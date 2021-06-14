@@ -3,6 +3,9 @@ import React from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomTab from './src/Component/BottomTab';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import {Store, storePersist} from './src/Store/Store';
 
 const Stack = createStackNavigator();
 
@@ -16,14 +19,18 @@ const myTheme = {
 
 export default function App() {
   return (
-    <NavigationContainer theme={myTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Home"
-          component={BottomTab}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={Store}>
+      <PersistGate persistor={storePersist}>
+        <NavigationContainer theme={myTheme}>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="Home"
+              component={BottomTab}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
