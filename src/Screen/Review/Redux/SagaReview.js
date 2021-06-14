@@ -5,5 +5,5 @@ export function* SagaReview() {
 }
 
 function* getReviewData() {
-  console.log('Saga');
+  yield console.log('Saga');
 }
