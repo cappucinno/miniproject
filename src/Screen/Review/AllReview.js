@@ -17,7 +17,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../../Utils/Constant';
 
-const Profile = () => {
+const AllReview = () => {
   return (
     <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -87,7 +87,7 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AllReview;
 
 const styles = StyleSheet.create({
   safeView: {

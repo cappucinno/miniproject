@@ -16,7 +16,7 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 
-const Review = () => {
+const ReviewScreen = () => {
   // state untuk toggle overlay
   const [stateOverlay, setstateOverlay] = useState(false);
   // function overlay
@@ -137,7 +137,7 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default ReviewScreen;
 
 const styles = StyleSheet.create({
   safeView: {
