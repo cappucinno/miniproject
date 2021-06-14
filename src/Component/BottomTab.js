@@ -15,6 +15,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 //other
 import {moderateScale} from 'react-native-size-matters';
 import {Avatar} from 'react-native-elements';
+import AllReviewScreen from '../Screen/Review/AllReviewScreen';
 
 const Tabs = createMaterialBottomTabNavigator();
 
@@ -56,6 +57,18 @@ export default function BottomTab() {
           tabBarColor: '#0C5D7B',
           tabBarIcon: () => (
             <Avatar rounded size={moderateScale(30)} title="Pr" />
+          ),
+        }}
+      />
+      {/* testing allreview */}
+      <Tabs.Screen
+        name="All Review"
+        component={AllReviewScreen}
+        options={{
+          tabBarLabel: 'All Review',
+          tabBarColor: '#0C5D7B',
+          tabBarIcon: () => (
+            <Avatar rounded size={moderateScale(30)} title="AR" />
           ),
         }}
       />
