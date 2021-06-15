@@ -8,6 +8,8 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Store, storePersist} from './src/Store/Store';
 import AllReviewScreen from './src/Screen/Review/AllReviewScreen';
+import LoginScreen from './src/Screen/LoginScreen/LoginScreen';
+import RegisterScreen from './src/Screen/RegisterScreen/RegisterScreen';
 
 const Stack = createStackNavigator();
 
@@ -19,12 +21,29 @@ const myTheme = {
   },
 };
 
+// satria menambahkan navcontainer untuk stackscreen loginscreen dan registerscreen
+
 export default function App({navigation}) {
   return (
     <Provider store={Store}>
       <PersistGate persistor={storePersist}>
         <NavigationContainer theme={myTheme}>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator initialRouteName="LoginScreen">
+            <Stack.Screen
+              name="LoginScreen"
+              component={LoginScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="RegisterScreen"
+              component={RegisterScreen}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+
+        <NavigationContainer theme={myTheme}>
+          <Stack.Navigator>
             <Stack.Screen
               options={{headerShown: false}}
               name="Home"
