@@ -15,9 +15,13 @@ import {
 import {moderateScale} from 'react-native-size-matters';
 import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
+import {COLORS} from '../../Utils/Constant';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen(props) {
   const movieCategory = ['action', 'thriller', 'comedy', 'syfy'];
+
+  const detail = () => props.navigation.navigate('HomeDetails');
+  const allReview = () => props.navigation.navigate('AllReview');
 
   return (
     <SafeAreaView style={styles.fullscreen}>
@@ -49,7 +53,11 @@ export default function HomeScreen({navigation}) {
         {/* Movie List */}
         <View style={styles.movieContainer}>
           <Text style={styles.headText}>Hot 'Category' Movies</Text>
-          <CardView navigation={navigation} />
+          <CardView
+            navigation={props.navigation}
+            detail={detail}
+            allReview={allReview}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

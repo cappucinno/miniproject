@@ -5,7 +5,10 @@ import {moderateScale} from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Share from 'react-native-vector-icons/Foundation';
 
-export default function CardView({navigation}) {
+export default function CardView(props) {
+  const detail = () => props.navigation.navigate('HomeDetails');
+  const allReview = () => props.navigation.navigate('AllReview');
+
   const dummyData = [
     {
       id: 337404,
@@ -24,14 +27,14 @@ export default function CardView({navigation}) {
   ];
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('HomeDetails')}>
+    <TouchableOpacity onPress={detail}>
       {dummyData.map((e, i) => {
         return (
           <View key={i.toString()}>
-            <Card containerStyle={styles.cardContiner}>
+            <Card containerStyle={styles.cardContainer}>
               <Image
                 style={styles.image}
-                resizeMode="contain"
+                resizeMode="cover"
                 source={{uri: e.link}}
               />
               <Text
@@ -44,7 +47,8 @@ export default function CardView({navigation}) {
               {/* tombol review */}
               <View style={styles.iconContainer}>
                 <TouchableOpacity
-                  style={{flexDirection: 'row', alignItems: 'center'}}>
+                  style={{flexDirection: 'row', alignItems: 'center'}}
+                  onPress={allReview}>
                   <Icon
                     name="star-box-outline"
                     size={moderateScale(25)}
@@ -52,15 +56,6 @@ export default function CardView({navigation}) {
                   />
                   <Text>123</Text>
                 </TouchableOpacity>
-
-                {/* tombol load more */}
-                {/* <TouchableOpacity>
-            <Text
-              style={styles.loadBtn}
-              onPress={() => navigation.navigate('HomeDetails')}>
-              load more
-            </Text>
-          </TouchableOpacity> */}
 
                 {/* tombol share */}
                 <TouchableOpacity>
@@ -80,7 +75,7 @@ export default function CardView({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  cardContiner: {
+  cardContainer: {
     borderRadius: moderateScale(20),
   },
   image: {

@@ -14,14 +14,13 @@ const OverlayComp = props => {
     <Overlay
       overlayStyle={styles.overStyle}
       isVisible={props.visible}
-      onBackdropPress={props.toggle}>
+      onBackdropPress={props.toggle}
+      animationType="slide"
+      statusBarTranslucent={true}>
       {/* overlay view */}
       <View style={styles.overlayView}>
-        <View style={{paddingTop: moderateScale(10)}}>
-          <Text style={styles.boldText}>
-            How Do You think about this movie?
-          </Text>
-        </View>
+        <Text style={styles.boldText}>How Do You think about this movie?</Text>
+
         {/* overlay star rating */}
         <View
           style={{
@@ -73,14 +72,17 @@ const styles = StyleSheet.create({
   },
   overStyle: {
     backgroundColor: COLORS.cream,
-    height: heightPercentageToDP(50),
-    width: widthPercentageToDP(100),
+    // height: heightPercentageToDP(60),
+    width: widthPercentageToDP(92),
     borderRadius: moderateScale(30),
     alignItems: 'center',
   },
   overlayView: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    height: heightPercentageToDP(48),
+    paddingVertical: moderateScale(5),
+    height: heightPercentageToDP(55),
   },
   containerInput: {
     width: widthPercentageToDP(70),
@@ -118,9 +120,9 @@ const styles = StyleSheet.create({
   styleButton: {
     backgroundColor: COLORS.primaryBlack,
 
-    borderRadius: moderateScale(8),
+    borderRadius: moderateScale(15),
     width: widthPercentageToDP(20),
-    height: heightPercentageToDP(3),
+    height: heightPercentageToDP(5),
     alignItems: 'center',
     justifyContent: 'center',
     padding: moderateScale(0),

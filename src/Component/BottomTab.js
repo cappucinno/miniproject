@@ -22,7 +22,11 @@ const Tabs = createMaterialBottomTabNavigator();
 
 export default function BottomTab() {
   return (
-    <Tabs.Navigator initialRouteName="Home" activeColor="#fff" shifting>
+    <Tabs.Navigator
+      initialRouteName="Home"
+      activeColor="#fff"
+      shifting
+      labeled={false}>
       {/* tab review */}
       <Tabs.Screen
         name="Review"
@@ -55,7 +59,7 @@ export default function BottomTab() {
       />
 
       {/* testing allreview */}
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="All Review"
         component={AllReviewScreen}
         options={{
@@ -65,17 +69,20 @@ export default function BottomTab() {
             <Avatar rounded size={moderateScale(30)} title="AR" />
           ),
         }}
-      />
+      /> */}
 
       {/* tab profile */}
       <Tabs.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
           tabBarColor: COLORS.redOld,
           tabBarIcon: () => (
-            <Avatar rounded size={moderateScale(30)} title="Pr" />
+            <Avatar
+              rounded
+              size={moderateScale(25)}
+              source={{uri: 'https://placeimg.com/640/480/people'}}
+            />
           ),
         }}
       />

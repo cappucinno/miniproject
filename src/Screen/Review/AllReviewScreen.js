@@ -8,7 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../../Utils/Constant';
 import AllReviewCard from '../../Component/AllReviewCard';
 
-const AllReviewScreen = () => {
+const AllReviewScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.scrollView}>

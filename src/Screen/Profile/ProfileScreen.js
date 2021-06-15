@@ -10,6 +10,7 @@ import {
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {moderateScale} from 'react-native-size-matters';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {COLORS} from '../../Utils/Constant';
 
@@ -38,9 +39,15 @@ const ProfileScreen = () => {
           </View>
           {/* input */}
           <View style={styles.inputView}>
-            <Input style={styles.textInput}>Isumi Kartika</Input>
-            <Input style={styles.textInput}>aiko.d.aurora</Input>
-            <Input style={styles.textInput}>Isumi.karina@gmail.com</Input>
+            <Input disabled style={styles.textInput}>
+              Isumi Kartika
+            </Input>
+            <Input disabled style={styles.textInput}>
+              aiko.d.aurora
+            </Input>
+            <Input disabled style={styles.textInput}>
+              Isumi.karina@gmail.com
+            </Input>
           </View>
           {/* bottom sheet */}
           <BottomSheet
@@ -49,7 +56,7 @@ const ProfileScreen = () => {
             <Header
               leftComponent={{
                 onPress: toggleBottom,
-                icon: 'logout',
+                icon: 'transit-enterexit',
                 size: 24,
                 color: 'white',
               }}
@@ -100,7 +107,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.redOld,
     borderBottomEndRadius: moderateScale(50),
-    borderBottomStartRadius: moderateScale(10),
     height: heightPercentageToDP(25),
     justifyContent: 'center',
   },
