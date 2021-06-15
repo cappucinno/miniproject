@@ -23,6 +23,7 @@ const Tabs = createMaterialBottomTabNavigator();
 export default function BottomTab() {
   return (
     <Tabs.Navigator initialRouteName="Home" activeColor="#fff" shifting>
+      {/* tab review */}
       <Tabs.Screen
         name="Review"
         component={ReviewScreen}
@@ -39,6 +40,8 @@ export default function BottomTab() {
           height: 150,
         }}
       />
+
+      {/* tab home */}
       <Tabs.Screen
         name="Home"
         component={HomeScreen}
@@ -50,26 +53,29 @@ export default function BottomTab() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarColor: COLORS.redOld,
-          tabBarIcon: () => (
-            <Avatar rounded size={moderateScale(30)} title="Pr" />
-          ),
-        }}
-      />
+
       {/* testing allreview */}
       <Tabs.Screen
         name="All Review"
         component={AllReviewScreen}
         options={{
-          tabBarLabel: 'All Review',
-          tabBarColor: '#0C5D7B',
+          tabBarLabel: 'Profile',
+          tabBarColor: COLORS.redOld,
           tabBarIcon: () => (
             <Avatar rounded size={moderateScale(30)} title="AR" />
+          ),
+        }}
+      />
+
+      {/* tab profile */}
+      <Tabs.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarColor: '#0C5D7B',
+          tabBarIcon: () => (
+            <Avatar rounded size={moderateScale(30)} title="Pr" />
           ),
         }}
       />

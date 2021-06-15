@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {SearchBar} from 'react-native-elements';
 import {
@@ -12,39 +13,44 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {moderateScale} from 'react-native-size-matters';
+import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
+  const movieCategory = ['action', 'thriller', 'comedy', 'syfy'];
   return (
     <SafeAreaView style={styles.fullscreen}>
-      <SearchBar
-        placeholder="Seacrh Movies"
-        onChangeText={() => {}}
-        platform="default"
-        round
-        containerStyle={styles.searchBar}
-      />
+      <ScrollView>
+        <SearchBar
+          placeholder="Searcgith Movies"
+          onChangeText={() => {}}
+          platform="default"
+          round
+          containerStyle={styles.searchBar}
+        />
 
-      {/* Genre */}
-      <View style={styles.genreContainer}>
-        <View style={styles.genreTextContainer}>
-          <Text style={styles.headText}>Best Genre</Text>
-          <TouchableOpacity>
-            <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.genreBtnContainer}>
-          <GenreButton title="Action" />
-          <GenreButton title="Romance" />
-          <GenreButton title="Thriller" />
-          <GenreButton title="Comedy" />
-        </View>
-      </View>
+        {/* Genre */}
+        <View style={styles.genreContainer}>
+          <View style={styles.genreTextContainer}>
+            <Text style={styles.headText}>Best Genre</Text>
+            <TouchableOpacity>
+              <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text>
+            </TouchableOpacity>
+          </View>
 
-      {/* Movie List */}
-      <View style={styles.movieContainer}>
-        <Text style={styles.headText}>Hot 'Category' Movies</Text>
-      </View>
+          <View style={styles.genreBtnContainer}>
+            {movieCategory.map((val, index) => (
+              <GenreButton title={val} key={index.toString()} />
+            ))}
+          </View>
+        </View>
+
+        {/* Movie List */}
+        <View style={styles.movieContainer}>
+          <Text style={styles.headText}>Hot 'Category' Movies</Text>
+          <CardView />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -79,9 +85,11 @@ const styles = StyleSheet.create({
   },
   genreBtnContainer: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
+    width: widthPercentageToDP(92),
   },
   movieContainer: {
-    marginTop: heightPercentageToDP(3),
+    marginTop: heightPercentageToDP(2),
   },
 });

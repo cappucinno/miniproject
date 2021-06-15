@@ -28,7 +28,7 @@ export default function GenreButton({title}) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F8E4CC',
-    width: moderateScale(85),
+    width: moderateScale(80),
     padding: moderateScale(3),
     borderRadius: moderateScale(10),
   },
