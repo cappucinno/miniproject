@@ -18,6 +18,7 @@ import GenreButton from '../../Component/GenreButton';
 
 export default function HomeScreen({navigation}) {
   const movieCategory = ['action', 'thriller', 'comedy', 'syfy'];
+
   return (
     <SafeAreaView style={styles.fullscreen}>
       <ScrollView>
