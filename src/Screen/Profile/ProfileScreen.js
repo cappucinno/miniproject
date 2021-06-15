@@ -38,9 +38,15 @@ const ProfileScreen = () => {
           </View>
           {/* input */}
           <View style={styles.inputView}>
-            <Input style={styles.textInput}>Isumi Kartika</Input>
-            <Input style={styles.textInput}>aiko.d.aurora</Input>
-            <Input style={styles.textInput}>Isumi.karina@gmail.com</Input>
+            <Input disabled style={styles.textInput}>
+              Isumi Kartika
+            </Input>
+            <Input disabled style={styles.textInput}>
+              aiko.d.aurora
+            </Input>
+            <Input disabled style={styles.textInput}>
+              Isumi.karina@gmail.com
+            </Input>
           </View>
           {/* bottom sheet */}
           <BottomSheet
@@ -100,7 +106,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.redOld,
     borderBottomEndRadius: moderateScale(50),
-    borderBottomStartRadius: moderateScale(10),
     height: heightPercentageToDP(25),
     justifyContent: 'center',
   },

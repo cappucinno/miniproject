@@ -22,7 +22,7 @@ export default function HomeScreen({navigation}) {
     <SafeAreaView style={styles.fullscreen}>
       <ScrollView>
         <SearchBar
-          placeholder="Searcgith Movies"
+          placeholder="Search Movies"
           onChangeText={() => {}}
           platform="default"
           round
