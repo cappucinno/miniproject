@@ -59,8 +59,8 @@ export default function BottomTab() {
         name="All Review"
         component={AllReviewScreen}
         options={{
-          tabBarLabel: 'Profile',
-          tabBarColor: COLORS.redOld,
+          tabBarLabel: 'All Review',
+          tabBarColor: '#0C5D7B',
           tabBarIcon: () => (
             <Avatar rounded size={moderateScale(30)} title="AR" />
           ),
@@ -73,7 +73,7 @@ export default function BottomTab() {
         component={ProfileScreen}
         options={{
           tabBarLabel: 'Profile',
-          tabBarColor: '#0C5D7B',
+          tabBarColor: COLORS.redOld,
           tabBarIcon: () => (
             <Avatar rounded size={moderateScale(30)} title="Pr" />
           ),
