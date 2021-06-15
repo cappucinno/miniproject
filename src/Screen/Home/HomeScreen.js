@@ -29,6 +29,14 @@ export default function HomeScreen({navigation}) {
           containerStyle={styles.searchBar}
         />
 
+        <SearchBar
+          placeholder="Seacrh Movies"
+          onChangeText={() => {}}
+          platform="default"
+          round
+          containerStyle={styles.searchBar}
+        />
+
         {/* Genre */}
         <View style={styles.genreContainer}>
           <View style={styles.genreTextContainer}>
