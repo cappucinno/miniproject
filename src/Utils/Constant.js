@@ -9,4 +9,5 @@ export const COLORS = {
   imperialRed: '#F20231',
   gold: '#EFBF7F',
   champagne: '#F8E4CC',
+  sakura: '#f8e4cc',
 };
