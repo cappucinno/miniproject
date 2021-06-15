@@ -10,6 +10,7 @@ import {
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {moderateScale} from 'react-native-size-matters';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {COLORS} from '../../Utils/Constant';
 
@@ -55,7 +56,7 @@ const ProfileScreen = () => {
             <Header
               leftComponent={{
                 onPress: toggleBottom,
-                icon: 'logout',
+                icon: 'transit-enterexit',
                 size: 24,
                 color: 'white',
               }}

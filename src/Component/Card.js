@@ -5,7 +5,9 @@ import {moderateScale} from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Share from 'react-native-vector-icons/Foundation';
 
-export default function CardView({navigation}) {
+export default function CardView(props) {
+  const detail = () => props.navigation.navigate('HomeDetails');
+  const allReview = () => props.navigation.navigate('AllReview');
   return (
     <>
       <Card containerStyle={styles.cardContiner}>
@@ -17,7 +19,7 @@ export default function CardView({navigation}) {
         <Card.Divider />
         {/* tombol review */}
         <View style={styles.iconContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={props.allreview}>
             <Icon
               name="star-box-outline"
               size={moderateScale(25)}
@@ -28,9 +30,7 @@ export default function CardView({navigation}) {
 
           {/* tombol load more */}
           <TouchableOpacity>
-            <Text
-              style={styles.loadBtn}
-              onPress={() => navigation.navigate('HomeDetails')}>
+            <Text style={styles.loadBtn} onPress={props.detail}>
               load more
             </Text>
           </TouchableOpacity>

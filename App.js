@@ -7,6 +7,7 @@ import HomeDetails from './src/Screen/Home/HomeDetails';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Store, storePersist} from './src/Store/Store';
+import AllReviewScreen from './src/Screen/Review/AllReviewScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,7 @@ export default function App({navigation}) {
               name="HomeDetails"
               component={HomeDetails}
             />
+            <Stack.Screen name="AllReview" component={AllReviewScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

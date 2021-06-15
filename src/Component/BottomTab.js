@@ -59,7 +59,7 @@ export default function BottomTab() {
       />
 
       {/* testing allreview */}
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="All Review"
         component={AllReviewScreen}
         options={{
@@ -69,7 +69,7 @@ export default function BottomTab() {
             <Avatar rounded size={moderateScale(30)} title="AR" />
           ),
         }}
-      />
+      /> */}
 
       {/* tab profile */}
       <Tabs.Screen
