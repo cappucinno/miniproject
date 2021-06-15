@@ -16,6 +16,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {moderateScale} from 'react-native-size-matters';
 import {Avatar} from 'react-native-elements';
 import AllReviewScreen from '../Screen/Review/AllReviewScreen';
+import {COLORS} from '../Utils/Constant';
 
 const Tabs = createMaterialBottomTabNavigator();
 
@@ -54,7 +55,7 @@ export default function BottomTab() {
         component={ProfileScreen}
         options={{
           tabBarLabel: 'Profile',
-          tabBarColor: '#0C5D7B',
+          tabBarColor: COLORS.redOld,
           tabBarIcon: () => (
             <Avatar rounded size={moderateScale(30)} title="Pr" />
           ),
