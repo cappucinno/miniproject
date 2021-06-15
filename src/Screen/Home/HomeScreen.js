@@ -48,7 +48,7 @@ export default function HomeScreen({navigation}) {
         {/* Movie List */}
         <View style={styles.movieContainer}>
           <Text style={styles.headText}>Hot 'Category' Movies</Text>
-          <CardView />
+          <CardView navigation={navigation} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   headText: {
     color: 'white',
-    fontSize: moderateScale(32),
+    fontSize: moderateScale(26),
     fontWeight: 'bold',
   },
   moreBtn: {

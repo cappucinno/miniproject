@@ -20,23 +20,24 @@ export default function CardView({navigation}) {
           <TouchableOpacity>
             <Icon
               name="star-box-outline"
-              size={moderateScale(30)}
+              size={moderateScale(25)}
               color="#1b1717"
             />
+            <Text>123</Text>
           </TouchableOpacity>
 
           {/* tombol load more */}
           <TouchableOpacity>
             <Text
               style={styles.loadBtn}
-              onPress={() => navigation.navigate('HomeDetail')}>
+              onPress={() => navigation.navigate('HomeDetails')}>
               load more
             </Text>
           </TouchableOpacity>
 
           {/* tombol share */}
           <TouchableOpacity>
-            <Share name="share" size={moderateScale(30)} color="#1b1717" />
+            <Share name="share" size={moderateScale(25)} color="#1b1717" />
           </TouchableOpacity>
         </View>
       </Card>

@@ -4,6 +4,10 @@ export const COLORS = {
   redOld: '#810000',
   red: '#ce1212',
   cream: '#eeebdd',
-  gold: '#efbf7f',
+  russianViolet: '#12103D',
+  blueShappire: '#0C5D7B',
+  imperialRed: '#F20231',
+  gold: '#EFBF7F',
+  champagne: '#F8E4CC',
   sakura: '#f8e4cc',
 };

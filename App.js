@@ -3,7 +3,7 @@ import React from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomTab from './src/Component/BottomTab';
-import HomeDetail from './src/Screen/Home/HomeDetail';
+import HomeDetails from './src/Screen/Home/HomeDetails';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Store, storePersist} from './src/Store/Store';
@@ -23,7 +23,7 @@ export default function App({navigation}) {
     <Provider store={Store}>
       <PersistGate persistor={storePersist}>
         <NavigationContainer theme={myTheme}>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
               options={{headerShown: false}}
               name="Home"
@@ -31,8 +31,8 @@ export default function App({navigation}) {
             />
             <Stack.Screen
               options={{headerShown: false}}
-              name="HomeDetail"
-              component={HomeDetail}
+              name="HomeDetails"
+              component={HomeDetails}
             />
           </Stack.Navigator>
         </NavigationContainer>
