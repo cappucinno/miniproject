@@ -12,6 +12,7 @@ import {Input} from 'react-native-elements';
 import styles from '../styles/RegisterStyle';
 import {useNavigation} from '@react-navigation/native';
 import {moderateScale} from 'react-native-size-matters';
+import FastImage from 'react-native-fast-image';
 
 function RegisterScreen(props) {
   const [name, setName] = useState(null);
@@ -43,6 +44,7 @@ function RegisterScreen(props) {
             <Image
               source={require('../../Assets/Images/Logo.png')}
               style={styles.logo}
+              resizeMode={FastImage.resizeMode.cover}
             />
             <Text style={styles.smallTextButton}>MovReact</Text>
           </View>

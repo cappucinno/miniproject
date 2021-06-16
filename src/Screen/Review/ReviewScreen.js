@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-    backgroundColor: COLORS.blueShappire,
+    backgroundColor: COLORS.gold,
   },
 
   boldText: {

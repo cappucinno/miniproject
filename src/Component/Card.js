@@ -4,6 +4,7 @@ import {Card} from 'react-native-elements';
 import {moderateScale} from 'react-native-size-matters';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Share from 'react-native-vector-icons/Foundation';
+import {COLORS} from '../Utils/Constant';
 
 export default function CardView(props) {
   const dummyData = [
@@ -40,16 +41,17 @@ export default function CardView(props) {
                 ellipsizeMode="tail">
                 {e.desc}
               </Text>
-              <Card.Divider />
+              <Card.Divider width={2} />
               {/* tombol review */}
               <View style={styles.iconContainer}>
                 <TouchableOpacity
-                  style={{flexDirection: 'row', alignItems: 'center'}}
+                  style={styles.reviewBtn}
                   onPress={props.allreview}>
                   <Ionicons
                     name="chatbubble-outline"
                     size={moderateScale(25)}
-                    color="#1b1717"
+                    color={COLORS.primaryBlack}
+                    style={styles.reviewIcon}
                   />
                   <Text>123</Text>
                 </TouchableOpacity>
@@ -59,7 +61,7 @@ export default function CardView(props) {
                   <Share
                     name="share"
                     size={moderateScale(25)}
-                    color="#1b1717"
+                    color={COLORS.primaryBlack}
                   />
                 </TouchableOpacity>
               </View>
@@ -74,10 +76,12 @@ export default function CardView(props) {
 const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: moderateScale(20),
+    backgroundColor: COLORS.cream,
   },
   image: {
-    width: moderateScale(290),
-    height: moderateScale(150),
+    flex: 1,
+    // width: moderateScale(290),
+    height: moderateScale(180),
     backgroundColor: 'black',
     marginBottom: moderateScale(15),
   },
@@ -89,5 +93,14 @@ const styles = StyleSheet.create({
   textDesc: {
     marginBottom: moderateScale(15),
     fontSize: moderateScale(16),
+    textAlign: 'justify',
+  },
+  reviewBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  reviewIcon: {
+    transform: [{rotateY: '180deg'}],
+    marginRight: moderateScale(5),
   },
 });

@@ -42,19 +42,21 @@ export default function BottomTab() {
         component={ReviewScreen}
         options={{
           tabBarLabel: 'Review',
-          tabBarColor: COLORS.blueShappire,
+          tabBarColor: COLORS.gold,
           tabBarIcon: ({color, focused}) =>
             focused ? (
               <Ionicons
                 name="chatbubble-sharp"
                 color={COLORS.primaryBlack}
                 size={moderateScale(22)}
+                style={{transform: [{rotateY: '180deg'}]}}
               />
             ) : (
               <Ionicons
                 name="chatbubble-outline"
                 color={color}
                 size={moderateScale(22)}
+                style={{transform: [{rotateY: '180deg'}]}}
               />
             ),
         }}
