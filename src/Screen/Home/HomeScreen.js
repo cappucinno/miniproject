@@ -18,7 +18,7 @@ import GenreButton from '../../Component/GenreButton';
 import {COLORS} from '../../Utils/Constant';
 
 export default function HomeScreen(props) {
-  const movieCategory = ['action', 'thriller', 'comedy', 'syfy'];
+  const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
 
   const detail = () => props.navigation.navigate('Detail');
   const allReview = () => props.navigation.navigate('AllReview');
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     backgroundColor: 'transparent',
-    paddingHorizontal: widthPercentageToDP(4),
-    borderBottomColor: '#1b1717',
+    // paddingHorizontal: widthPercentageToDP(0),
+    borderBottomColor: COLORS.primaryBlack,
   },
   headText: {
     color: 'white',
@@ -101,9 +101,9 @@ const styles = StyleSheet.create({
   },
   genreBtnContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
     justifyContent: 'space-between',
-    width: widthPercentageToDP(92),
+    // width: widthPercentageToDP(92),
   },
   movieContainer: {
     marginTop: heightPercentageToDP(2),
@@ -113,5 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primaryBlack,
     borderBottomStartRadius: moderateScale(30),
     borderBottomEndRadius: moderateScale(30),
+    paddingBottom: moderateScale(24),
+    paddingHorizontal: widthPercentageToDP(3),
   },
 });

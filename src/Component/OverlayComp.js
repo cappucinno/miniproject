@@ -31,7 +31,7 @@ const OverlayComp = props => {
             ratingCount={10}
             imageSize={moderateScale(25)}
             type="custom"
-            tintColor={COLORS.cream}
+            tintColor={COLORS.champagne}
             startingValue={props.start}
           />
         </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   overStyle: {
-    backgroundColor: COLORS.cream,
+    backgroundColor: COLORS.champagne,
     // height: heightPercentageToDP(60),
     width: widthPercentageToDP(92),
     borderRadius: moderateScale(30),
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
   },
   styleButton: {
-    backgroundColor: COLORS.primaryBlack,
+    backgroundColor: COLORS.imperialRed,
 
     borderRadius: moderateScale(15),
     width: widthPercentageToDP(20),
