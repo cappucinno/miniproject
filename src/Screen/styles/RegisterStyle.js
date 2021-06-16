@@ -36,6 +36,8 @@ export default StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     color: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
   },
   centerPos: {
     alignItems: 'center',

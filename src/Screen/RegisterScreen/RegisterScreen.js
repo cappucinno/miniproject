@@ -42,7 +42,7 @@ function RegisterScreen(props) {
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
             <Image
-              source={require('../../Assets/Images/Logo.png')}
+              source={require('../../Assets/Images/logo.png')}
               style={styles.logo}
               resizeMode={FastImage.resizeMode.cover}
             />
