@@ -6,7 +6,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import {Rating, Input, Button, Overlay, Avatar} from 'react-native-elements';
+import {Header, Input, Button, Overlay, Avatar} from 'react-native-elements';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
@@ -24,10 +24,16 @@ const ProfileOver = props => {
           isVisible={props.visible}
           onBackdropPress={props.toggle}
           animationType="slide"
-          statusBarTranslucent={true}>
+          statusBarTranslucent={true}
+          fullScreen>
           {/* overlay view */}
           <View style={styles.overlayView}>
-            <Text style={styles.boldText}>Edit Profile</Text>
+            <Header
+              leftComponent={{icon: 'arrow-back', onPress: props.toggle}}
+              centerComponent={{text: 'Edit Profile'}}
+              rightComponent={{icon: 'check'}}
+              containerStyle={styles.headerStyle}
+            />
 
             <View style={styles.photoView}>
               <Avatar
@@ -44,16 +50,33 @@ const ProfileOver = props => {
             </View>
             {/* input */}
             <View style={styles.inputView}>
-              <Input label="Fullname" style={styles.styleInput}>
+              <Input
+                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
+                labelStyle={{color: COLORS.primaryBlack}}
+                label="Fullname"
+                style={styles.styleInput}>
                 Isumi Kartika
               </Input>
-              <Input label="Username" style={styles.styleInput}>
+              <Input
+                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
+                labelStyle={{color: COLORS.primaryBlack}}
+                label="Username"
+                style={styles.styleInput}>
                 aiko.d.aurora
               </Input>
-              <Input label="Email" style={styles.styleInput}>
+              <Input
+                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
+                labelStyle={{color: COLORS.primaryBlack}}
+                label="Email"
+                style={styles.styleInput}>
                 Isumi.karina@gmail.com
               </Input>
-              <Input label="Password" secureTextEntry style={styles.styleInput}>
+              <Input
+                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
+                labelStyle={{color: COLORS.primaryBlack}}
+                label="Password"
+                secureTextEntry
+                style={styles.styleInput}>
                 Isumi.karina@gmail.com
               </Input>
             </View>
@@ -79,11 +102,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
   },
   overStyle: {
-    backgroundColor: COLORS.champagne,
-    opacity: 0.9,
-    height: heightPercentageToDP(99),
-    width: widthPercentageToDP(97),
-    borderRadius: moderateScale(30),
+    backgroundColor: COLORS.gold,
     alignItems: 'center',
   },
   overlayView: {
@@ -93,8 +112,12 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(5),
     height: heightPercentageToDP(55),
   },
+  headerStyle: {
+    borderBottomColor: COLORS.gold,
+    backgroundColor: COLORS.gold,
+  },
   photoView: {
-    height: heightPercentageToDP(25),
+    height: heightPercentageToDP(18),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -105,13 +128,12 @@ const styles = StyleSheet.create({
   },
 
   styleInput: {
-    fontSize: moderateScale(16),
-    fontWeight: 'bold',
+    fontSize: moderateScale(18),
     textAlign: 'justify',
+    fontWeight: '400',
   },
   inputView: {
-    width: widthPercentageToDP(70),
-    paddingVertical: moderateScale(20),
+    width: widthPercentageToDP(90),
   },
   styleButton: {
     backgroundColor: COLORS.primaryBlack,
@@ -126,8 +148,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: moderateScale(11),
-  },
-  reviewPlaceholder: {
-    alignItems: 'flex-start',
   },
 });

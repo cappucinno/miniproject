@@ -53,7 +53,9 @@ export default function HomeScreen(props) {
 
           {/* Movie List */}
           <View style={styles.movieContainer}>
-            <Text style={styles.headText}>Hot 'Category' Movies</Text>
+            <View style={styles.headView}>
+              <Text style={styles.headText}>Hot 'Category' Movies</Text>
+            </View>
             <CardView detail={detail} allreview={allReview} />
           </View>
         </View>
@@ -72,13 +74,16 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     backgroundColor: 'transparent',
-    paddingHorizontal: widthPercentageToDP(0),
+    paddingHorizontal: widthPercentageToDP(4),
     borderBottomColor: '#1b1717',
   },
   headText: {
     color: 'white',
     fontSize: moderateScale(26),
     fontWeight: 'bold',
+  },
+  headView: {
+    paddingHorizontal: moderateScale(10),
   },
   moreBtn: {
     color: 'white',
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
   genreContainer: {
     justifyContent: 'space-between',
     height: heightPercentageToDP(13),
-    padding: moderateScale(10),
+    paddingHorizontal: moderateScale(10),
   },
   genreTextContainer: {
     flexDirection: 'row',
