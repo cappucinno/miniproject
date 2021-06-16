@@ -1,60 +1,88 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 
 //component
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 
 //screen
-import HomeScreen from '../Screen/Home/HomeScreen';
+
 import ReviewScreen from '../Screen/Review/ReviewScreen';
 import ProfileScreen from '../Screen/Profile/ProfileScreen';
 
 //icon
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //other
 import {moderateScale} from 'react-native-size-matters';
 import {Avatar} from 'react-native-elements';
-import AllReviewScreen from '../Screen/Review/AllReviewScreen';
+
 import {COLORS} from '../Utils/Constant';
+import HomeRoute from '../Router/HomeRoute';
 
 const Tabs = createMaterialBottomTabNavigator();
+
+const style = StyleSheet.create({
+  styleBar: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default function BottomTab() {
   return (
     <Tabs.Navigator
       initialRouteName="Home"
-      activeColor="#fff"
+      labeled={false}
       shifting
-      labeled={false}>
+      inactiveColor={COLORS.primaryBlack}
+      barStyle={style.styleBar}>
       {/* tab review */}
       <Tabs.Screen
         name="Review"
         component={ReviewScreen}
         options={{
           tabBarLabel: 'Review',
-          tabBarColor: '#12103D',
-          tabBarIcon: ({color}) => (
-            <MaterialIcons
-              name="rate-review"
-              color={color}
-              size={moderateScale(22)}
-            />
-          ),
-          height: 150,
+          tabBarColor: COLORS.blueShappire,
+          tabBarIcon: ({color, focused}) =>
+            focused ? (
+              <Ionicons
+                name="chatbubble-sharp"
+                color={COLORS.primaryBlack}
+                size={moderateScale(22)}
+                style={{transform: [{rotateY: '180deg'}]}}
+              />
+            ) : (
+              <Ionicons
+                name="chatbubble-outline"
+                color={color}
+                size={moderateScale(22)}
+                style={{transform: [{rotateY: '180deg'}]}}
+              />
+            ),
         }}
       />
 
       {/* tab home */}
       <Tabs.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeRoute}
         options={{
           tabBarLabel: 'Home',
-          tabBarColor: '#F20231',
-          tabBarIcon: ({color}) => (
-            <Entypo name="home" color={color} size={moderateScale(22)} />
-          ),
+          tabBarColor: COLORS.imperialRed,
+          tabBarIcon: ({color, focused}) =>
+            focused ? (
+              <Ionicons
+                name="home-sharp"
+                color={COLORS.primaryBlack}
+                size={moderateScale(22)}
+              />
+            ) : (
+              <Ionicons
+                name="home-outline"
+                color={color}
+                size={moderateScale(22)}
+              />
+            ),
         }}
       />
 

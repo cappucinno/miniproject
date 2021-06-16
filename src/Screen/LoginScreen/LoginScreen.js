@@ -12,25 +12,22 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../styles/LoginStyle';
-import RegisterScreen from '../RegisterScreen/RegisterScreen';
-import {connect} from 'react-redux';
-import {loginAction} from './Redux/action/authAction';
 
-function LoginScreen(props) {
+const LoginScreen = props => {
   const [username, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
   const navigation = useNavigation();
 
-  const submit = () => {
-    if (!username) {
-      setMessage('Username Must be Field !!');
-    } else if (!password) {
-      setMessage('Password Must be Field !!');
-    } else {
-      props.processLogin({username, password});
-    }
-  };
+  // const submit = () => {
+  //   if (!username) {
+  //     setMessage('Username Must be Field !!');
+  //   } else if (!password) {
+  //     setMessage('Password Must be Field !!');
+  //   } else {
+  //     props.processLogin({username, password});
+  //   }
+  // };
 
   return (
     <KeyboardAvoidingView style={styles.window}>
@@ -73,7 +70,7 @@ function LoginScreen(props) {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
-                onPress={() => submit()}
+                onPress={() => props.navigation.navigate('MainScreen')}
                 style={styles.mainButton}>
                 <Text style={styles.buttonText}>LOGIN</Text>
               </TouchableOpacity>
@@ -81,7 +78,7 @@ function LoginScreen(props) {
           </View>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('RegisterScreen')}>
+            onPress={() => props.navigation.navigate('RegisterScreen')}>
             <View style={styles.centerPos}>
               <Text style={styles.smallTextButton}>
                 Don't have an account ? Sign Up
@@ -92,14 +89,6 @@ function LoginScreen(props) {
       </View>
     </KeyboardAvoidingView>
   );
-}
+};
 
-const mapStateToProps = state => ({
-  isLoading: state.auth.isLoading,
-});
-
-const mapDispatchToProps = dispatch => ({
-  processLogin: data => dispatch(loginAction(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default LoginScreen;

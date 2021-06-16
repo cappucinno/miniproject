@@ -5,6 +5,7 @@ import {moderateScale} from 'react-native-size-matters';
 
 //icon
 import Feather from 'react-native-vector-icons/Feather';
+import {COLORS} from '../Utils/Constant';
 
 export default function GenreButton({title}) {
   return (
@@ -15,7 +16,7 @@ export default function GenreButton({title}) {
         <Feather
           name="tv"
           size={moderateScale(15)}
-          color="#1b1717"
+          color={COLORS.primaryBlack}
           style={styles.icon}
         />
       }
@@ -27,7 +28,7 @@ export default function GenreButton({title}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F8E4CC',
+    backgroundColor: COLORS.champagne,
     width: moderateScale(80),
     padding: moderateScale(3),
     borderRadius: moderateScale(10),
@@ -37,6 +38,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: moderateScale(12),
-    color: '#1b1717',
+    color: COLORS.primaryBlack,
   },
 });
