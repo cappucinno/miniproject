@@ -18,6 +18,7 @@ import {moderateScale} from 'react-native-size-matters';
 import {Avatar} from 'react-native-elements';
 import AllReviewScreen from '../Screen/Review/AllReviewScreen';
 import {COLORS} from '../Utils/Constant';
+import HomeRoute from '../Router/HomeRoute';
 
 const Tabs = createMaterialBottomTabNavigator();
 
@@ -30,7 +31,7 @@ export default function BottomTab() {
       activeColor={COLORS.primaryBlack}
       inactiveColor={COLORS.cream}
       barStyle={{
-        backgroundColor: 'white',
+        backgroundColor: COLORS.gold,
         height: 70,
         justifyContent: 'center',
         alignItems: 'center',
@@ -41,7 +42,7 @@ export default function BottomTab() {
         component={ReviewScreen}
         options={{
           tabBarLabel: 'Review',
-          tabBarColor: 'white',
+          tabBarColor: COLORS.gold,
           tabBarIcon: ({color}) => (
             <Ionicons
               name="chatbubble-sharp"
@@ -55,7 +56,7 @@ export default function BottomTab() {
       {/* tab home */}
       <Tabs.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeRoute}
         options={{
           tabBarLabel: 'Home',
           tabBarColor: 'white',

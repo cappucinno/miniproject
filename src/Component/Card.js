@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Share from 'react-native-vector-icons/Foundation';
 
 export default function CardView(props) {
-  const detail = () => props.navigation.navigate('HomeDetails');
+  const detail = () => props.navigation.navigate('Detail');
   const allReview = () => props.navigation.navigate('AllReview');
 
   const dummyData = [

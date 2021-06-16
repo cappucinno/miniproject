@@ -22,6 +22,7 @@ const ReviewScreen = () => {
             flex: 1,
             backgroundColor: COLORS.primaryBlack,
             borderBottomStartRadius: 30,
+            borderBottomEndRadius: 30,
           }}>
           {/* card */}
           <ReviewCard
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.gold,
   },
 
   boldText: {
