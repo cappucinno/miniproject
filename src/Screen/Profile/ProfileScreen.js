@@ -10,7 +10,6 @@ import {
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {moderateScale} from 'react-native-size-matters';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {COLORS} from '../../Utils/Constant';
 
@@ -39,13 +38,13 @@ const ProfileScreen = () => {
           </View>
           {/* input */}
           <View style={styles.inputView}>
-            <Input disabled style={styles.textInput}>
+            <Input label="Fullname" disabled style={styles.textInput}>
               Isumi Kartika
             </Input>
-            <Input disabled style={styles.textInput}>
+            <Input label="Username" disabled style={styles.textInput}>
               aiko.d.aurora
             </Input>
-            <Input disabled style={styles.textInput}>
+            <Input label="Email" disabled style={styles.textInput}>
               Isumi.karina@gmail.com
             </Input>
           </View>
@@ -77,10 +76,33 @@ const ProfileScreen = () => {
               </Avatar>
             </View>
             <View style={styles.inputSheet}>
-              <Input style={styles.textInput}>Isumi Kartika</Input>
-              <Input style={styles.textInput}>aiko.d.aurora</Input>
-              <Input style={styles.textInput}>Isumi.karina@gmail.com</Input>
-              <Input secureTextEntry style={styles.textInput}>
+              <Input
+                onChangeText={() => {}}
+                label="Fullname"
+                style={styles.textInput}
+                placeholder="Write Your Fullname Here">
+                Isumi Kartika
+              </Input>
+              <Input
+                onChangeText={() => {}}
+                placeholder="Write Your Username Here"
+                label="Username"
+                style={styles.textInput}>
+                aiko.d.aurora
+              </Input>
+              <Input
+                onChangeText={() => {}}
+                placeholder="Write Your Email Here"
+                label="Email"
+                style={styles.textInput}>
+                Isumi.karina@gmail.com
+              </Input>
+              <Input
+                onChangeText={() => {}}
+                placeholder="Write Your Password Here"
+                label="Password"
+                secureTextEntry
+                style={styles.textInput}>
                 Isumi.karina@gmail.com
               </Input>
             </View>
@@ -118,7 +140,7 @@ const styles = StyleSheet.create({
   inputView: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: heightPercentageToDP(30),
+    height: heightPercentageToDP(40),
     paddingHorizontal: moderateScale(10),
     marginTop: moderateScale(60),
   },
@@ -130,10 +152,11 @@ const styles = StyleSheet.create({
   photoSheet: {
     alignItems: 'center',
     paddingTop: moderateScale(20),
-    height: heightPercentageToDP(25),
+    height: heightPercentageToDP(20),
   },
   inputSheet: {
-    height: heightPercentageToDP(40),
+    height: heightPercentageToDP(52),
+    paddingHorizontal: moderateScale(10),
   },
   buttonView: {
     height: heightPercentageToDP(20),
@@ -148,6 +171,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0.5, 0.25, 0, 0.9)',
   },
   headerContainer: {
-    marginBottom: moderateScale(50),
+    marginBottom: moderateScale(40),
   },
 });

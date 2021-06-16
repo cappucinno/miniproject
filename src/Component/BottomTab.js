@@ -1,4 +1,5 @@
 import React from 'react';
+import {View} from 'react-native';
 
 //component
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
@@ -9,7 +10,7 @@ import ReviewScreen from '../Screen/Review/ReviewScreen';
 import ProfileScreen from '../Screen/Profile/ProfileScreen';
 
 //icon
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 //other
@@ -24,24 +25,30 @@ export default function BottomTab() {
   return (
     <Tabs.Navigator
       initialRouteName="Home"
-      activeColor="#fff"
+      labeled={false}
       shifting
-      labeled={false}>
+      activeColor={COLORS.primaryBlack}
+      inactiveColor={COLORS.cream}
+      barStyle={{
+        backgroundColor: 'white',
+        height: 70,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
       {/* tab review */}
       <Tabs.Screen
         name="Review"
         component={ReviewScreen}
         options={{
           tabBarLabel: 'Review',
-          tabBarColor: '#12103D',
+          tabBarColor: 'white',
           tabBarIcon: ({color}) => (
-            <MaterialIcons
-              name="rate-review"
+            <Ionicons
+              name="chatbubble-sharp"
               color={color}
               size={moderateScale(22)}
             />
           ),
-          height: 150,
         }}
       />
 
@@ -51,7 +58,7 @@ export default function BottomTab() {
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
-          tabBarColor: '#F20231',
+          tabBarColor: 'white',
           tabBarIcon: ({color}) => (
             <Entypo name="home" color={color} size={moderateScale(22)} />
           ),
@@ -76,7 +83,7 @@ export default function BottomTab() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarColor: COLORS.redOld,
+          tabBarColor: 'white',
           tabBarIcon: () => (
             <Avatar
               rounded
