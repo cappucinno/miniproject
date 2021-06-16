@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../styles/LoginStyle';
+import FastImage from 'react-native-fast-image';
 
 const LoginScreen = props => {
   const [username, setEmail] = useState('');
@@ -34,9 +35,10 @@ const LoginScreen = props => {
       <View style={styles.container}>
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
-            <Image
-              source={require('../../Assets/Images/Logo.png')}
+            <FastImage
+              source={require('../../Assets/Images/logo.png')}
               style={styles.logo}
+              resizeMode={FastImage.resizeMode.cover}
             />
           </View>
 

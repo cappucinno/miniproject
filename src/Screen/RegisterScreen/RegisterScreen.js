@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import styles from '../styles/RegisterStyle';
 import {useNavigation} from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
 
 function RegisterScreen(props) {
   const [name, setName] = useState(null);
@@ -39,11 +40,10 @@ function RegisterScreen(props) {
       <View style={styles.container}>
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
-            <Image
-              source={{
-                uri: 'https://www.flaticon.com/free-icon/3d-glasses_4321355?term=movie&related_id=4321355',
-              }} // seharusnya profile pict
+            <FastImage
+              source={require('../../Assets/Images/logo.png')} // seharusnya profile pict
               style={styles.logo}
+              resizeMode={FastImage.resizeMode.cover}
             />
           </View>
           <Text style={styles.warnText}>{message}</Text>
