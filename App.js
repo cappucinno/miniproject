@@ -28,7 +28,7 @@ export default function App({navigation}) {
     <Provider store={Store}>
       <PersistGate persistor={storePersist}>
         <NavigationContainer theme={myTheme}>
-          <Stack.Navigator initialRouteName="LoginScreen">
+          <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
               name="LoginScreen"
               component={LoginScreen}
@@ -39,11 +39,6 @@ export default function App({navigation}) {
               component={RegisterScreen}
               options={{headerShown: false}}
             />
-          </Stack.Navigator>
-        </NavigationContainer>
-
-        <NavigationContainer theme={myTheme}>
-          <Stack.Navigator>
             <Stack.Screen
               options={{headerShown: false}}
               name="Home"

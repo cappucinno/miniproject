@@ -15,7 +15,6 @@ import {
 import {moderateScale} from 'react-native-size-matters';
 import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
-import {COLORS} from '../../Utils/Constant';
 
 export default function HomeScreen(props) {
   const movieCategory = ['action', 'thriller', 'comedy', 'syfy'];
