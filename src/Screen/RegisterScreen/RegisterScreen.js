@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  Dimensions,
   Image,
   KeyboardAvoidingView,
+  ScrollView,
+  TextInput,
 } from 'react-native';
+import {Input} from 'react-native-elements';
 import styles from '../styles/RegisterStyle';
 import {useNavigation} from '@react-navigation/native';
+import {moderateScale} from 'react-native-size-matters';
 
 function RegisterScreen(props) {
   const [name, setName] = useState(null);
@@ -40,11 +41,10 @@ function RegisterScreen(props) {
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
             <Image
-              source={{
-                uri: 'https://www.flaticon.com/free-icon/3d-glasses_4321355?term=movie&related_id=4321355',
-              }} // seharusnya profile pict
+              source={require('../../Assets/Images/Logo.png')}
               style={styles.logo}
             />
+            <Text style={styles.smallTextButton}>MovReact</Text>
           </View>
           <Text style={styles.warnText}>{message}</Text>
           <TextInput
@@ -96,6 +96,20 @@ function RegisterScreen(props) {
         </View>
       </View>
     </KeyboardAvoidingView>
+
+    // <KeyboardAvoidingView>
+    //   <View
+    //     style={{
+    //       flex: 1,
+    //       justifyContent: 'center',
+    //       alignItems: 'center',
+    //       height: 100,
+    //       width: 100,
+    //     }}>
+    //     <Image source={require('../../Assets/Images/Logo.png')} />
+    //   </View>
+    //   <Text>MovReact</Text>
+    // </KeyboardAvoidingView>
   );
 }
 

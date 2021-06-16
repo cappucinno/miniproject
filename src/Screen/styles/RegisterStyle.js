@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
 
 const contWidth = Dimensions.get('window').width * 0.9;
 const contHeight = Dimensions.get('window').height;
