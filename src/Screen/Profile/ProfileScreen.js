@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(40),
   },
   bottomStyle: {
-    height: heightPercentageToDP(91),
+    height: heightPercentageToDP(90),
     backgroundColor: COLORS.primaryBlack,
     borderBottomStartRadius: moderateScale(30),
     borderBottomEndRadius: moderateScale(30),

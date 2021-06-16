@@ -1,26 +1,32 @@
-import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 
 //component
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 
 //screen
-import HomeScreen from '../Screen/Home/HomeScreen';
+
 import ReviewScreen from '../Screen/Review/ReviewScreen';
 import ProfileScreen from '../Screen/Profile/ProfileScreen';
 
 //icon
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 //other
 import {moderateScale} from 'react-native-size-matters';
 import {Avatar} from 'react-native-elements';
-import AllReviewScreen from '../Screen/Review/AllReviewScreen';
+
 import {COLORS} from '../Utils/Constant';
 import HomeRoute from '../Router/HomeRoute';
 
 const Tabs = createMaterialBottomTabNavigator();
+
+const style = StyleSheet.create({
+  styleBar: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default function BottomTab() {
   return (
@@ -28,10 +34,8 @@ export default function BottomTab() {
       initialRouteName="Home"
       labeled={false}
       shifting
-      barStyle={{
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+      inactiveColor={COLORS.primaryBlack}
+      barStyle={style.styleBar}>
       {/* tab review */}
       <Tabs.Screen
         name="Review"
@@ -39,13 +43,20 @@ export default function BottomTab() {
         options={{
           tabBarLabel: 'Review',
           tabBarColor: COLORS.blueShappire,
-          tabBarIcon: ({color, focused}) => (
-            <Ionicons
-              name="chatbubble-sharp"
-              color={focused ? COLORS.primaryBlack : color}
-              size={moderateScale(22)}
-            />
-          ),
+          tabBarIcon: ({color, focused}) =>
+            focused ? (
+              <Ionicons
+                name="chatbubble-sharp"
+                color={COLORS.primaryBlack}
+                size={moderateScale(22)}
+              />
+            ) : (
+              <Ionicons
+                name="chatbubble-outline"
+                color={color}
+                size={moderateScale(22)}
+              />
+            ),
         }}
       />
 
@@ -56,13 +67,20 @@ export default function BottomTab() {
         options={{
           tabBarLabel: 'Home',
           tabBarColor: COLORS.imperialRed,
-          tabBarIcon: ({color, focused}) => (
-            <Entypo
-              name="home"
-              color={focused ? COLORS.primaryBlack : color}
-              size={moderateScale(22)}
-            />
-          ),
+          tabBarIcon: ({color, focused}) =>
+            focused ? (
+              <Ionicons
+                name="home-sharp"
+                color={COLORS.primaryBlack}
+                size={moderateScale(22)}
+              />
+            ) : (
+              <Ionicons
+                name="home-outline"
+                color={color}
+                size={moderateScale(22)}
+              />
+            ),
         }}
       />
 

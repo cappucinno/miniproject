@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {Card} from 'react-native-elements';
 import {moderateScale} from 'react-native-size-matters';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Share from 'react-native-vector-icons/Foundation';
 
 export default function CardView(props) {
@@ -46,8 +46,8 @@ export default function CardView(props) {
                 <TouchableOpacity
                   style={{flexDirection: 'row', alignItems: 'center'}}
                   onPress={props.allreview}>
-                  <Icon
-                    name="star-box-outline"
+                  <Ionicons
+                    name="chatbubble-outline"
                     size={moderateScale(25)}
                     color="#1b1717"
                   />

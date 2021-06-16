@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../Screen/Home/HomeScreen';
 import HomeDetails from '../Screen/Home/HomeDetails';
+import AllReviewScreen from '../Screen/Review/AllReviewScreen';
 
 const Stack = createStackNavigator();
 const HomeRoute = () => {
@@ -18,11 +19,7 @@ const HomeRoute = () => {
         component={HomeDetails}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="AllReview"
-        component={HomeDetails}
-        options={{headerShown: false}}
-      />
+      <Stack.Screen name="AllReview" component={AllReviewScreen} />
     </Stack.Navigator>
   );
 };
