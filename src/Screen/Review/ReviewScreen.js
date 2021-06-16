@@ -17,13 +17,7 @@ const ReviewScreen = () => {
   return (
     <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: COLORS.primaryBlack,
-            borderBottomStartRadius: 30,
-            borderBottomEndRadius: 30,
-          }}>
+        <View style={styles.bottomStyle}>
           {/* card */}
           <ReviewCard
             image="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
@@ -57,10 +51,16 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-    backgroundColor: COLORS.gold,
+    backgroundColor: COLORS.blueShappire,
   },
 
   boldText: {
     fontWeight: 'bold',
+  },
+  bottomStyle: {
+    flex: 1,
+    backgroundColor: COLORS.primaryBlack,
+    borderBottomStartRadius: moderateScale(30),
+    borderBottomEndRadius: moderateScale(30),
   },
 });

@@ -20,44 +20,42 @@ import {COLORS} from '../../Utils/Constant';
 export default function HomeScreen(props) {
   const movieCategory = ['action', 'thriller', 'comedy', 'syfy'];
 
-  const detail = () => props.navigation.navigate('HomeDetails');
+  const detail = () => props.navigation.navigate('Detail');
   const allReview = () => props.navigation.navigate('AllReview');
 
   return (
     <SafeAreaView style={styles.fullscreen}>
-      <ScrollView>
-        <SearchBar
-          placeholder="Search Movies"
-          onChangeText={() => {}}
-          platform="default"
-          round
-          containerStyle={styles.searchBar}
-        />
-
-        {/* Genre */}
-        <View style={styles.genreContainer}>
-          <View style={styles.genreTextContainer}>
-            <Text style={styles.headText}>Best Genre</Text>
-            <TouchableOpacity>
-              <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.genreBtnContainer}>
-            {movieCategory.map((val, index) => (
-              <GenreButton title={val} key={index.toString()} />
-            ))}
-          </View>
-        </View>
-
-        {/* Movie List */}
-        <View style={styles.movieContainer}>
-          <Text style={styles.headText}>Hot 'Category' Movies</Text>
-          <CardView
-            navigation={props.navigation}
-            detail={detail}
-            allReview={allReview}
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.bottomStyle}>
+          <SearchBar
+            placeholder="Search Movies"
+            onChangeText={() => {}}
+            platform="default"
+            round
+            containerStyle={styles.searchBar}
           />
+
+          {/* Genre */}
+          <View style={styles.genreContainer}>
+            <View style={styles.genreTextContainer}>
+              <Text style={styles.headText}>Best Genre</Text>
+              <TouchableOpacity>
+                <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.genreBtnContainer}>
+              {movieCategory.map((val, index) => (
+                <GenreButton title={val} key={index.toString()} />
+              ))}
+            </View>
+          </View>
+
+          {/* Movie List */}
+          <View style={styles.movieContainer}>
+            <Text style={styles.headText}>Hot 'Category' Movies</Text>
+            <CardView detail={detail} allreview={allReview} />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -67,7 +65,10 @@ export default function HomeScreen(props) {
 const styles = StyleSheet.create({
   fullscreen: {
     flex: 1,
-    paddingHorizontal: widthPercentageToDP(4),
+  },
+  scrollView: {
+    flexGrow: 1,
+    backgroundColor: COLORS.imperialRed,
   },
   searchBar: {
     backgroundColor: 'transparent',
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
   genreContainer: {
     justifyContent: 'space-between',
     height: heightPercentageToDP(13),
+    padding: moderateScale(10),
   },
   genreTextContainer: {
     flexDirection: 'row',
@@ -100,5 +102,11 @@ const styles = StyleSheet.create({
   },
   movieContainer: {
     marginTop: heightPercentageToDP(2),
+  },
+  bottomStyle: {
+    flex: 1,
+    backgroundColor: COLORS.primaryBlack,
+    borderBottomStartRadius: moderateScale(30),
+    borderBottomEndRadius: moderateScale(30),
   },
 });

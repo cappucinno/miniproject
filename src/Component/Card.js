@@ -6,9 +6,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Share from 'react-native-vector-icons/Foundation';
 
 export default function CardView(props) {
-  const detail = () => props.navigation.navigate('Detail');
-  const allReview = () => props.navigation.navigate('AllReview');
-
   const dummyData = [
     {
       id: 337404,
@@ -27,7 +24,7 @@ export default function CardView(props) {
   ];
 
   return (
-    <TouchableOpacity onPress={detail}>
+    <TouchableOpacity activeOpacity={0.8} onPress={props.detail}>
       {dummyData.map((e, i) => {
         return (
           <View key={i.toString()}>
@@ -48,7 +45,7 @@ export default function CardView(props) {
               <View style={styles.iconContainer}>
                 <TouchableOpacity
                   style={{flexDirection: 'row', alignItems: 'center'}}
-                  onPress={allReview}>
+                  onPress={props.allreview}>
                   <Icon
                     name="star-box-outline"
                     size={moderateScale(25)}

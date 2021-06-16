@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View} from 'react-native';
 
 //component
@@ -28,11 +28,7 @@ export default function BottomTab() {
       initialRouteName="Home"
       labeled={false}
       shifting
-      activeColor={COLORS.primaryBlack}
-      inactiveColor={COLORS.cream}
       barStyle={{
-        backgroundColor: COLORS.gold,
-        height: 70,
         justifyContent: 'center',
         alignItems: 'center',
       }}>
@@ -42,11 +38,11 @@ export default function BottomTab() {
         component={ReviewScreen}
         options={{
           tabBarLabel: 'Review',
-          tabBarColor: COLORS.gold,
-          tabBarIcon: ({color}) => (
+          tabBarColor: COLORS.blueShappire,
+          tabBarIcon: ({color, focused}) => (
             <Ionicons
               name="chatbubble-sharp"
-              color={color}
+              color={focused ? COLORS.primaryBlack : color}
               size={moderateScale(22)}
             />
           ),
@@ -59,9 +55,13 @@ export default function BottomTab() {
         component={HomeRoute}
         options={{
           tabBarLabel: 'Home',
-          tabBarColor: 'white',
-          tabBarIcon: ({color}) => (
-            <Entypo name="home" color={color} size={moderateScale(22)} />
+          tabBarColor: COLORS.imperialRed,
+          tabBarIcon: ({color, focused}) => (
+            <Entypo
+              name="home"
+              color={focused ? COLORS.primaryBlack : color}
+              size={moderateScale(22)}
+            />
           ),
         }}
       />
@@ -84,7 +84,7 @@ export default function BottomTab() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarColor: 'white',
+          tabBarColor: COLORS.redOld,
           tabBarIcon: () => (
             <Avatar
               rounded
