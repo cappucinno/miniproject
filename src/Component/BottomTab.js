@@ -42,7 +42,7 @@ export default function BottomTab() {
         component={ReviewScreen}
         options={{
           tabBarLabel: 'Review',
-          tabBarColor: COLORS.blueShappire,
+          tabBarColor: COLORS.gold,
           tabBarIcon: ({color, focused}) =>
             focused ? (
               <Ionicons

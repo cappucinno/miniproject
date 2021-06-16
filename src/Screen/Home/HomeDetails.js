@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
   movieYear: {
     fontSize: moderateScale(16),
     fontWeight: '700',
+    color: COLORS.russianViolet,
   },
   descContainer: {
     flex: 1,
