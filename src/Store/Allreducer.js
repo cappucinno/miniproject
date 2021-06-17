@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import ReducerHome from '../Screen/Home/Redux/reducerHome';
 import LoginReducer from '../Screen/LoginScreen/Redux/reducer/LoginReducer';
 import RegisterReducer from '../Screen/RegisterScreen/Redux/RegisterReducer';
 import ReducerReview from '../Screen/Review/Redux/Reducer/ReducerReview';
@@ -11,4 +12,5 @@ export const AllReducer = combineReducers({
   Register: RegisterReducer,
   Login: LoginReducer,
   AllReview: ReducerAllReview,
+  Home: ReducerHome,
 });
