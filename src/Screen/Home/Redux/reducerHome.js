@@ -2,7 +2,7 @@ import {SET_MOVIE_DATA, SET_MOVIE_DETAIL} from './actionHome';
 
 const initialState = {
   data: [],
-  id: '',
+  dataDetail: [],
 };
 
 export default (state = initialState, action) => {
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
     case SET_MOVIE_DETAIL:
       return {
         ...state,
-        id: action.payload,
+        dataDetail: action.payload,
       };
 
     default:
