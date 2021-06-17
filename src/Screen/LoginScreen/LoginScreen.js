@@ -11,22 +11,20 @@ import {Input} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../styles/LoginStyle';
 import FastImage from 'react-native-fast-image';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginAction} from './Redux/action/authAction';
 
 const LoginScreen = props => {
-  const [username, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const registerData = useSelector(state => state.Register.data);
 
-  // const submit = () => {
-  //   if (!username) {
-  //     setMessage('Username Must be Field !!');
-  //   } else if (!password) {
-  //     setMessage('Password Must be Field !!');
-  //   } else {
-  //     props.processLogin({username, password});
-  //   }
-  // };
+  const submit = () => {
+    dispatch(loginAction({email, password, token: registerData.data.token}));
+  };
 
   return (
     <KeyboardAvoidingView style={styles.window}>
@@ -41,12 +39,14 @@ const LoginScreen = props => {
             <Text style={styles.smallTextButton}>MovReact</Text>
           </View>
 
+          {/* input email */}
           <Input
             onChangeText={text => setEmail(text)}
-            value={username}
+            value={email}
             placeholder="Email"
             placeholderTextColor="#EFBF7F"
             style={styles.formInput}></Input>
+          {/* input password */}
           <Input
             onChangeText={text => setPassword(text)}
             value={password}
@@ -63,19 +63,20 @@ const LoginScreen = props => {
           </View>
 
           <View style={styles.centerPos}>
-            {props.isLoading ? (
+            {/* {props.isLoading ? (
               <TouchableOpacity
                 onPress={() => console.info('disabled')}
                 style={styles.mainButton}>
                 <ActivityIndicator size="large" color="#333333" />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                onPress={() => props.navigation.navigate('MainScreen')}
-                style={styles.mainButton}>
+              <TouchableOpacity onPress={submit} style={styles.mainButton}>
                 <Text style={styles.buttonText}>LOGIN</Text>
               </TouchableOpacity>
-            )}
+            )} */}
+            <TouchableOpacity onPress={submit} style={styles.mainButton}>
+              <Text style={styles.buttonText}>LOGIN</Text>
+            </TouchableOpacity>
           </View>
 
           <TouchableOpacity
