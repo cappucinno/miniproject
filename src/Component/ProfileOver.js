@@ -116,11 +116,10 @@ const ProfileOver = props => {
 
               <Input
                 onChangeText={input => setpassword(input)}
-                defaultValue={props.password}
                 placeholder="Write Your Password"
                 inputContainerStyle={{borderBottomColor: COLORS.redOld}}
                 labelStyle={{color: COLORS.redOld}}
-                label="Password"
+                label="New Password"
                 secureTextEntry
                 style={styles.styleInput}
               />

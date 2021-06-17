@@ -27,7 +27,7 @@ function RegisterScreen(props) {
   const [profilPicture, setprofilPicture] = useState(
     'https://placeimg.com/640/480/people',
   );
-  const [roleId, setroleId] = useState(2);
+  const [roleId, setroleId] = useState(1);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
