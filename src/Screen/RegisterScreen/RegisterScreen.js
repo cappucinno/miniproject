@@ -61,11 +61,10 @@ function RegisterScreen(props) {
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
             <Image
-              source={require('../../Assets/Images/logo.png')}
+              source={require('../../Assets/Images/user.png')}
               style={styles.logo}
               resizeMode={FastImage.resizeMode.cover}
             />
-            <Text style={styles.smallTextButton}>MovReact</Text>
           </View>
           <Text style={styles.warnText}>{message}</Text>
           <TextInput

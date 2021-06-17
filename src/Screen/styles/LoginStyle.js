@@ -36,7 +36,7 @@ export default StyleSheet.create({
   },
   logo: {
     width: 100,
-    height: 100,
+    height: 135,
     color: 'white',
   },
   contInput: {
