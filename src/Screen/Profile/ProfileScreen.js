@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {View, SafeAreaView, StyleSheet} from 'react-native';
 import {Avatar, Input} from 'react-native-elements';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {moderateScale} from 'react-native-size-matters';
+import ModalProfile from '../../Component/ModalProfile';
 import ProfileOver from '../../Component/ProfileOver';
 import SheetBottom from '../../Component/ProfileOver';
 
@@ -15,40 +15,39 @@ const ProfileScreen = () => {
   const toggleBottom = () => setVisible(!Visible);
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.safeView}>
-        <View style={styles.bottomStyle}>
-          {/* avatar */}
-          <View style={styles.photoView}>
-            <Avatar
-              rounded
-              source={{uri: 'https://placeimg.com/640/480/people'}}
-              size={moderateScale(120)}>
-              <Avatar.Accessory
-                style={styles.accStyle}
-                color="white"
-                size={moderateScale(20)}
-                onPress={toggleBottom}
-              />
-            </Avatar>
-          </View>
-          {/* input */}
-          <View style={styles.inputView}>
-            <Input label="Fullname" disabled style={styles.textInput}>
-              Isumi Kartika
-            </Input>
-            <Input label="Username" disabled style={styles.textInput}>
-              aiko.d.aurora
-            </Input>
-            <Input label="Email" disabled style={styles.textInput}>
-              Isumi.karina@gmail.com
-            </Input>
-          </View>
+    <SafeAreaView style={styles.safeView}>
+      <View style={styles.bottomStyle}>
+        {/* avatar */}
+        <View style={styles.photoView}>
+          <Avatar
+            rounded
+            source={{uri: 'https://placeimg.com/640/480/people'}}
+            size={moderateScale(120)}>
+            <Avatar.Accessory
+              style={styles.accStyle}
+              color="white"
+              size={moderateScale(20)}
+              onPress={toggleBottom}
+            />
+          </Avatar>
         </View>
-      </SafeAreaView>
+        {/* input */}
+        <View style={styles.inputView}>
+          <Input label="Fullname" disabled style={styles.textInput}>
+            Isumi Kartika
+          </Input>
+          <Input label="Username" disabled style={styles.textInput}>
+            aiko.d.aurora
+          </Input>
+          <Input label="Email" disabled style={styles.textInput}>
+            Isumi.karina@gmail.com
+          </Input>
+        </View>
+      </View>
+      {/* <ModalProfile visible={Visible} toggle={toggleBottom} /> */}
       {/* Overlay profile */}
       <ProfileOver visible={Visible} toggle={toggleBottom} />
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 

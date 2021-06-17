@@ -3,30 +3,27 @@ import {
   StyleSheet,
   Text,
   View,
+  Modal,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import {Header, Input, Button, Overlay, Avatar} from 'react-native-elements';
+import {Header, Input, Avatar, Button} from 'react-native-elements';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-
 import {moderateScale} from 'react-native-size-matters';
+import LoginStyle from '../Screen/styles/LoginStyle';
 import {COLORS} from '../Utils/Constant';
 
-const ProfileOver = props => {
+const ModalProfile = props => {
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
-      <KeyboardAvoidingView behavior="position">
-        <Overlay
-          overlayStyle={styles.overStyle}
-          isVisible={props.visible}
-          onBackdropPress={props.toggle}
-          animationType="slide"
-          statusBarTranslucent={true}
-          fullScreen>
-          {/* overlay view */}
+    <KeyboardAvoidingView style={LoginStyle.window}>
+      <Modal
+        statusBarTranslucent={true}
+        animationType="slide"
+        visible={props.visible}>
+        <View>
           <View style={styles.overlayView}>
             <Header
               leftComponent={{icon: 'arrow-back', onPress: props.toggle}}
@@ -88,13 +85,13 @@ const ProfileOver = props => {
               onPress={props.submit}
             />
           </View>
-        </Overlay>
-      </KeyboardAvoidingView>
-    </ScrollView>
+        </View>
+      </Modal>
+    </KeyboardAvoidingView>
   );
 };
 
-export default ProfileOver;
+export default ModalProfile;
 
 const styles = StyleSheet.create({
   boldText: {
