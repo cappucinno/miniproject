@@ -60,12 +60,13 @@ function RegisterScreen(props) {
       <View style={styles.container}>
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
-            <Image
-              source={require('../../Assets/Images/logo.png')}
-              style={styles.logo}
-              resizeMode={FastImage.resizeMode.cover}
-            />
-            <Text style={styles.smallTextButton}>MovReact</Text>
+            <TouchableOpacity>
+              <Image
+                source={require('../../Assets/Images/user.png')}
+                style={styles.logo}
+                resizeMode={FastImage.resizeMode.cover}
+              />
+            </TouchableOpacity>
           </View>
           <Text style={styles.warnText}>{message}</Text>
           <TextInput

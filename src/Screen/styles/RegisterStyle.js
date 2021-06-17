@@ -16,6 +16,7 @@ export default StyleSheet.create({
   },
   contLogo: {
     alignItems: 'center',
+    paddingTop: 10,
   },
   logo: {
     width: 100,
