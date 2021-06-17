@@ -1,8 +1,10 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
 
 const contWidth = Dimensions.get('window').width * 0.9;
 const posHeight = Dimensions.get('window').height * 0.1;
 const contHeight = Dimensions.get('window').height;
+import {COLORS} from '../../Utils/Constant';
 
 export default StyleSheet.create({
   window: {
@@ -35,9 +37,12 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    width: 100,
-    height: 135,
-    color: 'white',
+    width: 125,
+    height: 155,
+  },
+  title: {
+    color: COLORS.imperialRed,
+    fontSize: moderateScale(20),
   },
   contInput: {
     position: 'relative',

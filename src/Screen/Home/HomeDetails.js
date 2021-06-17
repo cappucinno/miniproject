@@ -19,7 +19,7 @@ import Share from 'react-native-vector-icons/Foundation';
 import {Card} from 'react-native-elements';
 import OverlayComp from '../../Component/OverlayComp';
 import {COLORS} from '../../Utils/Constant';
-import {getReviewData} from '../Review/Redux/ActionReview';
+// import {getReviewData} from '../Review/Redux/ActionReview';
 import {useDispatch, useSelector} from 'react-redux';
 
 export default function HomeDetails(props) {
@@ -33,7 +33,7 @@ export default function HomeDetails(props) {
   const Submit = () => {};
 
   const allReview = () => {
-    dispatch(getReviewData());
+    // dispatch(getReviewData());
     props.navigation.navigate('AllReview');
   };
 

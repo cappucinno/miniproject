@@ -34,8 +34,9 @@ const LoginScreen = props => {
             <FastImage
               source={require('../../Assets/Images/logo.png')}
               style={styles.logo}
-              resizeMode={FastImage.resizeMode.cover}
+              resizeMode={FastImage.resizeMode.contain}
             />
+            {/* <Text style={styles.title}>MovReact</Text> */}
           </View>
 
           {/* input email */}
