@@ -17,7 +17,7 @@ const myTheme = {
   },
 };
 
-export default function App({navigation}) {
+export default function App() {
   return (
     <Provider store={Store}>
       <PersistGate persistor={storePersist}>

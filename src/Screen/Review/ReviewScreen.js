@@ -1,18 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {COLORS} from '../../Utils/Constant';
 
 import ReviewCard from '../../Component/ReviewCard';
 import OverlayComp from '../../Component/OverlayComp';
+import {useDispatch, useSelector} from 'react-redux';
+import {getReviewData} from './Redux/Action/ActionReview';
 
 const ReviewScreen = () => {
+  const userData = useSelector(state => state.Login.data);
+
+  useEffect(() => {
+    dispatch(getReviewData({id: userData.data.id, token: userData.token}));
+  }, [userData]);
   // state untuk toggle overlay
   const [stateOverlay, setstateOverlay] = useState(false);
   // function overlay
   const toggleOverlay = () => setstateOverlay(!stateOverlay);
 
   const Submit = () => {};
+
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.safeView}>

@@ -14,6 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostNewUser} from './Redux/RegisterAction';
+import {setPasswordUser} from '../Profile/Redux/ActionEditProfile';
 
 function RegisterScreen(props) {
   const [name, setName] = useState('');
@@ -24,7 +25,7 @@ function RegisterScreen(props) {
   const [profilPicture, setprofilPicture] = useState(
     'https://placeimg.com/640/480/people',
   );
-  const [roleId, setroleId] = useState(2);
+  const [roleId, setroleId] = useState(1);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -48,6 +49,7 @@ function RegisterScreen(props) {
           roleId,
         }),
       );
+      dispatch(setPasswordUser(password));
 
       navigation.navigate('LoginScreen');
     }

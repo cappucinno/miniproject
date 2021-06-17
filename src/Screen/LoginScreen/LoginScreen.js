@@ -34,8 +34,9 @@ const LoginScreen = props => {
             <FastImage
               source={require('../../Assets/Images/logo.png')}
               style={styles.logo}
-              resizeMode={FastImage.resizeMode.cover}
+              resizeMode={FastImage.resizeMode.contain}
             />
+            {/* <Text style={styles.title}>MovReact</Text> */}
           </View>
 
           {/* input email */}
@@ -44,7 +45,8 @@ const LoginScreen = props => {
             value={email}
             placeholder="Email"
             placeholderTextColor="#EFBF7F"
-            style={styles.formInput}></Input>
+            style={styles.formInput}
+          />
           {/* input password */}
           <Input
             onChangeText={text => setPassword(text)}
@@ -52,11 +54,12 @@ const LoginScreen = props => {
             placeholder="Password"
             placeholderTextColor="#EFBF7F"
             style={styles.formInput}
-            secureTextEntry></Input>
+            secureTextEntry
+          />
 
           <View style={styles.rightPos}>
             <TouchableOpacity>
-              {/* onPress={() => props.navigation.navigate('RegisterScreen')}> */}
+              {/* onPress={() => props.navigation.navigate('MainScreen')}> */}
               <Text style={styles.warnText}>Forgot Password ?</Text>
             </TouchableOpacity>
           </View>
