@@ -17,10 +17,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
 import {COLORS} from '../../Utils/Constant';
-import {getMovieData} from './Redux/actionHome';
+import {getMovieData, getMovieDetail} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
-  const detail = () => props.navigation.navigate('Detail');
+  const detail = id => dispatch(getMovieDetail(id));
   const allReview = () => props.navigation.navigate('AllReview');
   const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
 
@@ -33,7 +33,6 @@ export default function HomeScreen(props) {
     return state.Home.data;
   });
   // console.log(dataMovie, '<=====ini data movie');
-  console.log(dataMovie.length, 'ini length');
   useEffect(() => {
     dispatch(getMovieData());
   }, []);
@@ -75,7 +74,7 @@ export default function HomeScreen(props) {
               ? dataMovie.map((e, i) => {
                   return (
                     <CardView
-                      detail={detail}
+                      detail={() => detail(e.id)}
                       allreview={allReview}
                       poster={e.poster}
                       synopsis={e.synopsis}

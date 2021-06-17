@@ -19,6 +19,8 @@ import Share from 'react-native-vector-icons/Foundation';
 import {Card} from 'react-native-elements';
 import OverlayComp from '../../Component/OverlayComp';
 import {COLORS} from '../../Utils/Constant';
+import {getReviewData} from '../Review/Redux/ActionReview';
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function HomeDetails(props) {
   // state untuk toggle overlay
@@ -26,28 +28,16 @@ export default function HomeDetails(props) {
   // function overlay
   const toggleOverlay = () => setstateOverlay(!stateOverlay);
 
+  const dispatch = useDispatch();
+
   const Submit = () => {};
 
-  const allReview = () => props.navigation.navigate('AllReview');
+  const allReview = () => {
+    dispatch(getReviewData());
+    props.navigation.navigate('AllReview');
+  };
 
-  const dummyDataDetail = [
-    {
-      id: 337404,
-      link: 'https://image.tmdb.org/t/p/original/8ChCpCYxh9YXusmHwcE9YzP0TSG.jpg',
-      desc: 'In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.',
-      title: 'Cruella',
-      year: '2021',
-      genre: ['Crime', 'Comedy'],
-    },
-    {
-      id: 423108,
-      link: 'https://image.tmdb.org/t/p/original/qi6Edc1OPcyENecGtz8TF0DUr9e.jpg',
-      desc: "Paranormal investigators Ed and Lorraine Warren encounter what would become one of the most sensational cases from their files. The fight for the soul of a young boy takes them beyond anything they'd ever seen before, to mark the first time in U.S. history that a murder suspect would claim demonic possession as a defense.",
-      title: 'The Conjuring: The Devil Made Me Do It',
-      year: '2021',
-      genre: ['Horror', 'Thriller'],
-    },
-  ];
+  const detail = useSelector(state => state.Home.detail);
 
   return (
     <ScrollView contentContainerStyle={styles.fullscreen}>
@@ -55,16 +45,17 @@ export default function HomeDetails(props) {
         <Card containerStyle={styles.cardContainer}>
           <Image
             style={styles.imageVideo}
-            source={{uri: dummyDataDetail[1].link}}
+            source={{uri: detail.poster}}
             resizeMode="cover"
           />
 
           {/* title container */}
           <View style={styles.titleContainer}>
-            <Text style={styles.movieTitle}>{dummyDataDetail[1].title}</Text>
+            <Text style={styles.movieTitle}>{detail.title}</Text>
             <Text style={styles.movieYear}>
-              {dummyDataDetail[1].genre[0]}/{dummyDataDetail[1].genre[1]} |{' '}
-              {dummyDataDetail[1].year}
+              {detail.MovieInfo.releaseDate}
+              {/* {dummyDataDetail[1].genre[0]}/{dummyDataDetail[1].genre[1]} |{' '}
+              {dummyDataDetail[1].year} */}
             </Text>
           </View>
           <Card.Divider width={2} color={COLORS.imperialRed} />
@@ -74,7 +65,7 @@ export default function HomeDetails(props) {
             <View>
               <ImageBackground
                 style={styles.poster}
-                source={{uri: dummyDataDetail[1].link}}
+                source={{uri: detail.poster}}
                 resizeMode="cover"
               />
             </View>
@@ -99,7 +90,7 @@ export default function HomeDetails(props) {
                 </TouchableOpacity>
               </View>
 
-              <Text style={styles.descText}>{dummyDataDetail[1].desc}</Text>
+              <Text style={styles.descText}>{detail.synopsis}</Text>
             </View>
           </View>
 
