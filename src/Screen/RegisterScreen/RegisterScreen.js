@@ -7,20 +7,28 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 import {Input} from 'react-native-elements';
 import styles from '../styles/RegisterStyle';
 import {useNavigation} from '@react-navigation/native';
 import {moderateScale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
+import {useDispatch, useSelector} from 'react-redux';
+import {PostNewUser} from './Redux/RegisterAction';
 
 function RegisterScreen(props) {
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [message, setMessage] = useState(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [profilPicture, setprofilPicture] = useState(
+    'https://placeimg.com/640/480/people',
+  );
+  const [roleId, setroleId] = useState(2);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const submit = () => {
     if (!name) {
@@ -32,7 +40,18 @@ function RegisterScreen(props) {
     } else if (!password) {
       setMessage('Password Must be Field !!');
     } else {
-      navigation.navigate('MainNavigator');
+      dispatch(
+        PostNewUser({
+          fullName: name,
+          userName: username,
+          email,
+          profilPicture: profilPicture,
+          password,
+          roleId,
+        }),
+      );
+
+      navigation.navigate('LoginScreen');
     }
   };
 
@@ -52,7 +71,7 @@ function RegisterScreen(props) {
           <TextInput
             onChangeText={text => setName(text)}
             value={name}
-            placeholder="Name"
+            placeholder="Fullname"
             placeholderTextColor="#EFBF7F"
             style={styles.formInput}
           />
@@ -82,9 +101,7 @@ function RegisterScreen(props) {
             secureTextEntry
           />
           <View style={styles.centerPos}>
-            <TouchableOpacity
-              onPress={() => submit()}
-              style={styles.mainButton}>
+            <TouchableOpacity onPress={submit} style={styles.mainButton}>
               <Text style={styles.buttonText}>SIGN UP</Text>
             </TouchableOpacity>
           </View>
