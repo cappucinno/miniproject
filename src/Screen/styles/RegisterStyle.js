@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
 
 const contWidth = Dimensions.get('window').width * 0.9;
 const contHeight = Dimensions.get('window').height;
@@ -35,6 +36,8 @@ export default StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     color: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
   },
   centerPos: {
     alignItems: 'center',

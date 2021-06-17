@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  Dimensions,
   Image,
   KeyboardAvoidingView,
+  ScrollView,
+  TextInput,
 } from 'react-native';
+import {Input} from 'react-native-elements';
 import styles from '../styles/RegisterStyle';
 import {useNavigation} from '@react-navigation/native';
+import {moderateScale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 
 function RegisterScreen(props) {
@@ -40,11 +41,12 @@ function RegisterScreen(props) {
       <View style={styles.container}>
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
-            <FastImage
-              source={require('../../Assets/Images/logo.png')} // seharusnya profile pict
+            <Image
+              source={require('../../Assets/Images/logo.png')}
               style={styles.logo}
               resizeMode={FastImage.resizeMode.cover}
             />
+            <Text style={styles.smallTextButton}>MovReact</Text>
           </View>
           <Text style={styles.warnText}>{message}</Text>
           <TextInput
@@ -96,6 +98,20 @@ function RegisterScreen(props) {
         </View>
       </View>
     </KeyboardAvoidingView>
+
+    // <KeyboardAvoidingView>
+    //   <View
+    //     style={{
+    //       flex: 1,
+    //       justifyContent: 'center',
+    //       alignItems: 'center',
+    //       height: 100,
+    //       width: 100,
+    //     }}>
+    //     <Image source={require('../../Assets/Images/Logo.png')} />
+    //   </View>
+    //   <Text>MovReact</Text>
+    // </KeyboardAvoidingView>
   );
 }
 

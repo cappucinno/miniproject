@@ -2,14 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  TextInput,
   TouchableOpacity,
   ActivityIndicator,
   Image,
   KeyboardAvoidingView,
-  Dimensions,
 } from 'react-native';
+import {Input} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../styles/LoginStyle';
 import FastImage from 'react-native-fast-image';
@@ -40,25 +38,26 @@ const LoginScreen = props => {
               style={styles.logo}
               resizeMode={FastImage.resizeMode.cover}
             />
+            <Text style={styles.smallTextButton}>MovReact</Text>
           </View>
 
-          <TextInput
+          <Input
             onChangeText={text => setEmail(text)}
             value={username}
             placeholder="Email"
             placeholderTextColor="#EFBF7F"
-            style={styles.formInput}></TextInput>
-          <TextInput
+            style={styles.formInput}></Input>
+          <Input
             onChangeText={text => setPassword(text)}
             value={password}
             placeholder="Password"
             placeholderTextColor="#EFBF7F"
             style={styles.formInput}
-            secureTextEntry></TextInput>
+            secureTextEntry></Input>
 
           <View style={styles.rightPos}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('MainApps')}>
+            <TouchableOpacity>
+              {/* onPress={() => props.navigation.navigate('RegisterScreen')}> */}
               <Text style={styles.warnText}>Forgot Password ?</Text>
             </TouchableOpacity>
           </View>

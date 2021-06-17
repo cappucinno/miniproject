@@ -16,8 +16,6 @@ const myTheme = {
   },
 };
 
-// satria menambahkan navcontainer untuk stackscreen loginscreen dan registerscreen
-
 export default function App({navigation}) {
   return (
     <Provider store={Store}>
