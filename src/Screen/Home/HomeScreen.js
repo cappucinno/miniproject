@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -13,15 +13,30 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {moderateScale} from 'react-native-size-matters';
+import {useDispatch, useSelector} from 'react-redux';
 import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
 import {COLORS} from '../../Utils/Constant';
+import {getMovieData} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
-  const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
-
   const detail = () => props.navigation.navigate('Detail');
   const allReview = () => props.navigation.navigate('AllReview');
+  const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
+
+  const dispatch = useDispatch();
+
+  const dataMovie = useSelector(state => {
+    // console.log(
+    //   state.Home.data[0].MovieCategories[0].Category.categoryName,
+    //   '<===ini state',
+    return state.Home.data;
+  });
+  // console.log(dataMovie, '<=====ini data movie');
+  console.log(dataMovie.length, 'ini length');
+  useEffect(() => {
+    dispatch(getMovieData());
+  }, []);
 
   return (
     <SafeAreaView style={styles.fullscreen}>
@@ -56,7 +71,19 @@ export default function HomeScreen(props) {
             <View style={styles.headView}>
               <Text style={styles.headText}>Hot 'Category' Movies</Text>
             </View>
-            <CardView detail={detail} allreview={allReview} />
+            {dataMovie.length > 0
+              ? dataMovie.map((e, i) => {
+                  return (
+                    <CardView
+                      detail={detail}
+                      allreview={allReview}
+                      poster={e.poster}
+                      synopsis={e.synopsis}
+                      key={i.toString()}
+                    />
+                  );
+                })
+              : null}
           </View>
         </View>
       </ScrollView>

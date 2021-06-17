@@ -1,17 +1,38 @@
 import axios from 'axios';
 import {takeLatest, put} from 'redux-saga/effects';
-import {getMovieData} from './actionHome';
+import {GET_MOVIE_DATA, setMovieData, setMovieDetail} from './actionHome';
 
-function* SagaMovie(action) {
+function* getDataMovie(action) {
   try {
-    yield axios.get(
+    const res = yield axios.get(
       'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/home',
       action.payload,
     );
-  } catch (error) {}
+    if (res.status === 200) {
+      yield put(setMovieData(res.data.data));
+    } else {
+      console.log(res.data.statusCode);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function* getMovie() {
-  yield takeLatest();
+function* getDetailMovie(action) {
+  try {
+    const res = yield axios.get(
+      'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/title/',
+      action.payload,
+    );
+    if (res.status === 200) {
+      yield put(setMovieDetail(res.data.id));
+    } else {
+      console.log(res.data.statusCode);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
-export default getMovie;
+export function* SagaMovie() {
+  yield takeLatest(GET_MOVIE_DATA, [getDataMovie, getDetailMovie]);
+}
