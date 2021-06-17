@@ -3,14 +3,15 @@ import {View, SafeAreaView, StyleSheet} from 'react-native';
 import {Avatar, Input} from 'react-native-elements';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {moderateScale} from 'react-native-size-matters';
-import ModalProfile from '../../Component/ModalProfile';
+import {useSelector} from 'react-redux';
 import ProfileOver from '../../Component/ProfileOver';
-import SheetBottom from '../../Component/ProfileOver';
 
 import {COLORS} from '../../Utils/Constant';
 
 const ProfileScreen = () => {
   const [Visible, setVisible] = useState(false);
+
+  const dataProfile = useSelector(state => state.Login.data.data);
 
   const toggleBottom = () => setVisible(!Visible);
 
@@ -34,19 +35,26 @@ const ProfileScreen = () => {
         {/* input */}
         <View style={styles.inputView}>
           <Input label="Fullname" disabled style={styles.textInput}>
-            Isumi Kartika
+            {dataProfile.fullName}
           </Input>
           <Input label="Username" disabled style={styles.textInput}>
-            aiko.d.aurora
+            {dataProfile.userName}
           </Input>
           <Input label="Email" disabled style={styles.textInput}>
-            Isumi.karina@gmail.com
+            {dataProfile.email}
           </Input>
         </View>
       </View>
       {/* <ModalProfile visible={Visible} toggle={toggleBottom} /> */}
       {/* Overlay profile */}
-      <ProfileOver visible={Visible} toggle={toggleBottom} />
+      <ProfileOver
+        fullName={dataProfile.fullName}
+        userName={dataProfile.userName}
+        email={dataProfile.email}
+        password={dataProfile.password}
+        visible={Visible}
+        toggle={toggleBottom}
+      />
     </SafeAreaView>
   );
 };

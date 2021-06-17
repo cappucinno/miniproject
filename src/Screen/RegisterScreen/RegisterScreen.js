@@ -16,6 +16,7 @@ import {moderateScale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostNewUser} from './Redux/RegisterAction';
+import {setPasswordUser} from '../Profile/Redux/ActionEditProfile';
 
 function RegisterScreen(props) {
   const [name, setName] = useState('');
@@ -50,13 +51,14 @@ function RegisterScreen(props) {
           roleId,
         }),
       );
+      dispatch(setPasswordUser(password));
 
       navigation.navigate('LoginScreen');
     }
   };
 
   return (
-    <KeyboardAvoidingView style={styles.window} behavior="position">
+    <KeyboardAvoidingView style={styles.window} behavior="padding">
       <View style={styles.container}>
         <View style={styles.contInput}>
           <View style={styles.contLogo}>

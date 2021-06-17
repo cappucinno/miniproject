@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,9 +13,32 @@ import {
 } from 'react-native-responsive-screen';
 
 import {moderateScale} from 'react-native-size-matters';
+import {useDispatch, useSelector} from 'react-redux';
+import {putDataProfile} from '../Screen/Profile/Redux/ActionEditProfile';
 import {COLORS} from '../Utils/Constant';
 
 const ProfileOver = props => {
+  const [fullName, setfullName] = useState('');
+  const [userName, setuserName] = useState('');
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+
+  const logindata = useSelector(state => state.Login.data);
+  const dispatch = useDispatch();
+
+  const submit = () => {
+    dispatch(
+      putDataProfile({
+        fullName,
+        userName,
+        email,
+        password,
+        id: logindata.data.id,
+        token: logindata.token,
+      }),
+    );
+  };
+
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <KeyboardAvoidingView behavior="position">
@@ -29,9 +52,20 @@ const ProfileOver = props => {
           {/* overlay view */}
           <View style={styles.overlayView}>
             <Header
-              leftComponent={{icon: 'arrow-back', onPress: props.toggle}}
-              centerComponent={{text: 'Edit Profile'}}
-              rightComponent={{icon: 'check'}}
+              leftComponent={{
+                icon: 'arrow-back',
+                color: COLORS.cream,
+                onPress: props.toggle,
+              }}
+              centerComponent={{
+                text: 'Edit Profile',
+                style: {color: COLORS.cream},
+              }}
+              rightComponent={{
+                icon: 'check',
+                color: COLORS.cream,
+                onPress: submit,
+              }}
               containerStyle={styles.headerStyle}
             />
 
@@ -51,41 +85,52 @@ const ProfileOver = props => {
             {/* input */}
             <View style={styles.inputView}>
               <Input
-                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
-                labelStyle={{color: COLORS.primaryBlack}}
+                onChangeText={input => setfullName(input)}
+                defaultValue={props.fullName}
+                placeholder="Write Your Fullname"
+                inputContainerStyle={{borderBottomColor: COLORS.redOld}}
+                labelStyle={{color: COLORS.redOld}}
                 label="Fullname"
-                style={styles.styleInput}>
-                Isumi Kartika
-              </Input>
+                style={styles.styleInput}
+              />
+
               <Input
-                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
-                labelStyle={{color: COLORS.primaryBlack}}
+                onChangeText={input => setuserName(input)}
+                defaultValue={props.userName}
+                placeholder="Write Your Username"
+                inputContainerStyle={{borderBottomColor: COLORS.redOld}}
+                labelStyle={{color: COLORS.redOld}}
                 label="Username"
-                style={styles.styleInput}>
-                aiko.d.aurora
-              </Input>
+                style={styles.styleInput}
+              />
+
               <Input
-                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
-                labelStyle={{color: COLORS.primaryBlack}}
+                onChangeText={input => setemail(input)}
+                defaultValue={props.email}
+                placeholder="Write Your Email"
+                inputContainerStyle={{borderBottomColor: COLORS.redOld}}
+                labelStyle={{color: COLORS.redOld}}
                 label="Email"
-                style={styles.styleInput}>
-                Isumi.karina@gmail.com
-              </Input>
+                style={styles.styleInput}
+              />
+
               <Input
-                inputContainerStyle={{borderBottomColor: COLORS.primaryBlack}}
-                labelStyle={{color: COLORS.primaryBlack}}
+                onChangeText={input => setpassword(input)}
+                defaultValue={props.password}
+                placeholder="Write Your Password"
+                inputContainerStyle={{borderBottomColor: COLORS.redOld}}
+                labelStyle={{color: COLORS.redOld}}
                 label="Password"
                 secureTextEntry
-                style={styles.styleInput}>
-                Isumi.karina@gmail.com
-              </Input>
+                style={styles.styleInput}
+              />
             </View>
             {/* overlay button submit */}
             <Button
-              title="Submit"
+              title="Logout"
               buttonStyle={styles.styleButton}
               titleStyle={styles.titleButton}
-              onPress={props.submit}
+              onPress={props.logout}
             />
           </View>
         </Overlay>
@@ -102,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
   },
   overStyle: {
-    backgroundColor: COLORS.gold,
+    backgroundColor: COLORS.primaryBlack,
     alignItems: 'center',
   },
   overlayView: {
@@ -113,8 +158,9 @@ const styles = StyleSheet.create({
     height: heightPercentageToDP(55),
   },
   headerStyle: {
-    borderBottomColor: COLORS.gold,
-    backgroundColor: COLORS.gold,
+    borderBottomColor: COLORS.redOld,
+    backgroundColor: COLORS.redOld,
+    borderRadius: moderateScale(20),
   },
   photoView: {
     height: heightPercentageToDP(18),
@@ -131,12 +177,13 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(18),
     textAlign: 'justify',
     fontWeight: '400',
+    color: COLORS.cream,
   },
   inputView: {
     width: widthPercentageToDP(90),
   },
   styleButton: {
-    backgroundColor: COLORS.primaryBlack,
+    backgroundColor: COLORS.redOld,
     borderRadius: moderateScale(15),
     width: widthPercentageToDP(20),
     height: heightPercentageToDP(5),
