@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {
-  Text,
   SafeAreaView,
   View,
   StyleSheet,
@@ -23,7 +22,7 @@ import {getMovieData, getMovieDetail} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
   const detail = id => dispatch(getMovieDetail(id));
-  const allReview = () => props.navigation.navigate('AllReview');
+  // const allReview = () => props.navigation.navigate('AllReview');
   const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
 
   const dispatch = useDispatch();
@@ -37,7 +36,7 @@ export default function HomeScreen(props) {
   // console.log(dataMovie, '<=====ini data movie');
   useEffect(() => {
     dispatch(getMovieData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <SafeAreaView style={styles.fullscreen}>
