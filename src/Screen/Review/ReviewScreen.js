@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {COLORS} from '../../Utils/Constant';
 
@@ -23,21 +29,29 @@ const ReviewScreen = () => {
 
   const dispatch = useDispatch();
 
+  const review = useSelector(state => state.Review.review);
+
   return (
     <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.bottomStyle}>
           {/* card */}
-          <ReviewCard
-            image="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            title="Parasite"
-            years="2019"
-            dateReviewed="February 24, 2019"
-            star="9"
-            headline="GREATTTT"
-            review="ksjbdkbwakdbawkjdbkwabkdbakwdba wdkawdkakwd akwj awd awjdasnbdjbhw adbjhawbdkjagwudgajk"
-            toggle={toggleOverlay}
-          />
+          {review.length !== undefined ? (
+            review.map((e, i) => (
+              <ReviewCard
+                image="https://dummyimage.com/600x400/000/fff.png&text=asdasd"
+                title="Parasite"
+                years="2019"
+                dateReviewed={e.createdAt}
+                star={e.rating}
+                headline={e.headlineReview}
+                review={e.review}
+                toggle={toggleOverlay}
+              />
+            ))
+          ) : (
+            <ActivityIndicator />
+          )}
           {/* overlay */}
           <OverlayComp
             visible={stateOverlay}
