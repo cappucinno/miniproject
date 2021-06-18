@@ -16,6 +16,7 @@ import {moderateScale} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
 import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
+import Poppins from '../../Component/Poppins';
 import {COLORS} from '../../Utils/Constant';
 import {getMovieData, getMovieDetail} from './Redux/actionHome';
 
@@ -52,7 +53,13 @@ export default function HomeScreen(props) {
           {/* Genre */}
           <View style={styles.genreContainer}>
             <View style={styles.genreTextContainer}>
-              <Text style={styles.headText}>Best Genre</Text>
+              <Poppins
+                title="Best Genre"
+                color="white"
+                type="Bold"
+                size={moderateScale(26)}
+              />
+              {/* <Text style={styles.headText}>Best Genre</Text> */}
               <TouchableOpacity>
                 <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text>
               </TouchableOpacity>
@@ -75,7 +82,7 @@ export default function HomeScreen(props) {
                   return (
                     <CardView
                       detail={() => {
-                        dispatch(getMovieDetail(e.id));
+                        detail(e.id);
                       }}
                       allreview={allReview}
                       poster={e.poster}
