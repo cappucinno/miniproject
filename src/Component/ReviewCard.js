@@ -8,6 +8,7 @@ import {
 import {moderateScale} from 'react-native-size-matters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {COLORS} from '../Utils/Constant';
+import Poppins from './Poppins';
 
 const ReviewCard = props => {
   return (
@@ -38,9 +39,10 @@ const ReviewCard = props => {
           {/* card rating */}
           <View style={styles.ratingView}>
             <MaterialCommunityIcons name="star" size={16} color="orange" />
-            <Text>
-              <Text style={styles.boldText}>{props.star}</Text>/10
-            </Text>
+            <Poppins size={moderateScale(12)}>
+              <Poppins title={props.star} type="bold" />
+              /10
+            </Poppins>
           </View>
 
           {/* card icon edit & delete */}
@@ -48,14 +50,14 @@ const ReviewCard = props => {
             <TouchableOpacity onPress={props.toggle}>
               <MaterialCommunityIcons
                 name="circle-edit-outline"
-                size={18}
+                size={moderateScale(18)}
                 color="orange"
               />
             </TouchableOpacity>
             <TouchableOpacity>
               <MaterialCommunityIcons
                 name="delete-circle"
-                size={18}
+                size={moderateScale(18)}
                 color="orange"
               />
             </TouchableOpacity>
@@ -64,8 +66,8 @@ const ReviewCard = props => {
       </View>
 
       {/* bottom text */}
-      <Text style={styles.headlineText}>{props.headline}</Text>
-      <Text style={{fontSize: moderateScale(12)}}>{props.review}</Text>
+      <Poppins title={props.headline} type="bold" style={styles.headlineText} />
+      <Poppins title={props.review} size={moderateScale(12)} />
     </Card>
   );
 };
@@ -77,7 +79,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headlineText: {
-    fontWeight: 'bold',
     marginVertical: moderateScale(5),
   },
   editView: {

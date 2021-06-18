@@ -14,6 +14,7 @@ import ReviewCard from '../../Component/ReviewCard';
 import OverlayComp from '../../Component/OverlayComp';
 import {useDispatch, useSelector} from 'react-redux';
 import {getReviewData} from './Redux/Action/ActionReview';
+import Poppins from '../../Component/Poppins';
 
 const ReviewScreen = () => {
   const userData = useSelector(state => state.Login.data);
@@ -56,9 +57,12 @@ const ReviewScreen = () => {
               ))
             ) : (
               <View style={styles.empty}>
-                <Text style={styles.emptyText}>
-                  Anda Belum Pernah Mereview Film Apapun
-                </Text>
+                <Poppins
+                  title="Anda Belum Pernah Mereview Film Apapun"
+                  size={moderateScale(14)}
+                  type="Bold"
+                  color={COLORS.champagne}
+                />
               </View>
             )}
             {/* overlay */}
@@ -100,10 +104,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-  },
-  emptyText: {
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    color: COLORS.champagne,
   },
 });

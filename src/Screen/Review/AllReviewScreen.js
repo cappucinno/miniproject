@@ -9,6 +9,8 @@ import {COLORS} from '../../Utils/Constant';
 import AllReviewCard from '../../Component/AllReviewCard';
 import {useSelector} from 'react-redux';
 
+import Poppins from '../../Component/Poppins';
+
 const AllReviewScreen = ({navigation}) => {
   const allReview = useSelector(state => state.AllReview.data);
   return (
@@ -18,6 +20,7 @@ const AllReviewScreen = ({navigation}) => {
         {allReview !== undefined ? (
           allReview.Reviews.data.map((e, i) => (
             <AllReviewCard
+              keyIndex={i}
               index={i}
               image="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
               rating={e.rating}
@@ -28,9 +31,11 @@ const AllReviewScreen = ({navigation}) => {
           ))
         ) : (
           <View style={styles.empty}>
-            <Text style={styles.emptyText}>
-              Belum Ada Review Untuk Film Ini
-            </Text>
+            <Poppins
+              title="Belum Ada Review Untuk Film Ini"
+              style={styles.emptyText}
+              color={COLORS.champagne}
+            />
           </View>
         )}
 
@@ -75,6 +80,5 @@ const styles = StyleSheet.create({
   emptyText: {
     fontWeight: 'bold',
     fontSize: moderateScale(16),
-    color: COLORS.champagne,
   },
 });

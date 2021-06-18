@@ -5,6 +5,7 @@ import {Card} from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {COLORS} from '../Utils/Constant';
+import Poppins from './Poppins';
 
 const AllReviewCard = props => {
   return (
@@ -31,23 +32,49 @@ const AllReviewCard = props => {
         <View style={styles.cardTextView}>
           {/* card rating */}
           <View style={styles.ratingView}>
-            <MaterialCommunityIcons name="star" size={16} color="orange" />
-            <Text>
-              <Text style={styles.boldText}>{props.rating}</Text>/10
-            </Text>
-            <Text style={styles.boldText}>{props.headline}</Text>
+            <View style={styles.topContain}>
+              <MaterialCommunityIcons
+                name="star"
+                size={moderateScale(18)}
+                color="orange"
+              />
+            </View>
+            <View style={styles.topContain}>
+              <Poppins
+                title={props.rating}
+                title1="/10"
+                size={moderateScale(12)}
+                size1={moderateScale(12)}
+              />
+            </View>
+
+            <View style={styles.topContain}>
+              <Poppins
+                title={props.headline}
+                type="Bold"
+                size={moderateScale(14)}
+              />
+            </View>
           </View>
           {/* card reviewer */}
-          <Card.FeaturedSubtitle style={styles.cardSubtitle}>
-            Reviewer :{' '}
-            <Card.Title style={styles.cardTitle}>{props.reviewer}</Card.Title>
-          </Card.FeaturedSubtitle>
+          <Poppins
+            title="Reviewer : "
+            title1={props.reviewer}
+            type1="Bold"
+            size={moderateScale(12)}
+            size1={moderateScale(12)}
+            style={styles.cardSubtitle}
+            style1={styles.cardTitle}
+          />
         </View>
       </View>
       {/* card review */}
-      <Text style={{fontSize: moderateScale(12), marginTop: moderateScale(10)}}>
-        {props.review}
-      </Text>
+      <Poppins
+        index={props.keyIndex}
+        title={props.review}
+        size={moderateScale(12)}
+        style={{marginTop: moderateScale(10)}}
+      />
     </Card>
   );
 };
@@ -64,8 +91,8 @@ const styles = StyleSheet.create({
   },
   ratingView: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: widthPercentageToDP(55),
+    justifyContent: 'flex-start',
+    width: widthPercentageToDP(62),
     marginBottom: moderateScale(3),
     alignItems: 'center',
   },
@@ -73,14 +100,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   cardSubtitle: {
-    color: 'black',
     marginBottom: moderateScale(2),
-    fontSize: moderateScale(12),
-    fontWeight: '400',
   },
   cardTitle: {
-    color: 'black',
     marginBottom: moderateScale(0),
-    fontWeight: 'bold',
+  },
+  topContain: {
+    paddingLeft: moderateScale(2),
+    alignItems: 'center',
   },
 });

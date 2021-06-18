@@ -5,6 +5,7 @@ import {navigate} from '../../../../function/nav';
 import {
   GET_MY_REVIEW_DATA,
   POST_MY_NEW_REVIEW,
+  PUT_MY_REVIEW_DATA,
   setReviewData,
 } from '../Action/ActionReview';
 
@@ -40,7 +41,24 @@ function* postReview(action) {
   }
 }
 
+function* putMyReview(action) {
+  try {
+    const res = yield axios.put(
+      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/put/review/${action.payload.id}`,
+      action.payload,
+      {headers: {Authorization: action.payload.token}},
+    );
+
+    if (res.status === 200) {
+      yield ToastAndroid.show(res.data.message, ToastAndroid.BOTTOM);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* SagaReview() {
   yield takeEvery(GET_MY_REVIEW_DATA, getReviewData);
   yield takeLatest(POST_MY_NEW_REVIEW, postReview);
+  yield takeLatest(PUT_MY_REVIEW_DATA, putMyReview);
 }

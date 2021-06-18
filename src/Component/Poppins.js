@@ -10,7 +10,20 @@ export default function Poppins(props) {
       color: props.color ? props.color : COLORS.primaryBlack,
       ...props.style,
     },
+    textStyle1: {
+      fontFamily: `Poppins-${props.type1 ? props.type1 : 'Regular'}`,
+      fontSize: props.size1 ? props.size1 : 16,
+      color: props.color1 ? props.color1 : COLORS.primaryBlack,
+      ...props.style1,
+    },
   });
 
-  return <Text style={styles.textStyle}>{props.title}</Text>;
+  return (
+    <Text key={props.index} style={styles.textStyle}>
+      {props.title}
+      <Text key={props.i} style={styles.textStyle1}>
+        {props.title1}
+      </Text>
+    </Text>
+  );
 }
