@@ -7,12 +7,15 @@ import {
 } from 'react-native-responsive-screen';
 import {moderateScale} from 'react-native-size-matters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {COLORS} from '../Utils/Constant';
 
 const ReviewCard = props => {
   return (
     <Card
+      key={props.index}
       containerStyle={{
         borderRadius: moderateScale(20),
+        backgroundColor: COLORS.cream,
       }}>
       {/* card image */}
       <View style={styles.cardFlex}>

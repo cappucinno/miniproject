@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ToastAndroid} from 'react-native';
 import {put, takeLatest} from 'redux-saga/effects';
 import {navigate} from '../../../../function/nav';
 import {LOGIN} from '../action/actionTypes';
@@ -15,6 +16,7 @@ function* login(action) {
     if (res.status === 200) {
       yield put(setDataLogin(res.data));
       yield navigate('MainScreen');
+      yield ToastAndroid.show(res.message, ToastAndroid.BOTTOM);
     } else {
       console.log(res.data.statusCode);
     }

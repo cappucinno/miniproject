@@ -4,12 +4,15 @@ import {moderateScale} from 'react-native-size-matters';
 import {Card} from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
+import {COLORS} from '../Utils/Constant';
 
 const AllReviewCard = props => {
   return (
     <Card
+      key={props.index}
       containerStyle={{
         borderRadius: moderateScale(20),
+        backgroundColor: COLORS.cream,
       }}>
       {/* card image */}
       <View style={styles.cardFlex}>
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
   ratingView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: widthPercentageToDP(35),
+    width: widthPercentageToDP(55),
     marginBottom: moderateScale(3),
     alignItems: 'center',
   },

@@ -9,7 +9,7 @@ import {
 function* getAllReview(action) {
   try {
     const res = yield axios.get(
-      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/get/review/${action.payload}`,
+      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/get/review/${action.payload.id}?page=${action.payload.page}&size=20`,
       {headers: {Authorization: action.payload.token}},
     );
 
