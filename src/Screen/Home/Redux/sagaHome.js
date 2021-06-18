@@ -6,6 +6,7 @@ import {
   setMovieData,
   setMovieDetail,
 } from './actionHome';
+import {navigate} from '../../../function/nav';
 
 function* getDataMovie(action) {
   try {
@@ -30,6 +31,7 @@ function* getDetailMovie(action) {
     );
     if (res.status === 200) {
       yield put(setMovieDetail(res.data.data));
+      yield navigate('Detail');
     } else {
       console.log(res.data.statusCode);
     }

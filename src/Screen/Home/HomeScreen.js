@@ -77,7 +77,6 @@ export default function HomeScreen(props) {
                     <CardView
                       detail={() => {
                         dispatch(getMovieDetail(e.id));
-                        props.navigation.navigate('Detail');
                       }}
                       allreview={allReview}
                       poster={e.poster}

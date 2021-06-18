@@ -20,7 +20,8 @@ import Share from 'react-native-vector-icons/Foundation';
 import {Card} from 'react-native-elements';
 import OverlayComp from '../../Component/OverlayComp';
 import {COLORS} from '../../Utils/Constant';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 
 export default function HomeDetails(props) {
   // state untuk toggle overlay
@@ -33,6 +34,8 @@ export default function HomeDetails(props) {
   const allReview = () => props.navigation.navigate('AllReview');
 
   const datadetail = useSelector(data => data.Home.dataDetail);
+
+  const dispatch = useDispatch();
 
   // const dummyDataDetail = [
   //   {
@@ -112,7 +115,9 @@ export default function HomeDetails(props) {
           <Card.Divider width={2} color={COLORS.imperialRed} />
           <View style={styles.iconContainer}>
             {/* tombol review */}
-            <TouchableOpacity style={styles.reviewBtn} onPress={allReview}>
+            <TouchableOpacity
+              style={styles.reviewBtn}
+              onPress={() => dispatch(getReviewAllMovie(datadetail.id))}>
               <Icon
                 name="chatbubble-outline"
                 size={moderateScale(25)}
