@@ -12,7 +12,7 @@ export default function CardView(props) {
       <Card containerStyle={styles.cardContainer}>
         <Image
           style={styles.image}
-          resizeMode="cover"
+          resizeMode="contain"
           source={{uri: props.poster}}
         />
         <Text style={styles.textDesc} numberOfLines={4} ellipsizeMode="tail">

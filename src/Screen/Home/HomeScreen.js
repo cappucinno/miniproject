@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -20,6 +20,7 @@ import {COLORS} from '../../Utils/Constant';
 import {getMovieData, getMovieDetail} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
+  const detail = id => dispatch(getMovieDetail(id));
   const allReview = () => props.navigation.navigate('AllReview');
   const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
 
@@ -32,8 +33,6 @@ export default function HomeScreen(props) {
     return state.Home.data;
   });
   // console.log(dataMovie, '<=====ini data movie');
-  console.log(dataMovie.length, 'ini length');
-
   useEffect(() => {
     dispatch(getMovieData());
   }, []);
@@ -77,7 +76,6 @@ export default function HomeScreen(props) {
                     <CardView
                       detail={() => {
                         dispatch(getMovieDetail(e.id));
-                        props.navigation.navigate('Detail');
                       }}
                       allreview={allReview}
                       poster={e.poster}

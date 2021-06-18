@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {put, takeLatest} from 'redux-saga/effects';
+import {navigate} from '../../../../function/nav';
 import {
   GET_ALL_REVIEW_MOVIE,
   setReviewAllMovie,
@@ -8,12 +9,13 @@ import {
 function* getAllReview(action) {
   try {
     const res = yield axios.get(
-      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/get/review/${action.payload.id}`,
+      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/get/review/${action.payload}`,
       {headers: {Authorization: action.payload.token}},
     );
 
     if (res.status === 200) {
       yield put(setReviewAllMovie(res.data));
+      yield navigate('AllReview');
     }
   } catch (error) {
     console.log(error);

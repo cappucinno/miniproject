@@ -7,7 +7,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 
@@ -20,7 +19,10 @@ import Share from 'react-native-vector-icons/Foundation';
 import {Card} from 'react-native-elements';
 import OverlayComp from '../../Component/OverlayComp';
 import {COLORS} from '../../Utils/Constant';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
+import {postNewReview} from '../Review/Redux/Action/ActionReview';
+// import {getReviewData} from '../Review/Redux/ActionReview';
 
 export default function HomeDetails(props) {
   // state untuk toggle overlay
@@ -28,49 +30,39 @@ export default function HomeDetails(props) {
   // function overlay
   const toggleOverlay = () => setstateOverlay(!stateOverlay);
 
+  const dispatch = useDispatch();
+
   const Submit = () => {};
 
-  const allReview = () => props.navigation.navigate('AllReview');
+  const allReview = () => {
+    // dispatch(getReviewData());
+    props.navigation.navigate('AllReview');
+  };
 
-  const datadetail = useSelector(data => data.Home.dataDetail);
+  const detail = useSelector(state => state.Home.detail);
+  const user = useSelector(state => state.Login.data);
 
-  // const dummyDataDetail = [
-  //   {
-  //     id: 337404,
-  //     link: 'https://image.tmdb.org/t/p/original/8ChCpCYxh9YXusmHwcE9YzP0TSG.jpg',
-  //     desc: 'In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.',
-  //     title: 'Cruella',
-  //     year: '2021',
-  //     genre: ['Crime', 'Comedy'],
-  //   },
-  //   {
-  //     id: 423108,
-  //     link: 'https://image.tmdb.org/t/p/original/qi6Edc1OPcyENecGtz8TF0DUr9e.jpg',
-  //     desc: "Paranormal investigators Ed and Lorraine Warren encounter what would become one of the most sensational cases from their files. The fight for the soul of a young boy takes them beyond anything they'd ever seen before, to mark the first time in U.S. history that a murder suspect would claim demonic possession as a defense.",
-  //     title: 'The Conjuring: The Devil Made Me Do It',
-  //     year: '2021',
-  //     genre: ['Horror', 'Thriller'],
-  //   },
-  // ];
+  const [StarRating, setStar] = useState(0);
+  const [Headline, setHeadline] = useState('');
+  const [Review, setReview] = useState('');
 
-  return datadetail === undefined ? (
-    <ActivityIndicator />
-  ) : (
+  return (
     <ScrollView contentContainerStyle={styles.fullscreen}>
       <View style={styles.bottomStyle}>
         <Card containerStyle={styles.cardContainer}>
           <Image
             style={styles.imageVideo}
-            source={{uri: datadetail.trailer}}
+            source={{uri: detail.poster}}
             resizeMode="cover"
           />
 
           {/* title container */}
           <View style={styles.titleContainer}>
-            <Text style={styles.movieTitle}>{datadetail.title}</Text>
+            <Text style={styles.movieTitle}>{detail.title}</Text>
             <Text style={styles.movieYear}>
-              {datadetail.MovieInfo.director}/{datadetail.MovieInfo.budget} |{' '}
-              {datadetail.MovieInfo.releaseDate}
+              {detail.MovieInfo.releaseDate}
+              {/* {dummyDataDetail[1].genre[0]}/{dummyDataDetail[1].genre[1]} |{' '}
+              {dummyDataDetail[1].year} */}
             </Text>
           </View>
           <Card.Divider width={2} color={COLORS.imperialRed} />
@@ -80,7 +72,7 @@ export default function HomeDetails(props) {
             <View>
               <ImageBackground
                 style={styles.poster}
-                source={{uri: datadetail.poster}}
+                source={{uri: detail.poster}}
                 resizeMode="cover"
               />
             </View>
@@ -105,14 +97,16 @@ export default function HomeDetails(props) {
                 </TouchableOpacity>
               </View>
 
-              <Text style={styles.descText}>{datadetail.synopsis}</Text>
+              <Text style={styles.descText}>{detail.synopsis}</Text>
             </View>
           </View>
 
           <Card.Divider width={2} color={COLORS.imperialRed} />
           <View style={styles.iconContainer}>
             {/* tombol review */}
-            <TouchableOpacity style={styles.reviewBtn} onPress={allReview}>
+            <TouchableOpacity
+              style={styles.reviewBtn}
+              onPress={() => dispatch(getReviewAllMovie(detail.id))}>
               <Icon
                 name="chatbubble-outline"
                 size={moderateScale(25)}
@@ -135,9 +129,23 @@ export default function HomeDetails(props) {
         <OverlayComp
           visible={stateOverlay}
           toggle={toggleOverlay}
-          start={1}
-          rating="9"
-          submit={Submit}
+          start={0}
+          rating={StarRating}
+          submit={() =>
+            dispatch(
+              postNewReview({
+                userId: user.data.id,
+                token: user.token,
+                movieId: detail.id,
+                headlineReview: Headline,
+                review: Review,
+                rating: StarRating,
+              }),
+            )
+          }
+          setstar={setStar}
+          setheadline={setHeadline}
+          setreview={setReview}
         />
       </View>
     </ScrollView>

@@ -6,6 +6,7 @@ import {
   setMovieData,
   setMovieDetail,
 } from './actionHome';
+import {navigate} from '../../../function/nav';
 
 function* getDataMovie(action) {
   try {
@@ -26,10 +27,13 @@ function* getDataMovie(action) {
 function* getDetailMovie(action) {
   try {
     const res = yield axios.get(
-      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/title/${action.payload}`,
+      'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/title/' +
+        action.payload,
     );
+    console.log(res);
     if (res.status === 200) {
       yield put(setMovieDetail(res.data.data));
+      yield navigate('Detail');
     } else {
       console.log(res.data.statusCode);
     }
