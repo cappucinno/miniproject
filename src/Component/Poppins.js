@@ -12,5 +12,12 @@ export default function Poppins(props) {
     },
   });
 
-  return <Text style={styles.textStyle}>{props.title}</Text>;
+  return (
+    <Text
+      style={styles.textStyle}
+      numberOfLines={props.numberOfLines}
+      ellipsizeMode={props.ellipsizeMode}>
+      {props.title}
+    </Text>
+  );
 }

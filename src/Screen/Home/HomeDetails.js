@@ -50,19 +50,20 @@ export default function HomeDetails(props) {
     <ScrollView contentContainerStyle={styles.fullscreen}>
       <View style={styles.bottomStyle}>
         <Card containerStyle={styles.cardContainer}>
+          {/* TRAILER */}
           <Image
             style={styles.imageVideo}
-            source={{uri: detail.poster}}
+            source={{uri: detail.movie.poster}}
             resizeMode="cover"
           />
 
           {/* title container */}
           <View style={styles.titleContainer}>
-            <Text style={styles.movieTitle}>{detail.title}</Text>
+            {/* TITLE */}
+            <Text style={styles.movieTitle}>{detail.movie.title}</Text>
+            {/* YEAR AND GENRE */}
             <Text style={styles.movieYear}>
-              {detail.MovieInfo.releaseDate}
-              {/* {dummyDataDetail[1].genre[0]}/{dummyDataDetail[1].genre[1]} |{' '}
-              {dummyDataDetail[1].year} */}
+              {detail.movie.MovieInfo.releaseDate}
             </Text>
           </View>
           <Card.Divider width={2} color={COLORS.imperialRed} />
@@ -70,9 +71,10 @@ export default function HomeDetails(props) {
           {/* description container */}
           <View style={styles.descContainer}>
             <View>
+              {/* POSTER */}
               <ImageBackground
                 style={styles.poster}
-                source={{uri: detail.poster}}
+                source={{uri: detail.movie.poster}}
                 resizeMode="cover"
               />
             </View>
@@ -80,13 +82,14 @@ export default function HomeDetails(props) {
             <View style={styles.ratingDescContainer}>
               {/* rating and description container */}
               <View style={styles.ratingIconContainer}>
+                {/* RATING */}
                 <View style={styles.ratingIcon}>
                   <Star
                     name="star"
                     size={moderateScale(20)}
                     color={COLORS.imperialRed}
                   />
-                  <Text>9/10</Text>
+                  <Text>{Math.floor(detail.rating)}/10</Text>
                 </View>
 
                 <TouchableOpacity
@@ -97,7 +100,8 @@ export default function HomeDetails(props) {
                 </TouchableOpacity>
               </View>
 
-              <Text style={styles.descText}>{detail.synopsis}</Text>
+              {/* SYNOPSIS */}
+              <Text style={styles.descText}>{detail.movie.synopsis}</Text>
             </View>
           </View>
 
