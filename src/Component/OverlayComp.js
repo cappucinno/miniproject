@@ -32,7 +32,8 @@ const OverlayComp = props => {
             imageSize={moderateScale(25)}
             type="custom"
             tintColor={COLORS.champagne}
-            startingValue={props.start}
+            startingValue={props.start ? props.start : props.startEdit}
+            onFinishRating={sta => props.setstar(sta)}
           />
         </View>
 
@@ -43,6 +44,7 @@ const OverlayComp = props => {
           placeholder="Write a headline for your review here"
           inputContainerStyle={styles.containerInput}
           inputStyle={styles.styleInput}
+          onChangeText={i => props.setheadline(i)}
         />
 
         <Input
@@ -51,13 +53,14 @@ const OverlayComp = props => {
           inputStyle={styles.reviewInput}
           multiline={true}
           placeholderStyle={styles.reviewPlaceholder}
+          onChangeText={i => props.setreview(i)}
         />
         {/* overlay button submit */}
         <Button
           title="Submit"
           buttonStyle={styles.styleButton}
           titleStyle={styles.titleButton}
-          onPress={props.submit}
+          onPress={props.submit ? props.submit : props.edit}
         />
       </View>
     </Overlay>
