@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  ActivityIndicator,
-} from 'react-native';
+import {StyleSheet, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {FAB} from 'react-native-elements';
 
 import {moderateScale} from 'react-native-size-matters';
@@ -32,7 +27,11 @@ const AllReviewScreen = ({navigation}) => {
             />
           ))
         ) : (
-          <ActivityIndicator />
+          <View style={styles.empty}>
+            <Text style={styles.emptyText}>
+              Belum Ada Review Untuk Film Ini
+            </Text>
+          </View>
         )}
 
         {/* floating action button */}
@@ -67,5 +66,15 @@ const styles = StyleSheet.create({
   scrollView: {
     flexGrow: 1,
     backgroundColor: COLORS.primaryBlack,
+  },
+  empty: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  emptyText: {
+    fontWeight: 'bold',
+    fontSize: moderateScale(16),
+    color: COLORS.champagne,
   },
 });

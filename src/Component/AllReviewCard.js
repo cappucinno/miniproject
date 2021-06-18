@@ -4,6 +4,7 @@ import {moderateScale} from 'react-native-size-matters';
 import {Card} from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
+import {COLORS} from '../Utils/Constant';
 
 const AllReviewCard = props => {
   return (
@@ -11,6 +12,7 @@ const AllReviewCard = props => {
       key={props.index}
       containerStyle={{
         borderRadius: moderateScale(20),
+        backgroundColor: COLORS.cream,
       }}>
       {/* card image */}
       <View style={styles.cardFlex}>

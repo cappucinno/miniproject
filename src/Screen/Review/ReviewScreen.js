@@ -35,37 +35,42 @@ const ReviewScreen = () => {
   return (
     <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.bottomStyle}>
-          {/* card */}
-          {review !== undefined ? (
-            review.map((e, i) => (
-              <ReviewCard
-                image="https://dummyimage.com/600x400/000/fff.png&text=asdasd"
-                title="Parasite"
-                years="2019"
-                dateReviewed={e.createdAt}
-                star={e.rating}
-                headline={e.headlineReview}
-                review={e.review}
-                toggle={toggleOverlay}
-              />
-            ))
-          ) : (
-            <View style={styles.empty}>
-              <Text style={styles.emptyText}>
-                Anda Belum Pernah Mereview Film Apapun
-              </Text>
-            </View>
-          )}
-          {/* overlay */}
-          <OverlayComp
-            visible={stateOverlay}
-            toggle={toggleOverlay}
-            start={1}
-            rating="9"
-            submit={Submit}
-          />
-        </View>
+        {userData === null ? (
+          <ActivityIndicator />
+        ) : (
+          <View style={styles.bottomStyle}>
+            {/* card */}
+            {review !== undefined ? (
+              review.map((e, i) => (
+                <ReviewCard
+                  index={i}
+                  image="https://dummyimage.com/600x400/000/fff.png&text=asdasd"
+                  title="Parasite"
+                  years="2019"
+                  dateReviewed={e.createdAt}
+                  star={e.rating}
+                  headline={e.headlineReview}
+                  review={e.review}
+                  toggle={toggleOverlay}
+                />
+              ))
+            ) : (
+              <View style={styles.empty}>
+                <Text style={styles.emptyText}>
+                  Anda Belum Pernah Mereview Film Apapun
+                </Text>
+              </View>
+            )}
+            {/* overlay */}
+            <OverlayComp
+              visible={stateOverlay}
+              toggle={toggleOverlay}
+              start={1}
+              rating="9"
+              submit={Submit}
+            />
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
