@@ -2,6 +2,7 @@ import axios from 'axios';
 import {ToastAndroid} from 'react-native';
 import {put, takeLatest} from 'redux-saga/effects';
 import {PUT_DATA_PROFILE, setNewDataProfile} from './ActionEditProfile';
+import {navigate} from '../../../../function/nav';
 
 function* putDataProfile(action) {
   try {
@@ -20,10 +21,11 @@ function* putDataProfile(action) {
     if (res.status === 200) {
       yield put(setNewDataProfile(res.data));
       yield ToastAndroid.show(
-        res.message,
+        res.data.message,
         ToastAndroid.SHORT,
         ToastAndroid.BOTTOM,
       );
+      yield navigate('Profile');
     }
   } catch (error) {
     console.log(error);

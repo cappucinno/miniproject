@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 
@@ -48,106 +49,112 @@ export default function HomeDetails(props) {
 
   return (
     <ScrollView contentContainerStyle={styles.fullscreen}>
-      <View style={styles.bottomStyle}>
-        <Card containerStyle={styles.cardContainer}>
-          <Image
-            style={styles.imageVideo}
-            source={{uri: detail.poster}}
-            resizeMode="cover"
-          />
+      {detail === undefined && user === undefined ? (
+        <ActivityIndicator />
+      ) : (
+        <View style={styles.bottomStyle}>
+          <Card containerStyle={styles.cardContainer}>
+            <Image
+              style={styles.imageVideo}
+              source={{uri: detail.poster}}
+              resizeMode="cover"
+            />
 
-          {/* title container */}
-          <View style={styles.titleContainer}>
-            <Text style={styles.movieTitle}>{detail.title}</Text>
-            <Text style={styles.movieYear}>
-              {detail.MovieInfo.releaseDate}
-              {/* {dummyDataDetail[1].genre[0]}/{dummyDataDetail[1].genre[1]} |{' '}
+            {/* title container */}
+            <View style={styles.titleContainer}>
+              <Text style={styles.movieTitle}>{detail.title}</Text>
+              <Text style={styles.movieYear}>
+                {/* {detail.MovieInfo.releaseDate} */}
+                {/* {dummyDataDetail[1].genre[0]}/{dummyDataDetail[1].genre[1]} |{' '}
               {dummyDataDetail[1].year} */}
-            </Text>
-          </View>
-          <Card.Divider width={2} color={COLORS.imperialRed} />
-
-          {/* description container */}
-          <View style={styles.descContainer}>
-            <View>
-              <ImageBackground
-                style={styles.poster}
-                source={{uri: detail.poster}}
-                resizeMode="cover"
-              />
+              </Text>
             </View>
+            <Card.Divider width={2} color={COLORS.imperialRed} />
 
-            <View style={styles.ratingDescContainer}>
-              {/* rating and description container */}
-              <View style={styles.ratingIconContainer}>
-                <View style={styles.ratingIcon}>
-                  <Star
-                    name="star"
-                    size={moderateScale(20)}
-                    color={COLORS.imperialRed}
-                  />
-                  <Text>9/10</Text>
-                </View>
-
-                <TouchableOpacity
-                  style={styles.ratingIcon}
-                  onPress={toggleOverlay}>
-                  <Star name="star" size={moderateScale(20)} color="grey" />
-                  <Text>Rate this</Text>
-                </TouchableOpacity>
+            {/* description container */}
+            <View style={styles.descContainer}>
+              <View>
+                <ImageBackground
+                  style={styles.poster}
+                  source={{uri: detail.poster}}
+                  resizeMode="cover"
+                />
               </View>
 
-              <Text style={styles.descText}>{detail.synopsis}</Text>
+              <View style={styles.ratingDescContainer}>
+                {/* rating and description container */}
+                <View style={styles.ratingIconContainer}>
+                  <View style={styles.ratingIcon}>
+                    <Star
+                      name="star"
+                      size={moderateScale(20)}
+                      color={COLORS.imperialRed}
+                    />
+                    <Text>9/10</Text>
+                  </View>
+
+                  <TouchableOpacity
+                    style={styles.ratingIcon}
+                    onPress={toggleOverlay}>
+                    <Star name="star" size={moderateScale(20)} color="grey" />
+                    <Text>Rate this</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <Text style={styles.descText}>{detail.synopsis}</Text>
+              </View>
             </View>
-          </View>
 
-          <Card.Divider width={2} color={COLORS.imperialRed} />
-          <View style={styles.iconContainer}>
-            {/* tombol review */}
-            <TouchableOpacity
-              style={styles.reviewBtn}
-              onPress={() => dispatch(getReviewAllMovie(detail.id))}>
-              <Icon
-                name="chatbubble-outline"
-                size={moderateScale(25)}
-                color={COLORS.imperialRed}
-                style={styles.reviewIcon}
-              />
-              <Text style={{color: COLORS.imperialRed}}>123</Text>
-            </TouchableOpacity>
+            <Card.Divider width={2} color={COLORS.imperialRed} />
+            <View style={styles.iconContainer}>
+              {/* tombol review */}
+              <TouchableOpacity
+                style={styles.reviewBtn}
+                onPress={() =>
+                  dispatch(getReviewAllMovie({id: detail.id, page: 0}))
+                }>
+                <Icon
+                  name="chatbubble-outline"
+                  size={moderateScale(25)}
+                  color={COLORS.imperialRed}
+                  style={styles.reviewIcon}
+                />
+                <Text style={{color: COLORS.imperialRed}}>123</Text>
+              </TouchableOpacity>
 
-            {/* tombol share */}
-            <TouchableOpacity>
-              <Share
-                name="share"
-                size={moderateScale(25)}
-                color={COLORS.imperialRed}
-              />
-            </TouchableOpacity>
-          </View>
-        </Card>
-        <OverlayComp
-          visible={stateOverlay}
-          toggle={toggleOverlay}
-          start={0}
-          rating={StarRating}
-          submit={() =>
-            dispatch(
-              postNewReview({
-                userId: user.data.id,
-                token: user.token,
-                movieId: detail.id,
-                headlineReview: Headline,
-                review: Review,
-                rating: StarRating,
-              }),
-            )
-          }
-          setstar={setStar}
-          setheadline={setHeadline}
-          setreview={setReview}
-        />
-      </View>
+              {/* tombol share */}
+              <TouchableOpacity>
+                <Share
+                  name="share"
+                  size={moderateScale(25)}
+                  color={COLORS.imperialRed}
+                />
+              </TouchableOpacity>
+            </View>
+          </Card>
+          <OverlayComp
+            visible={stateOverlay}
+            toggle={toggleOverlay}
+            start={0}
+            rating={StarRating}
+            submit={() =>
+              dispatch(
+                postNewReview({
+                  userId: user.data.id,
+                  token: user.token,
+                  movieId: detail.id,
+                  headlineReview: Headline,
+                  review: Review,
+                  rating: StarRating,
+                }),
+              )
+            }
+            setstar={setStar}
+            setheadline={setHeadline}
+            setreview={setReview}
+          />
+        </View>
+      )}
     </ScrollView>
   );
 }

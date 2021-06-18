@@ -8,6 +8,7 @@ import {widthPercentageToDP} from 'react-native-responsive-screen';
 const AllReviewCard = props => {
   return (
     <Card
+      key={props.index}
       containerStyle={{
         borderRadius: moderateScale(20),
       }}>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   ratingView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: widthPercentageToDP(35),
+    width: widthPercentageToDP(55),
     marginBottom: moderateScale(3),
     alignItems: 'center',
   },

@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   ActivityIndicator,
+  Text,
 } from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {COLORS} from '../../Utils/Constant';
@@ -36,7 +37,7 @@ const ReviewScreen = () => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.bottomStyle}>
           {/* card */}
-          {review.length !== undefined ? (
+          {review !== undefined ? (
             review.map((e, i) => (
               <ReviewCard
                 image="https://dummyimage.com/600x400/000/fff.png&text=asdasd"
@@ -50,7 +51,11 @@ const ReviewScreen = () => {
               />
             ))
           ) : (
-            <ActivityIndicator />
+            <View style={styles.empty}>
+              <Text style={styles.emptyText}>
+                Anda Belum Pernah Mereview Film Apapun
+              </Text>
+            </View>
           )}
           {/* overlay */}
           <OverlayComp
@@ -85,5 +90,15 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primaryBlack,
     borderBottomStartRadius: moderateScale(30),
     borderBottomEndRadius: moderateScale(30),
+  },
+  empty: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  emptyText: {
+    fontWeight: 'bold',
+    fontSize: moderateScale(16),
+    color: COLORS.champagne,
   },
 });

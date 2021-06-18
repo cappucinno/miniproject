@@ -48,7 +48,6 @@ function RegisterScreen(props) {
           email,
           profilPicture: profilPicture,
           password,
-          roleId,
         }),
       );
       dispatch(setPasswordUser(password));

@@ -17,6 +17,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
 import {COLORS} from '../../Utils/Constant';
+import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {getMovieData, getMovieDetail} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
@@ -77,7 +78,9 @@ export default function HomeScreen(props) {
                       detail={() => {
                         dispatch(getMovieDetail(e.id));
                       }}
-                      allreview={allReview}
+                      allreview={() =>
+                        dispatch(getReviewAllMovie({id: e.id, page: 0}))
+                      }
                       poster={e.poster}
                       synopsis={e.synopsis}
                       key={i.toString()}
