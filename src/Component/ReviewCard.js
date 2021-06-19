@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   overView: {
     alignItems: 'flex-start',
     paddingLeft: moderateScale(10),
-    width: widthPercentageToDP(68),
+    width: widthPercentageToDP(66),
     height: heightPercentageToDP(18),
   },
   titleCard: {

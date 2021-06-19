@@ -142,7 +142,6 @@ export default function HomeDetails() {
                 dispatch(
                   postNewReview({
                     userId: user.data.id,
-                    token: user.token,
                     movieId: detail.movie.id,
                     headlineReview: Headline,
                     review: Review,

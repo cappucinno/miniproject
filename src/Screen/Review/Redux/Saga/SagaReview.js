@@ -27,11 +27,12 @@ function* getReviewData(action) {
 }
 
 function* postReview(action) {
+  const token = yield select(state => state.Login.token);
   try {
     const res = yield axios.post(
       'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/post/review',
       action.payload,
-      {headers: {Authorization: action.payload.token}},
+      {headers: {Authorization: token}},
     );
 
     if (res.status === 200) {
