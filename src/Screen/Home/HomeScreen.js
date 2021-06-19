@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -18,41 +18,59 @@ import GenreButton from '../../Component/GenreButton';
 import Poppins from '../../Component/Poppins';
 import {COLORS} from '../../Utils/Constant';
 import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
-import {getMovieData, getMovieDetail} from './Redux/actionHome';
+import {
+  getMovieByCategory,
+  getMovieData,
+  getMovieDetail,
+  getSearchedMovie,
+} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
-  const detail = id => dispatch(getMovieDetail(id));
-  // const allReview = () => props.navigation.navigate('AllReview');
-  const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
-
   const dispatch = useDispatch();
 
+  // SEMUA DATA MOVIE
   const dataMovie = useSelector(state => {
     return state.Home.data;
   });
-  // console.log(dataMovie, '<=====ini data movie');
-
-  const search = useSelector(state => state.Home.searched);
-
-  const searchFilterMovie = text => {
-    if (text) {
-      const searchedMovie = dataMovie.filter(item => {
-        // const data =
-      });
-    }
-  };
 
   useEffect(() => {
     dispatch(getMovieData());
   }, [dispatch]);
+
+  //SHEARCH MOVIE BY CATEGORY
+  const [search, setSearch] = useState('');
+  const searched = useSelector(state => state.Home.data);
+  // console.log(searched, 'search');
+
+  const searchMovieByTitle = title => dispatch(getSearchedMovie(title));
+
+  const searchMovie = e => {
+    // console.log(e.nativeEvent.text, 'ini text');
+    const text = e.nativeEvent.text;
+    if (text.length <= 0) {
+      dispatch(getMovieData());
+    } else {
+      searchMovieByTitle(text);
+    }
+  };
+
+  //SHOW MOVIE BY CATEGORY
+  const dummy = ['Action', 'Thriller', 'Drama', 'Romance'];
+  const movieCategory = useSelector(state => state.Home.category);
+  console.log(movieCategory, 'category');
+
+  const showMovieByCategory = id => dispatch(getMovieByCategory(id));
 
   return (
     <SafeAreaView style={styles.fullscreen}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.bottomStyle}>
           <SearchBar
+            onSubmitEditing={searchMovie}
+            onClear={() => dispatch(getMovieData())}
             placeholder="Search Movies"
-            onChangeText={() => {}}
+            onChangeText={text => setSearch(text)}
+            value={search}
             platform="default"
             round
             containerStyle={styles.searchBar}
@@ -81,9 +99,20 @@ export default function HomeScreen(props) {
             </View>
 
             <View style={styles.genreBtnContainer}>
-              {movieCategory.map((val, index) => (
-                <GenreButton title={val} key={index.toString()} />
-              ))}
+              {/* <ScrollView horizontal> */}
+              {dummy.map((e, i) => {
+                return <GenreButton title={e} key={i.toString()} />;
+              })}
+              {/* {movieCategory.length > 0
+                  ? movieCategory.map((e, i) => (
+                      <GenreButton
+                        // showCategory={showMovieByCategory}
+                        title={e}
+                        key={i.toString()}
+                      />
+                    ))
+                  : null} */}
+              {/* </ScrollView> */}
             </View>
           </View>
 
@@ -103,9 +132,7 @@ export default function HomeScreen(props) {
               ? dataMovie.map((e, i) => {
                   return (
                     <CardView
-                      detail={() => {
-                        detail(e.id);
-                      }}
+                      detail={() => dispatch(getMovieDetail(e.id))}
                       allreview={() =>
                         dispatch(getReviewAllMovie({id: e.id, page: 0}))
                       }
@@ -129,7 +156,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-    backgroundColor: COLORS.imperialRed,
+    backgroundColor: COLORS.primaryBlack,
   },
   searchBar: {
     backgroundColor: 'transparent',

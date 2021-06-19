@@ -22,22 +22,10 @@ const ProfileOver = props => {
   const [userName, setuserName] = useState('');
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
+  const [profilPicture, setprofilPicture] = useState('');
 
-  const logindata = useSelector(state => state.Login.data);
+  const logindata = useSelector(state => state.Login.data.data);
   const dispatch = useDispatch();
-
-  const submit = () => {
-    dispatch(
-      putDataProfile({
-        fullName,
-        userName,
-        email,
-        password,
-        id: logindata.data.id,
-        token: logindata.token,
-      }),
-    );
-  };
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -64,7 +52,19 @@ const ProfileOver = props => {
               rightComponent={{
                 icon: 'check',
                 color: COLORS.cream,
-                onPress: submit,
+                onPress: () => {
+                  dispatch(
+                    putDataProfile({
+                      fullName,
+                      userName,
+                      email,
+                      password,
+                      id: logindata.id,
+                      profilPicture,
+                    }),
+                  );
+                  props.toggle;
+                },
               }}
               containerStyle={styles.headerStyle}
             />

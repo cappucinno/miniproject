@@ -1,5 +1,5 @@
 import {SET_NEW_DATA_PROFILE} from '../../../Profile/Redux/ActionEditProfile';
-import {LOGIN_SUCCESS} from '../action/actionTypes';
+import {LOGIN_SUCCESS, LOGOUT} from '../action/actionTypes';
 
 const initialState = {
   data: [],
@@ -19,6 +19,8 @@ export default (state = initialState, {type, payload}) => {
     case SET_NEW_DATA_PROFILE:
       return {...state, data: payload.data};
 
+    case LOGOUT:
+      return {...state, data: [], token: '', message: ''};
     default:
       return state;
   }

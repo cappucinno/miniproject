@@ -24,6 +24,7 @@ import {COLORS} from '../../Utils/Constant';
 import {useDispatch, useSelector} from 'react-redux';
 import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {postNewReview} from '../Review/Redux/Action/ActionReview';
+import Poppins from '../../Component/Poppins';
 // import {getReviewData} from '../Review/Redux/ActionReview';
 
 export default function HomeDetails() {
@@ -39,7 +40,8 @@ export default function HomeDetails() {
   //   props.navigation.navigate('AllReview');
   // };
 
-  const detail = useSelector(state => state.Home.detail);
+  const detail = useSelector(state => state.Home.detail.data);
+  const category = useSelector(state => state.Home.detail.data.category);
   const user = useSelector(state => state.Login.data);
 
   const [StarRating, setStar] = useState(0);
@@ -47,9 +49,9 @@ export default function HomeDetails() {
   const [Review, setReview] = useState('');
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.fullscreen}>
-        {detail === undefined && user === undefined ? (
+        {detail === undefined ? (
           <ActivityIndicator />
         ) : (
           <View style={styles.bottomStyle}>
@@ -64,10 +66,25 @@ export default function HomeDetails() {
               {/* title container */}
               <View style={styles.titleContainer}>
                 {/* TITLE */}
-                <Text style={styles.movieTitle}>{detail.movie.title}</Text>
+                <Poppins
+                  title={detail.movie.title}
+                  size={moderateScale(22)}
+                  type="Bold"
+                  style={styles.movieTitle}
+                />
+                {/* <Text style={styles.movieTitle}>{detail.movie.title}</Text> */}
                 {/* YEAR AND GENRE */}
                 <Text style={styles.movieYear}>
-                  {detail.movie.MovieInfo.releaseDate}
+                  {detail.movie.MovieInfo.releaseDate} |{' '}
+                  {category.length > 0
+                    ? category.map((e, i) => {
+                        return (
+                          <Text style={styles.movieYear} key={i.toString()}>
+                            {e.categoryName + ' '}
+                          </Text>
+                        );
+                      })
+                    : null}
                 </Text>
               </View>
               <Card.Divider width={2} color={COLORS.imperialRed} />
@@ -77,7 +94,7 @@ export default function HomeDetails() {
                 <View>
                   <ImageBackground
                     style={styles.poster}
-                    source={{uri: detail.poster}}
+                    source={{uri: detail.movie.poster}}
                     resizeMode="cover"
                   />
                 </View>
@@ -92,17 +109,23 @@ export default function HomeDetails() {
                         size={moderateScale(20)}
                         color={COLORS.imperialRed}
                       />
-                      <Text>{Math.floor(detail.rating)}/10</Text>
+                      <Poppins title={Math.floor(detail.rating) + '/10'} />
+                      {/* <Text>{Math.floor(detail.rating)}/10</Text> */}
                     </View>
                     <TouchableOpacity
                       style={styles.ratingIcon}
                       onPress={toggleOverlay}>
                       <Star name="star" size={moderateScale(20)} color="grey" />
-                      <Text>Rate this</Text>
+                      <Poppins title="Rate this" />
+                      {/* <Text>Rate this</Text> */}
                     </TouchableOpacity>
                   </View>
                   {/* SYNOPSIS */}
-                  <Text style={styles.descText}>{detail.movie.synopsis}</Text>
+                  <Poppins
+                    title={detail.movie.synopsis}
+                    style={styles.descText}
+                  />
+                  {/* <Text style={styles.descText}>{detail.movie.synopsis}</Text> */}
                 </View>
               </View>
               <Card.Divider width={2} color={COLORS.imperialRed} />
@@ -112,7 +135,7 @@ export default function HomeDetails() {
                 <TouchableOpacity
                   style={styles.reviewBtn}
                   onPress={() =>
-                    dispatch(getReviewAllMovie({id: detail.id, page: 0}))
+                    dispatch(getReviewAllMovie({id: detail.movie.id, page: 0}))
                   }>
                   <Icon
                     name="chatbubble-outline"
@@ -120,7 +143,8 @@ export default function HomeDetails() {
                     color={COLORS.imperialRed}
                     style={styles.reviewIcon}
                   />
-                  <Text style={{color: COLORS.imperialRed}}>123</Text>
+                  <Poppins title="123" color={COLORS.imperialRed} />
+                  {/* <Text style={{color: COLORS.imperialRed}}>123</Text> */}
                 </TouchableOpacity>
 
                 {/* tombol share */}
@@ -138,18 +162,18 @@ export default function HomeDetails() {
               toggle={toggleOverlay}
               start={0}
               rating={StarRating}
-              submit={() =>
+              submit={() => {
                 dispatch(
                   postNewReview({
                     userId: user.data.id,
-                    token: user.token,
-                    movieId: detail.id,
+                    movieId: detail.movie.id,
                     headlineReview: Headline,
                     review: Review,
                     rating: StarRating,
                   }),
-                )
-              }
+                );
+                setstateOverlay(false);
+              }}
               setstar={setStar}
               setheadline={setHeadline}
               setreview={setReview}
@@ -162,6 +186,9 @@ export default function HomeDetails() {
 }
 
 const styles = StyleSheet.create({
+  safeView: {
+    flex: 1,
+  },
   fullscreen: {
     flexGrow: 1,
     // paddingVertical: moderateScale(5),
@@ -194,14 +221,15 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(5),
   },
   movieTitle: {
-    fontSize: moderateScale(22),
-    fontWeight: 'bold',
+    // fontSize: moderateScale(22),
+    // fontWeight: 'bold',
     textAlign: 'justify',
   },
   movieYear: {
     fontSize: moderateScale(16),
     fontWeight: '700',
     color: COLORS.russianViolet,
+    fontFamily: 'Poppins',
   },
   descContainer: {
     flex: 1,

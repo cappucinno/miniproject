@@ -10,13 +10,16 @@ function* login(action) {
     const res = yield axios.post(
       'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/login',
       action.payload,
-      {headers: {Authorization: action.payload.token}},
     );
 
     if (res.status === 200) {
       yield put(setDataLogin(res.data));
+      yield ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
       yield navigate('MainScreen');
-      yield ToastAndroid.show(res.message, ToastAndroid.BOTTOM);
     } else {
       console.log(res.data.statusCode);
     }

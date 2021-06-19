@@ -1,4 +1,5 @@
 import {
+  SET_MOVIE_BY_CATEGORY,
   SET_MOVIE_DATA,
   SET_MOVIE_DETAIL,
   SET_SEACRHED_MOVIE,
@@ -6,15 +7,8 @@ import {
 
 const initialState = {
   data: [],
-  detail: {
-    id: '',
-    // trailer:'',
-    title: '',
-    synopsis: '',
-    poster: '',
-    releaseDate: '',
-  },
-  searched: '',
+  detail: [],
+  category: [],
 };
 
 export default (state = initialState, action) => {
@@ -34,7 +28,13 @@ export default (state = initialState, action) => {
     case SET_SEACRHED_MOVIE:
       return {
         ...state,
-        searched: action.payload,
+        data: action.payload,
+      };
+
+    case SET_MOVIE_BY_CATEGORY:
+      return {
+        ...state,
+        category: action.payload,
       };
 
     default:

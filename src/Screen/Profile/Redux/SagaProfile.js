@@ -1,34 +1,32 @@
 import axios from 'axios';
 import {ToastAndroid} from 'react-native';
-import {put, takeLatest} from 'redux-saga/effects';
+import {put, select, takeLatest} from 'redux-saga/effects';
 import {PUT_DATA_PROFILE, setNewDataProfile} from './ActionEditProfile';
 import {navigate} from '../../../../function/nav';
 
 function* putDataProfile(action) {
+  const token = yield select(state => state.Login.token);
   try {
     const res = yield axios.put(
       `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/profile/update/${action.payload.id}`,
-      {
-        fullName: action.payload.fullName,
-        userName: action.payload.userName,
-        email: action.payload.email,
-        profilPicture: action.payload.profilPicture,
-        password: action.payload.password,
-      },
-      {Headers: {Authorization: action.payload.token}},
+      action.payload,
+      {Headers: {Authorization: token}},
     );
 
     if (res.status === 200) {
-      yield put(setNewDataProfile(res.data));
-      yield ToastAndroid.show(
+      // yield put(setNewDataProfile(res.data));
+      yield ToastAndroid.showWithGravity(
         res.data.message,
         ToastAndroid.SHORT,
         ToastAndroid.BOTTOM,
       );
-      yield navigate('Profile');
     }
   } catch (error) {
-    console.log(error);
+    yield ToastAndroid.showWithGravity(
+      error,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+    );
   }
 }
 

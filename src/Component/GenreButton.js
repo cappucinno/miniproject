@@ -8,7 +8,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {COLORS} from '../Utils/Constant';
 import Poppins from './Poppins';
 
-export default function GenreButton({title}) {
+export default function GenreButton(props) {
   return (
     <Button
       type="clear"
@@ -21,7 +21,7 @@ export default function GenreButton({title}) {
           style={styles.icon}
         />
       }
-      title={title}
+      title={props.title}
       titleStyle={styles.title}
     />
   );

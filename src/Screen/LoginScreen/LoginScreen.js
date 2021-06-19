@@ -20,7 +20,6 @@ const LoginScreen = props => {
   const [message, setMessage] = useState(null);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const token = useSelector(state => state.Register.token);
 
   return (
     <KeyboardAvoidingView style={styles.window}>
@@ -78,7 +77,6 @@ const LoginScreen = props => {
                   loginAction({
                     email,
                     password,
-                    token,
                   }),
                 )
               }
