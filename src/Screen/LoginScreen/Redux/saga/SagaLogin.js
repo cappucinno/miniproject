@@ -15,8 +15,12 @@ function* login(action) {
 
     if (res.status === 200) {
       yield put(setDataLogin(res.data));
+      yield ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
       yield navigate('MainScreen');
-      yield ToastAndroid.show(res.message, ToastAndroid.BOTTOM);
     } else {
       console.log(res.data.statusCode);
     }

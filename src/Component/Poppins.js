@@ -22,7 +22,7 @@ export default function Poppins(props) {
     <Text
       numberOfLines={props.numberOfLines}
       ellipsizeMode={props.ellipsizeMode}
-      key={props.index}
+      key={props.indextext}
       style={styles.textStyle}>
       {props.title}
       <Text key={props.i} style={styles.textStyle1}>

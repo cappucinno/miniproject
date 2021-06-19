@@ -29,20 +29,35 @@ const ReviewCard = props => {
 
         {/* card text */}
         <View style={styles.overView}>
-          <Card.Title style={styles.titleCard}>
-            {props.title} ({props.years})
-          </Card.Title>
-          <Card.FeaturedSubtitle style={styles.subtitleCard}>
-            Reviewed {props.dateReviewed}
-          </Card.FeaturedSubtitle>
+          <Poppins
+            title={props.title}
+            title1={` (${props.years})`}
+            style={styles.titleCard}
+            type="Bold"
+          />
+
+          <Poppins
+            title="Reviewed "
+            title1={props.dateReviewed}
+            size={moderateScale(12)}
+            size1={moderateScale(12)}
+            style={styles.subtitleCard}
+          />
 
           {/* card rating */}
           <View style={styles.ratingView}>
-            <MaterialCommunityIcons name="star" size={16} color="orange" />
-            <Poppins size={moderateScale(12)}>
-              <Poppins title={props.star} type="bold" />
-              /10
-            </Poppins>
+            <MaterialCommunityIcons
+              name="star"
+              size={moderateScale(16)}
+              color="orange"
+            />
+            <Poppins
+              title={props.star}
+              type="Bold"
+              title1="/10"
+              size={moderateScale(14)}
+              size1={moderateScale(14)}
+            />
           </View>
 
           {/* card icon edit & delete */}
@@ -54,7 +69,7 @@ const ReviewCard = props => {
                 color="orange"
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.delete}>
               <MaterialCommunityIcons
                 name="delete-circle"
                 size={moderateScale(18)}
@@ -66,7 +81,7 @@ const ReviewCard = props => {
       </View>
 
       {/* bottom text */}
-      <Poppins title={props.headline} type="bold" style={styles.headlineText} />
+      <Poppins title={props.headline} type="Bold" style={styles.headlineText} />
       <Poppins title={props.review} size={moderateScale(12)} />
     </Card>
   );
@@ -86,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: widthPercentageToDP(13),
     alignItems: 'flex-end',
-    height: heightPercentageToDP(6),
+    height: heightPercentageToDP(4),
     paddingTop: moderateScale(10),
   },
   boldText: {
@@ -96,22 +111,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: widthPercentageToDP(13),
-    marginBottom: moderateScale(10),
     alignItems: 'center',
   },
   subtitleCard: {
-    color: 'black',
     marginBottom: moderateScale(2),
-    fontSize: moderateScale(12),
-    fontWeight: '400',
   },
   overView: {
     alignItems: 'flex-start',
     paddingLeft: moderateScale(10),
+    width: widthPercentageToDP(68),
+    height: heightPercentageToDP(18),
   },
   titleCard: {
-    color: 'black',
     marginBottom: moderateScale(0),
-    fontWeight: 'bold',
   },
 });

@@ -7,6 +7,7 @@ import {
   setMovieDetail,
 } from './actionHome';
 import {navigate} from '../../../function/nav';
+import {ToastAndroid} from 'react-native';
 
 function* getDataMovie(action) {
   try {
@@ -32,13 +33,17 @@ function* getDetailMovie(action) {
     );
     console.log(res, '<====ini movie detail');
     if (res.status === 200) {
-      yield put(setMovieDetail(res.data.data));
+      yield put(setMovieDetail(res.data));
       yield navigate('Detail');
     } else {
       console.log(res.data.statusCode);
     }
   } catch (error) {
-    console.log(error);
+    yield ToastAndroid.showWithGravity(
+      error,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+    );
   }
 }
 export function* SagaMovie() {

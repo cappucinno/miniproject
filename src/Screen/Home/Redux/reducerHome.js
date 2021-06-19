@@ -2,14 +2,7 @@ import {SET_MOVIE_DATA, SET_MOVIE_DETAIL} from './actionHome';
 
 const initialState = {
   data: [],
-  detail: {
-    id: '',
-    // trailer:'',
-    title: '',
-    synopsis: '',
-    poster: '',
-    releaseDate: '',
-  },
+  detail: [],
 };
 
 export default (state = initialState, action) => {

@@ -39,7 +39,7 @@ export default function HomeDetails() {
   //   props.navigation.navigate('AllReview');
   // };
 
-  const detail = useSelector(state => state.Home.detail);
+  const detail = useSelector(state => state.Home.detail.data);
   const user = useSelector(state => state.Login.data);
 
   const [StarRating, setStar] = useState(0);
@@ -47,9 +47,9 @@ export default function HomeDetails() {
   const [Review, setReview] = useState('');
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.fullscreen}>
-        {detail === undefined && user === undefined ? (
+        {detail === undefined ? (
           <ActivityIndicator />
         ) : (
           <View style={styles.bottomStyle}>
@@ -112,7 +112,7 @@ export default function HomeDetails() {
                 <TouchableOpacity
                   style={styles.reviewBtn}
                   onPress={() =>
-                    dispatch(getReviewAllMovie({id: detail.id, page: 0}))
+                    dispatch(getReviewAllMovie({id: detail.movie.id, page: 0}))
                   }>
                   <Icon
                     name="chatbubble-outline"
@@ -138,18 +138,19 @@ export default function HomeDetails() {
               toggle={toggleOverlay}
               start={0}
               rating={StarRating}
-              submit={() =>
+              submit={() => {
                 dispatch(
                   postNewReview({
                     userId: user.data.id,
                     token: user.token,
-                    movieId: detail.id,
+                    movieId: detail.movie.id,
                     headlineReview: Headline,
                     review: Review,
                     rating: StarRating,
                   }),
-                )
-              }
+                );
+                setstateOverlay(false);
+              }}
               setstar={setStar}
               setheadline={setHeadline}
               setreview={setReview}
@@ -162,6 +163,9 @@ export default function HomeDetails() {
 }
 
 const styles = StyleSheet.create({
+  safeView: {
+    flex: 1,
+  },
   fullscreen: {
     flexGrow: 1,
     // paddingVertical: moderateScale(5),

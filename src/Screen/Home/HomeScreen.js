@@ -21,7 +21,6 @@ import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {getMovieData, getMovieDetail} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
-  const detail = id => dispatch(getMovieDetail(id));
   // const allReview = () => props.navigation.navigate('AllReview');
   const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
 
@@ -95,9 +94,7 @@ export default function HomeScreen(props) {
               ? dataMovie.map((e, i) => {
                   return (
                     <CardView
-                      detail={() => {
-                        detail(e.id);
-                      }}
+                      detail={() => dispatch(getMovieDetail(e.id))}
                       allreview={() =>
                         dispatch(getReviewAllMovie({id: e.id, page: 0}))
                       }

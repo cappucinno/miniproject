@@ -13,15 +13,19 @@ import {COLORS} from '../../Utils/Constant';
 import ReviewCard from '../../Component/ReviewCard';
 import OverlayComp from '../../Component/OverlayComp';
 import {useDispatch, useSelector} from 'react-redux';
-import {getReviewData, putMyReviewData} from './Redux/Action/ActionReview';
+import {
+  deleteMyReview,
+  getReviewData,
+  putMyReviewData,
+} from './Redux/Action/ActionReview';
 import Poppins from '../../Component/Poppins';
 
 const ReviewScreen = () => {
   const userData = useSelector(state => state.Login.data);
 
   useEffect(() => {
-    dispatch(getReviewData({id: userData.data.id, token: userData.token}));
-  }, [userData]);
+    dispatch(getReviewData(userData.data.id));
+  }, [getReviewData]);
   // state untuk toggle overlay
   const [stateOverlay, setstateOverlay] = useState(false);
   // function overlay
@@ -31,6 +35,9 @@ const ReviewScreen = () => {
 
   const review = useSelector(state => state.Review.review);
 
+  let date = new Date(review[0].createdAt);
+  let format = date.toUTCString();
+  console.log(format);
   const [StarRating, setStar] = useState(0);
   const [Headline, setHeadline] = useState('');
   const [Review, setReview] = useState('');
@@ -38,25 +45,31 @@ const ReviewScreen = () => {
   return (
     <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {userData === null ? (
+        {userData === null && review === undefined ? (
           <ActivityIndicator />
         ) : (
           <View style={styles.bottomStyle}>
             {/* card */}
             {review !== undefined ? (
-              review.map((e, i) => (
-                <ReviewCard
-                  index={i}
-                  image="https://dummyimage.com/600x400/000/fff.png&text=asdasd"
-                  title="Parasite"
-                  years="2019"
-                  dateReviewed={e.createdAt}
-                  star={e.rating}
-                  headline={e.headlineReview}
-                  review={e.review}
-                  toggle={toggleOverlay}
-                />
-              ))
+              review.map((e, i) => {
+                return (
+                  <ReviewCard
+                    index={i.toString()}
+                    image={e.Movie.poster}
+                    title={e.Movie.title}
+                    years={e.Movie.MovieInfo.releaseDate
+                      .split('-')
+                      .slice(0, 1)
+                      .join('')}
+                    dateReviewed={'sa'}
+                    star={e.rating}
+                    headline={e.headlineReview}
+                    review={e.review}
+                    toggle={toggleOverlay}
+                    delete={() => dispatch(deleteMyReview(e.id))}
+                  />
+                );
+              })
             ) : (
               <View style={styles.empty}>
                 <Poppins
@@ -68,34 +81,33 @@ const ReviewScreen = () => {
               </View>
             )}
             {/* overlay */}
-            {review !== undefined ? (
-              review.map((e, i) => (
-                <OverlayComp
-                  index={i}
-                  visible={stateOverlay}
-                  toggle={toggleOverlay}
-                  startEdit={e.rating}
-                  setstar={setStar}
-                  setheadline={setHeadline}
-                  setreview={setReview}
-                  defHead={e.headline}
-                  defRev={e.review}
-                  rating={e.rating}
-                  edit={() =>
-                    dispatch(
-                      putMyReviewData({
-                        movieId: e.id,
-                        headlineReview: Headline,
-                        review: Review,
-                        rating: StarRating,
-                      }),
-                    )
-                  }
-                />
-              ))
-            ) : (
-              <OverlayComp />
-            )}
+            {review !== undefined
+              ? review.map((e, i) => (
+                  <OverlayComp
+                    index={i.toString()}
+                    visible={stateOverlay}
+                    toggle={toggleOverlay}
+                    startEdit={e.rating}
+                    setstar={setStar}
+                    setheadline={setHeadline}
+                    setreview={setReview}
+                    defHead={e.headlineReview}
+                    defRev={e.review}
+                    rating={StarRating}
+                    edit={() => {
+                      dispatch(
+                        putMyReviewData({
+                          movieId: e.id,
+                          headlineReview: Headline,
+                          review: Review,
+                          rating: StarRating,
+                        }),
+                      );
+                      setstateOverlay(false);
+                    }}
+                  />
+                ))
+              : null}
           </View>
         )}
       </ScrollView>
