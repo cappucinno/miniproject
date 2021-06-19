@@ -118,20 +118,6 @@ function RegisterScreen(props) {
         </View>
       </View>
     </KeyboardAvoidingView>
-
-    // <KeyboardAvoidingView>
-    //   <View
-    //     style={{
-    //       flex: 1,
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //       height: 100,
-    //       width: 100,
-    //     }}>
-    //     <Image source={require('../../Assets/Images/Logo.png')} />
-    //   </View>
-    //   <Text>MovReact</Text>
-    // </KeyboardAvoidingView>
   );
 }
 

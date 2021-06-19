@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   ActivityIndicator,
-  Image,
   KeyboardAvoidingView,
 } from 'react-native';
 import {Input} from 'react-native-elements';
@@ -15,8 +14,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {loginAction} from './Redux/action/authAction';
 
 const LoginScreen = props => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
   const [message, setMessage] = useState(null);
   const navigation = useNavigation();
   const dispatch = useDispatch();
