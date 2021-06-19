@@ -14,9 +14,9 @@ function* putDataProfile(action) {
     );
 
     if (res.status === 200) {
-      // yield put(setNewDataProfile(res.data));
+      yield put(setNewDataProfile({data: action.payload}));
       yield ToastAndroid.showWithGravity(
-        res.data.message,
+        res.data.statusText,
         ToastAndroid.SHORT,
         ToastAndroid.BOTTOM,
       );

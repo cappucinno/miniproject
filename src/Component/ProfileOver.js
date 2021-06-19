@@ -17,6 +17,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {putDataProfile} from '../Screen/Profile/Redux/ActionEditProfile';
 import {COLORS} from '../Utils/Constant';
 
+import {launchImageLibrary} from 'react-native-image-picker';
+
 const ProfileOver = props => {
   const [fullName, setfullName] = useState('');
   const [userName, setuserName] = useState('');
@@ -26,6 +28,20 @@ const ProfileOver = props => {
 
   const logindata = useSelector(state => state.Login.data.data);
   const dispatch = useDispatch();
+
+  const changePhoto = () => {
+    launchImageLibrary({maxWidth: 300, maxHeight: 300}, res => {
+      if (res.didCancel) {
+        return;
+      } else {
+        const img = {
+          uri: res.uri,
+        };
+
+        setprofilPicture(img);
+      }
+    });
+  };
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -72,13 +88,18 @@ const ProfileOver = props => {
             <View style={styles.photoView}>
               <Avatar
                 rounded
-                source={{uri: 'https://placeimg.com/640/480/people'}}
+                source={{
+                  uri:
+                    logindata.profilPicture === null
+                      ? ''
+                      : logindata.profilPicture,
+                }}
                 size={moderateScale(120)}>
                 <Avatar.Accessory
                   style={styles.accStyle}
                   color="white"
                   size={moderateScale(20)}
-                  onPress={props.toggle}
+                  onPress={changePhoto}
                 />
               </Avatar>
             </View>
