@@ -19,6 +19,7 @@ import {
   putMyReviewData,
 } from './Redux/Action/ActionReview';
 import Poppins from '../../Component/Poppins';
+import moment from 'moment';
 
 const ReviewScreen = () => {
   const userData = useSelector(state => state.Login.data);
@@ -35,9 +36,6 @@ const ReviewScreen = () => {
 
   const review = useSelector(state => state.Review.review);
 
-  let date = new Date(review[0].createdAt);
-  let format = date.toUTCString();
-  console.log(format);
   const [StarRating, setStar] = useState(0);
   const [Headline, setHeadline] = useState('');
   const [Review, setReview] = useState('');
@@ -57,11 +55,8 @@ const ReviewScreen = () => {
                     index={i.toString()}
                     image={e.Movie.poster}
                     title={e.Movie.title}
-                    years={e.Movie.MovieInfo.releaseDate
-                      .split('-')
-                      .slice(0, 1)
-                      .join('')}
-                    dateReviewed={'sa'}
+                    years={moment(e.Movie.MovieInfo.releaseDate).format('YYYY')}
+                    dateReviewed={moment(e.createdAt).format('LL')}
                     star={e.rating}
                     headline={e.headlineReview}
                     review={e.review}

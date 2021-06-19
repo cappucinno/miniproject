@@ -10,7 +10,6 @@ function* login(action) {
     const res = yield axios.post(
       'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/login',
       action.payload,
-      {headers: {Authorization: action.payload.token}},
     );
 
     if (res.status === 200) {
