@@ -6,6 +6,7 @@ import {moderateScale} from 'react-native-size-matters';
 //icon
 import Feather from 'react-native-vector-icons/Feather';
 import {COLORS} from '../Utils/Constant';
+import Poppins from './Poppins';
 
 export default function GenreButton({title}) {
   return (

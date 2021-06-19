@@ -19,7 +19,11 @@ export default function Poppins(props) {
   });
 
   return (
-    <Text key={props.index} style={styles.textStyle}>
+    <Text
+      numberOfLines={props.numberOfLines}
+      ellipsizeMode={props.ellipsizeMode}
+      key={props.index}
+      style={styles.textStyle}>
       {props.title}
       <Text key={props.i} style={styles.textStyle1}>
         {props.title1}

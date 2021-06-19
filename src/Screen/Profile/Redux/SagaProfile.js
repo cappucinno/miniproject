@@ -20,12 +20,7 @@ function* putDataProfile(action) {
 
     if (res.status === 200) {
       yield put(setNewDataProfile(res.data));
-      yield ToastAndroid.show(
-        res.data.message,
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM,
-      );
-      yield navigate('Profile');
+      yield ToastAndroid.showWithGravity(res.data.message, ToastAndroid.BOTTOM);
     }
   } catch (error) {
     console.log(error);

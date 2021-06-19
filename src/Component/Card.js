@@ -5,6 +5,7 @@ import {moderateScale} from 'react-native-size-matters';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Share from 'react-native-vector-icons/Foundation';
 import {COLORS} from '../Utils/Constant';
+import Poppins from './Poppins';
 
 export default function CardView(props) {
   return (
@@ -15,9 +16,16 @@ export default function CardView(props) {
           resizeMode="contain"
           source={{uri: props.poster}}
         />
-        <Text style={styles.textDesc} numberOfLines={4} ellipsizeMode="tail">
+        <Poppins
+          title={props.synopsis}
+          size={moderateScale(16)}
+          style={styles.textDesc}
+          numberOfLines={3}
+          ellipsizeMode="tail"
+        />
+        {/* <Text style={styles.textDesc} numberOfLines={4} ellipsizeMode="tail">
           {props.synopsis}
-        </Text>
+        </Text> */}
 
         <Card.Divider width={2} color={COLORS.imperialRed} />
 
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
   },
   textDesc: {
     marginBottom: moderateScale(15),
-    fontSize: moderateScale(16),
+    // fontSize: moderateScale(16),
     textAlign: 'justify',
   },
   reviewBtn: {

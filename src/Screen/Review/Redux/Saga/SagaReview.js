@@ -33,7 +33,7 @@ function* postReview(action) {
     );
 
     if (res.status === 200) {
-      ToastAndroid.show(res.data.message, ToastAndroid.BOTTOM);
+      ToastAndroid.showWithGravity(res.data.message, ToastAndroid.BOTTOM);
       yield navigate('HomeScreen');
     }
   } catch (error) {
@@ -50,7 +50,7 @@ function* putMyReview(action) {
     );
 
     if (res.status === 200) {
-      yield ToastAndroid.show(res.data.message, ToastAndroid.BOTTOM);
+      yield ToastAndroid.showWithGravity(res.data.message, ToastAndroid.BOTTOM);
     }
   } catch (error) {
     console.log(error);
@@ -58,7 +58,7 @@ function* putMyReview(action) {
 }
 
 export function* SagaReview() {
-  yield takeEvery(GET_MY_REVIEW_DATA, getReviewData);
+  yield takeLatest(GET_MY_REVIEW_DATA, getReviewData);
   yield takeLatest(POST_MY_NEW_REVIEW, postReview);
   yield takeLatest(PUT_MY_REVIEW_DATA, putMyReview);
 }

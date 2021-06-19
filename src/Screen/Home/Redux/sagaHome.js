@@ -30,7 +30,7 @@ function* getDetailMovie(action) {
       'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/title/' +
         action.payload,
     );
-    console.log(res);
+    console.log(res, '<====ini movie detail');
     if (res.status === 200) {
       yield put(setMovieDetail(res.data.data));
       yield navigate('Detail');

@@ -26,19 +26,6 @@ const ProfileOver = props => {
   const logindata = useSelector(state => state.Login.data);
   const dispatch = useDispatch();
 
-  const submit = () => {
-    dispatch(
-      putDataProfile({
-        fullName,
-        userName,
-        email,
-        password,
-        id: logindata.data.id,
-        token: logindata.token,
-      }),
-    );
-  };
-
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <KeyboardAvoidingView behavior="position">
@@ -64,7 +51,17 @@ const ProfileOver = props => {
               rightComponent={{
                 icon: 'check',
                 color: COLORS.cream,
-                onPress: submit,
+                onPress: () =>
+                  dispatch(
+                    putDataProfile({
+                      fullName,
+                      userName,
+                      email,
+                      password,
+                      id: logindata.data.id,
+                      token: logindata.token,
+                    }),
+                  ),
               }}
               containerStyle={styles.headerStyle}
             />

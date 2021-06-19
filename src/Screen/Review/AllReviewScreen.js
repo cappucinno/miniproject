@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import {FAB} from 'react-native-elements';
 
 import {moderateScale} from 'react-native-size-matters';
@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux';
 
 import Poppins from '../../Component/Poppins';
 
-const AllReviewScreen = ({navigation}) => {
+const AllReviewScreen = () => {
   const allReview = useSelector(state => state.AllReview.data);
   return (
     <SafeAreaView style={styles.safeView}>

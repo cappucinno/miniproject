@@ -13,7 +13,7 @@ import {COLORS} from '../../Utils/Constant';
 import ReviewCard from '../../Component/ReviewCard';
 import OverlayComp from '../../Component/OverlayComp';
 import {useDispatch, useSelector} from 'react-redux';
-import {getReviewData} from './Redux/Action/ActionReview';
+import {getReviewData, putMyReviewData} from './Redux/Action/ActionReview';
 import Poppins from '../../Component/Poppins';
 
 const ReviewScreen = () => {
@@ -27,11 +27,13 @@ const ReviewScreen = () => {
   // function overlay
   const toggleOverlay = () => setstateOverlay(!stateOverlay);
 
-  const Submit = () => {};
-
   const dispatch = useDispatch();
 
   const review = useSelector(state => state.Review.review);
+
+  const [StarRating, setStar] = useState(0);
+  const [Headline, setHeadline] = useState('');
+  const [Review, setReview] = useState('');
 
   return (
     <SafeAreaView style={styles.safeView}>
@@ -66,13 +68,34 @@ const ReviewScreen = () => {
               </View>
             )}
             {/* overlay */}
-            <OverlayComp
-              visible={stateOverlay}
-              toggle={toggleOverlay}
-              start={1}
-              rating="9"
-              submit={Submit}
-            />
+            {review !== undefined ? (
+              review.map((e, i) => (
+                <OverlayComp
+                  index={i}
+                  visible={stateOverlay}
+                  toggle={toggleOverlay}
+                  startEdit={e.rating}
+                  setstar={setStar}
+                  setheadline={setHeadline}
+                  setreview={setReview}
+                  defHead={e.headline}
+                  defRev={e.review}
+                  rating={e.rating}
+                  edit={() =>
+                    dispatch(
+                      putMyReviewData({
+                        movieId: e.id,
+                        headlineReview: Headline,
+                        review: Review,
+                        rating: StarRating,
+                      }),
+                    )
+                  }
+                />
+              ))
+            ) : (
+              <OverlayComp />
+            )}
           </View>
         )}
       </ScrollView>
