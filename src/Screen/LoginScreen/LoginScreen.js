@@ -19,11 +19,6 @@ const LoginScreen = props => {
   const [message, setMessage] = useState(null);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const registerData = useSelector(state => state.Register.data);
-
-  const submit = () => {
-    dispatch(loginAction({email, password, token: registerData.data.token}));
-  };
 
   return (
     <KeyboardAvoidingView style={styles.window}>
@@ -75,7 +70,16 @@ const LoginScreen = props => {
                 <Text style={styles.buttonText}>LOGIN</Text>
               </TouchableOpacity>
             )} */}
-            <TouchableOpacity onPress={submit} style={styles.mainButton}>
+            <TouchableOpacity
+              onPress={() =>
+                dispatch(
+                  loginAction({
+                    email,
+                    password,
+                  }),
+                )
+              }
+              style={styles.mainButton}>
               <Text style={styles.buttonText}>LOGIN</Text>
             </TouchableOpacity>
           </View>

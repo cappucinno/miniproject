@@ -7,12 +7,16 @@ import {
 } from 'react-native-responsive-screen';
 import {moderateScale} from 'react-native-size-matters';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {COLORS} from '../Utils/Constant';
+import Poppins from './Poppins';
 
 const ReviewCard = props => {
   return (
     <Card
+      key={props.index}
       containerStyle={{
         borderRadius: moderateScale(20),
+        backgroundColor: COLORS.cream,
       }}>
       {/* card image */}
       <View style={styles.cardFlex}>
@@ -25,19 +29,35 @@ const ReviewCard = props => {
 
         {/* card text */}
         <View style={styles.overView}>
-          <Card.Title style={styles.titleCard}>
-            {props.title} ({props.years})
-          </Card.Title>
-          <Card.FeaturedSubtitle style={styles.subtitleCard}>
-            Reviewed {props.dateReviewed}
-          </Card.FeaturedSubtitle>
+          <Poppins
+            title={props.title}
+            title1={` (${props.years})`}
+            style={styles.titleCard}
+            type="Bold"
+          />
+
+          <Poppins
+            title="Reviewed "
+            title1={props.dateReviewed}
+            size={moderateScale(12)}
+            size1={moderateScale(12)}
+            style={styles.subtitleCard}
+          />
 
           {/* card rating */}
           <View style={styles.ratingView}>
-            <MaterialCommunityIcons name="star" size={16} color="orange" />
-            <Text>
-              <Text style={styles.boldText}>{props.star}</Text>/10
-            </Text>
+            <MaterialCommunityIcons
+              name="star"
+              size={moderateScale(16)}
+              color="orange"
+            />
+            <Poppins
+              title={props.star}
+              type="Bold"
+              title1="/10"
+              size={moderateScale(14)}
+              size1={moderateScale(14)}
+            />
           </View>
 
           {/* card icon edit & delete */}
@@ -45,14 +65,14 @@ const ReviewCard = props => {
             <TouchableOpacity onPress={props.toggle}>
               <MaterialCommunityIcons
                 name="circle-edit-outline"
-                size={18}
+                size={moderateScale(18)}
                 color="orange"
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.delete}>
               <MaterialCommunityIcons
                 name="delete-circle"
-                size={18}
+                size={moderateScale(18)}
                 color="orange"
               />
             </TouchableOpacity>
@@ -61,8 +81,8 @@ const ReviewCard = props => {
       </View>
 
       {/* bottom text */}
-      <Text style={styles.headlineText}>{props.headline}</Text>
-      <Text style={{fontSize: moderateScale(12)}}>{props.review}</Text>
+      <Poppins title={props.headline} type="Bold" style={styles.headlineText} />
+      <Poppins title={props.review} size={moderateScale(12)} />
     </Card>
   );
 };
@@ -74,7 +94,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headlineText: {
-    fontWeight: 'bold',
     marginVertical: moderateScale(5),
   },
   editView: {
@@ -82,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: widthPercentageToDP(13),
     alignItems: 'flex-end',
-    height: heightPercentageToDP(6),
+    height: heightPercentageToDP(4),
     paddingTop: moderateScale(10),
   },
   boldText: {
@@ -92,22 +111,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: widthPercentageToDP(13),
-    marginBottom: moderateScale(10),
     alignItems: 'center',
   },
   subtitleCard: {
-    color: 'black',
     marginBottom: moderateScale(2),
-    fontSize: moderateScale(12),
-    fontWeight: '400',
   },
   overView: {
     alignItems: 'flex-start',
     paddingLeft: moderateScale(10),
+    width: widthPercentageToDP(68),
+    height: heightPercentageToDP(18),
   },
   titleCard: {
-    color: 'black',
     marginBottom: moderateScale(0),
-    fontWeight: 'bold',
   },
 });

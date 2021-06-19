@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ToastAndroid} from 'react-native';
 import {put, takeLatest} from 'redux-saga/effects';
 import {navigate} from '../../../../function/nav';
 import {LOGIN} from '../action/actionTypes';
@@ -9,11 +10,15 @@ function* login(action) {
     const res = yield axios.post(
       'https://movieapp-team-b-2021.herokuapp.com/api/rMovie/login',
       action.payload,
-      {headers: {Authorization: action.payload.token}},
     );
 
     if (res.status === 200) {
       yield put(setDataLogin(res.data));
+      yield ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
       yield navigate('MainScreen');
     } else {
       console.log(res.data.statusCode);

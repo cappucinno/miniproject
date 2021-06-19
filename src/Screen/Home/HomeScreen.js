@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {
-  Text,
   SafeAreaView,
   View,
   StyleSheet,
@@ -16,12 +15,13 @@ import {moderateScale} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
 import CardView from '../../Component/Card';
 import GenreButton from '../../Component/GenreButton';
+import Poppins from '../../Component/Poppins';
 import {COLORS} from '../../Utils/Constant';
+import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {getMovieData, getMovieDetail} from './Redux/actionHome';
 
 export default function HomeScreen(props) {
-  const detail = id => dispatch(getMovieDetail(id));
-  const allReview = () => props.navigation.navigate('AllReview');
+  // const allReview = () => props.navigation.navigate('AllReview');
   const movieCategory = ['Action', 'Thriller', 'Comedy', 'Horror'];
 
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export default function HomeScreen(props) {
   // console.log(dataMovie, '<=====ini data movie');
   useEffect(() => {
     dispatch(getMovieData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <SafeAreaView style={styles.fullscreen}>
@@ -52,9 +52,22 @@ export default function HomeScreen(props) {
           {/* Genre */}
           <View style={styles.genreContainer}>
             <View style={styles.genreTextContainer}>
-              <Text style={styles.headText}>Best Genre</Text>
+              <Poppins
+                title="Best Genre"
+                color="white"
+                type="Bold"
+                size={moderateScale(24)}
+                // style={styles.headText}
+              />
+              {/* <Text style={styles.headText}>Best Genre</Text> */}
               <TouchableOpacity>
-                <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text>
+                <Poppins
+                  title="more &gt;&gt;&gt;"
+                  color="white"
+                  fontSize={moderateScale(16)}
+                  // style={styles.moreBtn}
+                />
+                {/* <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text> */}
               </TouchableOpacity>
             </View>
 
@@ -68,16 +81,23 @@ export default function HomeScreen(props) {
           {/* Movie List */}
           <View style={styles.movieContainer}>
             <View style={styles.headView}>
-              <Text style={styles.headText}>Hot 'Category' Movies</Text>
+              <Poppins
+                title="Hot 'Catergory' Movies"
+                color="white"
+                size={moderateScale(24)}
+                type="Bold"
+                // style={styles.headText}
+              />
+              {/* <Text style={styles.headText}>Hot 'Category' Movies</Text> */}
             </View>
             {dataMovie.length > 0
               ? dataMovie.map((e, i) => {
                   return (
                     <CardView
-                      detail={() => {
-                        dispatch(getMovieDetail(e.id));
-                      }}
-                      allreview={allReview}
+                      detail={() => dispatch(getMovieDetail(e.id))}
+                      allreview={() =>
+                        dispatch(getReviewAllMovie({id: e.id, page: 0}))
+                      }
                       poster={e.poster}
                       synopsis={e.synopsis}
                       key={i.toString()}

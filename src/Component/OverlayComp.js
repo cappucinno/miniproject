@@ -12,11 +12,13 @@ import {COLORS} from '../Utils/Constant';
 const OverlayComp = props => {
   return (
     <Overlay
+      key={props.index}
       overlayStyle={styles.overStyle}
       isVisible={props.visible}
       onBackdropPress={props.toggle}
       animationType="slide"
-      statusBarTranslucent={true}>
+      statusBarTranslucent={true}
+      onRequestClose={props.close}>
       {/* overlay view */}
       <View style={styles.overlayView}>
         <Text style={styles.boldText}>How Do You think about this movie?</Text>
@@ -41,6 +43,7 @@ const OverlayComp = props => {
 
         {/* overlay input review */}
         <Input
+          defaultValue={props.defHead}
           placeholder="Write a headline for your review here"
           inputContainerStyle={styles.containerInput}
           inputStyle={styles.styleInput}
@@ -48,6 +51,7 @@ const OverlayComp = props => {
         />
 
         <Input
+          defaultValue={props.defRev}
           placeholder="Write your review here"
           inputContainerStyle={styles.containerReview}
           inputStyle={styles.reviewInput}
