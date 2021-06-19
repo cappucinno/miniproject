@@ -1,4 +1,8 @@
-import {SET_MOVIE_DATA, SET_MOVIE_DETAIL} from './actionHome';
+import {
+  SET_MOVIE_DATA,
+  SET_MOVIE_DETAIL,
+  SET_SEACRHED_MOVIE,
+} from './actionHome';
 
 const initialState = {
   data: [],
@@ -10,6 +14,7 @@ const initialState = {
     poster: '',
     releaseDate: '',
   },
+  searched: '',
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +29,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         detail: action.payload,
+      };
+
+    case SET_SEACRHED_MOVIE:
+      return {
+        ...state,
+        searched: action.payload,
       };
 
     default:

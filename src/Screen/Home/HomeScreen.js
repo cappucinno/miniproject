@@ -28,12 +28,20 @@ export default function HomeScreen(props) {
   const dispatch = useDispatch();
 
   const dataMovie = useSelector(state => {
-    // console.log(
-    //   state.Home.data[0].MovieCategories[0].Category.categoryName,
-    //   '<===ini state',
     return state.Home.data;
   });
   // console.log(dataMovie, '<=====ini data movie');
+
+  const search = useSelector(state => state.Home.searched);
+
+  const searchFilterMovie = text => {
+    if (text) {
+      const searchedMovie = dataMovie.filter(item => {
+        // const data =
+      });
+    }
+  };
+
   useEffect(() => {
     dispatch(getMovieData());
   }, [dispatch]);
