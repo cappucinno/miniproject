@@ -33,8 +33,7 @@ const AllReviewScreen = () => {
         {allReview.data.Reviews.data.length !== 0 ? (
           allReview.data.Reviews.data.map((e, i) => (
             <AllReviewCard
-              keyIndex={i}
-              index={i}
+              key={i}
               image={
                 e.User.profilePicture === null
                   ? 'https://placeimg.com/640/480/people'

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import {View, SafeAreaView, StyleSheet, ActivityIndicator} from 'react-native';
 import {Avatar, Input} from 'react-native-elements';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {moderateScale} from 'react-native-size-matters';
@@ -13,7 +13,9 @@ import {logoutAction} from '../LoginScreen/Redux/action/authAction';
 const ProfileScreen = () => {
   const [Visible, setVisible] = useState(false);
 
-  const dataProfile = useSelector(state => state.Login.data.data);
+  const dataProfile = useSelector(state => state.Login.data.data) || '';
+
+  console.log(dataProfile);
 
   const dispatch = useDispatch();
 
@@ -21,13 +23,15 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeView}>
-      {dataProfile !== undefined ? (
+      {dataProfile !== '' ? (
         <>
           <View style={styles.bottomStyle}>
             <View style={styles.photoView}>
               <Avatar
                 rounded
-                source={{uri: 'https://placeimg.com/640/480/people'}}
+                source={{
+                  uri: dataProfile ? dataProfile.profilePicture : '',
+                }}
                 size={moderateScale(120)}>
                 <Avatar.Accessory
                   style={styles.accStyle}
@@ -59,12 +63,13 @@ const ProfileScreen = () => {
             visible={Visible}
             toggle={toggleBottom}
             logout={() => {
-              dispatch(logoutAction());
               navigate('LoginScreen');
             }}
           />
         </>
-      ) : null}
+      ) : (
+        <ActivityIndicator />
+      )}
     </SafeAreaView>
   );
 };

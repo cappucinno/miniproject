@@ -13,7 +13,7 @@ import Poppins from './Poppins';
 const ReviewCard = props => {
   return (
     <Card
-      key={props.index}
+      // key={props.index}
       containerStyle={{
         borderRadius: moderateScale(20),
         backgroundColor: COLORS.cream,

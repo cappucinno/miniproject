@@ -18,6 +18,7 @@ import {Avatar} from 'react-native-elements';
 
 import {COLORS} from '../Utils/Constant';
 import HomeRoute from '../Router/HomeRoute';
+import {useSelector} from 'react-redux';
 
 const Tabs = createMaterialBottomTabNavigator();
 
@@ -29,6 +30,7 @@ const style = StyleSheet.create({
 });
 
 export default function BottomTab() {
+  const image = useSelector(state => state.Login.data.data);
   return (
     <Tabs.Navigator
       initialRouteName="Home"
@@ -109,7 +111,12 @@ export default function BottomTab() {
             <Avatar
               rounded
               size={moderateScale(25)}
-              source={{uri: 'https://placeimg.com/640/480/people'}}
+              source={{
+                uri:
+                  image !== undefined
+                    ? image.profilePicture || image.profilePicture.uri
+                    : require('../Assets/Images/user.png'),
+              }}
             />
           ),
         }}
