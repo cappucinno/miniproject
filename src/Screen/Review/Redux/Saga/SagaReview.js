@@ -49,11 +49,12 @@ function* postReview(action) {
 }
 
 function* putMyReview(action) {
+  const token = yield select(state => state.Login.token);
   try {
     const res = yield axios.put(
       `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/put/review/${action.payload.id}`,
       action.payload,
-      {headers: {Authorization: action.payload.token}},
+      {headers: {Authorization: token}},
     );
 
     if (res.status === 200) {

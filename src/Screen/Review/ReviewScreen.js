@@ -26,7 +26,7 @@ const ReviewScreen = () => {
 
   useEffect(() => {
     dispatch(getReviewData(userData.data.id));
-  }, [getReviewData]);
+  }, []);
   // state untuk toggle overlay
   const [stateOverlay, setstateOverlay] = useState(false);
   // function overlay
@@ -39,6 +39,7 @@ const ReviewScreen = () => {
   const [StarRating, setStar] = useState(0);
   const [Headline, setHeadline] = useState('');
   const [Review, setReview] = useState('');
+  const [selectId, setselectId] = useState({});
 
   return (
     <SafeAreaView style={styles.safeView}>
@@ -48,11 +49,10 @@ const ReviewScreen = () => {
         ) : (
           <View style={styles.bottomStyle}>
             {/* card */}
-            {review !== undefined ? (
+            {review.length !== 0 ? (
               review.map((e, i) => {
                 return (
                   <ReviewCard
-                    key={i}
                     image={e.Movie.poster}
                     title={e.Movie.title}
                     years={moment(e.Movie.MovieInfo.releaseDate).format('YYYY')}
@@ -60,7 +60,10 @@ const ReviewScreen = () => {
                     star={e.rating}
                     headline={e.headlineReview}
                     review={e.review}
-                    toggle={toggleOverlay}
+                    toggle={() => {
+                      toggleOverlay();
+                      setselectId(e);
+                    }}
                     delete={() => dispatch(deleteMyReview(e.id))}
                   />
                 );
@@ -76,35 +79,31 @@ const ReviewScreen = () => {
               </View>
             )}
             {/* overlay */}
-            {review !== undefined
-              ? review.map((e, i) => (
-                  <OverlayComp
-                    key={i}
-                    visible={stateOverlay}
-                    toggle={toggleOverlay}
-                    startEdit={e.rating}
-                    setstar={setStar}
-                    setheadline={setHeadline}
-                    setreview={setReview}
-                    defHead={e.headlineReview}
-                    defRev={e.review}
-                    rating={StarRating}
-                    edit={() => {
-                      dispatch(
-                        putMyReviewData({
-                          movieId: e.id,
-                          headlineReview: Headline,
-                          review: Review,
-                          rating: StarRating,
-                        }),
-                      );
-                      setstateOverlay(false);
-                    }}
-                  />
-                ))
-              : null}
           </View>
         )}
+        <OverlayComp
+          visible={stateOverlay}
+          toggle={toggleOverlay}
+          startEdit={selectId.rating}
+          setstar={setStar}
+          setheadline={setHeadline}
+          setreview={setReview}
+          defHead={selectId.headlineReview}
+          defRev={selectId.review}
+          rating={StarRating}
+          edit={() => {
+            dispatch(
+              putMyReviewData({
+                id: selectId.userId,
+                movieId: selectId.movieId,
+                headlineReview: Headline,
+                review: Review,
+                rating: StarRating,
+              }),
+            );
+            toggleOverlay;
+          }}
+        />
       </ScrollView>
     </SafeAreaView>
   );

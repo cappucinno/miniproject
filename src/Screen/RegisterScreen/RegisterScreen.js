@@ -8,13 +8,17 @@ import {
   ScrollView,
   TextInput,
   Alert,
+  Platform,
 } from 'react-native';
 import styles from '../styles/RegisterStyle';
+import {Avatar} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
-import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostNewUser} from './Redux/RegisterAction';
 import {setPasswordUser} from '../Profile/Redux/ActionEditProfile';
+
+import {launchImageLibrary} from 'react-native-image-picker';
+import {moderateScale} from 'react-native-size-matters';
 
 function RegisterScreen(props) {
   const [name, setName] = useState('');
@@ -22,12 +26,23 @@ function RegisterScreen(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [profilPicture, setprofilPicture] = useState(
-    'https://placeimg.com/640/480/people',
-  );
+  const [profilePicture, setprofilePicture] = useState({});
   const [roleId, setroleId] = useState(1);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  const changePhoto = () => {
+    launchImageLibrary({maxHeight: 300, maxWidth: 300}, res => {
+      if (res.didCancel) {
+        return;
+      } else {
+        const img = {
+          ...res.assets[0],
+        };
+        setprofilePicture(img);
+      }
+    });
+  };
 
   const submit = () => {
     if (!name) {
@@ -44,14 +59,12 @@ function RegisterScreen(props) {
           fullName: name,
           userName: username,
           email,
-          profilPicture,
+          profilePicture,
           password,
           roleId,
         }),
       );
       dispatch(setPasswordUser(password));
-
-      navigation.navigate('LoginScreen');
     }
   };
 
@@ -62,13 +75,21 @@ function RegisterScreen(props) {
       <View style={styles.container}>
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
-            <TouchableOpacity>
-              <Image
-                source={require('../../Assets/Images/user.png')}
-                style={styles.logo}
-                resizeMode={FastImage.resizeMode.cover}
-              />
-            </TouchableOpacity>
+            <View style={styles.photoView}>
+              <Avatar
+                rounded
+                source={{
+                  uri: profilePicture ? profilePicture.uri : '',
+                }}
+                size={moderateScale(120)}>
+                <Avatar.Accessory
+                  style={styles.accStyle}
+                  color="white"
+                  size={moderateScale(20)}
+                  onPress={changePhoto}
+                />
+              </Avatar>
+            </View>
           </View>
           <Text style={styles.warnText}>{message}</Text>
           <TextInput
