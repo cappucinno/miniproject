@@ -8,6 +8,7 @@ export const GET_MOVIE_CATEGORY = 'GET_MOVIE_CATEGORY';
 export const SET_MOVIE_CATEGORY = 'SET_MOVIE_CATEGORY';
 export const GET_MOVIE_BY_CATEGORY = 'GET_MOVIE_BY_CATEGORY';
 export const SET_MOVIE_BY_CATEGORY = 'SET_MOVIE_BY_CATEGORY';
+export const CURRENT_CATEGORY = 'CURRENT_CATEGORY';
 
 //ke Reducer
 export const setMovieData = payload => ({type: SET_MOVIE_DATA, payload});
@@ -28,6 +29,8 @@ export const setMovieCategory = payload => ({
   type: SET_MOVIE_CATEGORY,
   payload,
 });
+
+export const currentCategory = payload => ({type: CURRENT_CATEGORY, payload});
 
 //ke Saga
 export const getMovieDetail = payload => ({type: GET_MOVIE_DETAIL, payload});

@@ -24,6 +24,7 @@ import {
   getMovieData,
   getMovieDetail,
   getSearchedMovie,
+  currentCategory,
 } from './Redux/actionHome';
 
 export default function HomeScreen(props) {
@@ -62,17 +63,19 @@ export default function HomeScreen(props) {
 
   //SHOW MOVIE BY CATEGORY
   const movieCategory = useSelector(state => state.Home.data);
+  const current = useSelector(state => state.Home.currentCategory);
 
   const [pressed, setPressed] = useState(false);
   // const [focussed, setFocussed] = useState(false);
 
-  // const showMovieByCategory = id => {
-  //   if (!pressed) {
-  //     dispatch(getMovieByCategory(id));
-  //   } else {
-  //     dispatch(getMovieData());
-  //   }
-  // };
+  const showMovieByCategory = (id, name) => {
+    if (name === current) {
+      dispatch(getMovieData());
+      dispatch(currentCategory(''));
+    } else {
+      dispatch(getMovieByCategory(id));
+    }
+  };
 
   return (
     <SafeAreaView style={styles.fullscreen}>
@@ -112,10 +115,9 @@ export default function HomeScreen(props) {
                 {category.length > 0
                   ? category.map((e, i) => (
                       <GenreButton
-                        // select={() => showMovieByCategory(e.id)}
+                        select={() => showMovieByCategory(e.id, e.categoryName)}
                         title={e.categoryName}
                         key={i.toString()}
-                        // select={setFocussed(!focussed)}
                       />
                     ))
                   : null}
@@ -127,7 +129,7 @@ export default function HomeScreen(props) {
           <View style={styles.movieContainer}>
             <View style={styles.headView}>
               <Poppins
-                title="Hot Movies"
+                title={`Hot ${current === '' ? '' : current} Movies`}
                 color="white"
                 size={moderateScale(24)}
                 type="Bold"

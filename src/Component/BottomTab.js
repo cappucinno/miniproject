@@ -31,6 +31,7 @@ const style = StyleSheet.create({
 
 export default function BottomTab() {
   const image = useSelector(state => state.Login.data.data);
+
   return (
     <Tabs.Navigator
       initialRouteName="Home"
@@ -111,12 +112,11 @@ export default function BottomTab() {
             <Avatar
               rounded
               size={moderateScale(25)}
-              source={{
-                uri:
-                  image !== undefined
-                    ? image.profilePicture || image.profilePicture.uri
-                    : require('../Assets/Images/user.png'),
-              }}
+              source={
+                image && image.profilePicture
+                  ? {uri: image.profilePicture}
+                  : require('../Assets/Images/user.png')
+              }
             />
           ),
         }}

@@ -27,7 +27,6 @@ export default function GenreButton(props) {
       title={props.title}
       titleStyle={styles.title}
       onPress={props.select}
-      onFocus={props.focussed}
     />
   );
 }
