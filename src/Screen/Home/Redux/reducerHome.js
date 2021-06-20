@@ -1,8 +1,14 @@
-import {SET_MOVIE_DATA, SET_MOVIE_DETAIL} from './actionHome';
+import {
+  SET_MOVIE_BY_CATEGORY,
+  SET_MOVIE_DATA,
+  SET_MOVIE_DETAIL,
+  SET_SEACRHED_MOVIE,
+} from './actionHome';
 
 const initialState = {
   data: [],
   detail: [],
+  category: [],
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +23,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         detail: action.payload,
+      };
+
+    case SET_SEACRHED_MOVIE:
+      return {
+        ...state,
+        data: action.payload,
+      };
+
+    case SET_MOVIE_BY_CATEGORY:
+      return {
+        ...state,
+        category: action.payload,
       };
 
     default:

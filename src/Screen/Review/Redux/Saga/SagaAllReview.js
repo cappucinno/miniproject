@@ -14,7 +14,9 @@ function* getAllReview(action) {
     );
 
     if (res.status === 200) {
-      yield put(setReviewAllMovie(res.data));
+      yield put(
+        setReviewAllMovie({data: res.data.data, movieId: action.payload.id}),
+      );
       yield navigate('AllReview');
     }
   } catch (error) {

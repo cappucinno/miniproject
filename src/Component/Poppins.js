@@ -12,7 +12,7 @@ export default function Poppins(props) {
     },
     textStyle1: {
       fontFamily: `Poppins-${props.type1 ? props.type1 : 'Regular'}`,
-      fontSize: props.size1 ? props.size1 : 16,
+      fontSize: props.size1 ? props.size1 : 12,
       color: props.color1 ? props.color1 : COLORS.primaryBlack,
       ...props.style1,
     },
