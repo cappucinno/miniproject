@@ -90,12 +90,15 @@ const ProfileOver = props => {
               <Avatar
                 rounded
                 source={{
-                  uri:
-                    'uri' in profilePicture
-                      ? profilePicture.uri
-                      : logindata.profilePicture.uri
-                      ? logindata.profilePicture.uri
-                      : logindata.profilePicture,
+                  uri: !logindata
+                    ? 'https://placeimg.com/640/480/people'
+                    : profilePicture
+                    ? profilePicture.uri
+                    : logindata
+                    ? logindata.profilePicture
+                    : logindata.profilePicture
+                    ? logindata.profilePicture.uri
+                    : logindata.profilePicture.uri,
                 }}
                 size={moderateScale(120)}>
                 <Avatar.Accessory

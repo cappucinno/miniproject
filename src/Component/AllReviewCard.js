@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   ratingView: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: widthPercentageToDP(62),
+    width: widthPercentageToDP(61),
     marginBottom: moderateScale(3),
     alignItems: 'center',
   },

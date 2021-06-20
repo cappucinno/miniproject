@@ -49,12 +49,16 @@ function* postReview(action) {
 }
 
 function* putMyReview(action) {
+  const token = yield select(state => state.Login.token);
+  const {id, movieId, headlineReview, review, rating} = action.payload;
   try {
     const res = yield axios.put(
-      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/put/review/${action.payload.id}`,
-      action.payload,
-      {headers: {Authorization: action.payload.token}},
+      `https://movieapp-team-b-2021.herokuapp.com/api/rMovie/put/review/${id}`,
+      {movieId, headlineReview, review, rating},
+      {headers: {Authorization: token}},
     );
+
+    console.log(res, 'update review');
 
     if (res.status === 200) {
       yield ToastAndroid.showWithGravity(
@@ -64,7 +68,11 @@ function* putMyReview(action) {
       );
     }
   } catch (error) {
-    console.log(error);
+    yield ToastAndroid.showWithGravity(
+      error.message,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+    );
   }
 }
 
