@@ -60,10 +60,6 @@ export default function HomeScreen(props) {
   const category = useSelector(state => state.Home.category);
   console.log(category, 'category');
 
-  // useEffect(() => {
-  //   dispatch(getMovieCategory());
-  // }, [dispatch]);
-
   //SHOW MOVIE BY CATEGORY
   const movieCategory = useSelector(state => state.Home.data);
 
@@ -101,25 +97,18 @@ export default function HomeScreen(props) {
                 color="white"
                 type="Bold"
                 size={moderateScale(24)}
-                // style={styles.headText}
               />
-              {/* <Text style={styles.headText}>Best Genre</Text> */}
               <TouchableOpacity>
                 <Poppins
                   title="more &gt;&gt;&gt;"
                   color="white"
                   fontSize={moderateScale(16)}
-                  // style={styles.moreBtn}
                 />
-                {/* <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text> */}
               </TouchableOpacity>
             </View>
 
             <View style={styles.genreBtnContainer}>
               <ScrollView horizontal>
-                {/* {dummy.map((e, i) => {
-                return <GenreButton title={e} key={i.toString()} />;
-              })} */}
                 {category.length > 0
                   ? category.map((e, i) => (
                       <GenreButton
@@ -142,9 +131,7 @@ export default function HomeScreen(props) {
                 color="white"
                 size={moderateScale(24)}
                 type="Bold"
-                // style={styles.headText}
               />
-              {/* <Text style={styles.headText}>Hot 'Category' Movies</Text> */}
             </View>
             {dataMovie.length > 0
               ? dataMovie.map((e, i) => {
@@ -178,21 +165,14 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     backgroundColor: 'transparent',
-    // paddingHorizontal: widthPercentageToDP(0),
+
     borderBottomColor: COLORS.primaryBlack,
   },
-  headText: {
-    color: 'white',
-    fontSize: moderateScale(26),
-    fontWeight: 'bold',
-  },
+
   headView: {
     paddingHorizontal: moderateScale(10),
   },
-  moreBtn: {
-    color: 'white',
-    fontSize: moderateScale(16),
-  },
+
   genreContainer: {
     justifyContent: 'space-between',
     height: heightPercentageToDP(13),
@@ -205,9 +185,8 @@ const styles = StyleSheet.create({
   },
   genreBtnContainer: {
     flexDirection: 'row',
-    // flexWrap: 'wrap',
+
     justifyContent: 'space-between',
-    // width: widthPercentageToDP(92),
   },
   movieContainer: {
     marginTop: heightPercentageToDP(2),

@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Image,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -36,11 +34,6 @@ export default function HomeDetails() {
 
   const dispatch = useDispatch();
 
-  // const allReview = () => {
-  //   // dispatch(getReviewData());
-  //   props.navigation.navigate('AllReview');
-  // };
-
   const detail = useSelector(state => state.Home.detail.data);
   const category = useSelector(state => state.Home.detail.data.category);
   const user = useSelector(state => state.Login.data);
@@ -58,10 +51,14 @@ export default function HomeDetails() {
           <View style={styles.bottomStyle}>
             <Card containerStyle={styles.cardContainer}>
               {/* TRAILER */}
-              <Image
+
+              <FastImage
                 style={styles.imageVideo}
-                source={{uri: detail.movie.poster}}
-                resizeMode="cover"
+                source={{
+                  uri: detail.movie.poster,
+                  priority: FastImage.priority.high,
+                }}
+                resizeMode={FastImage.resizeMode.cover}
               />
 
               {/* title container */}
@@ -73,7 +70,6 @@ export default function HomeDetails() {
                   type="Bold"
                   style={styles.movieTitle}
                 />
-                {/* <Text style={styles.movieTitle}>{detail.movie.title}</Text> */}
                 {/* YEAR AND GENRE */}
                 <Text style={styles.movieYear}>
                   {detail.movie.MovieInfo.releaseDate} |{' '}
@@ -93,11 +89,6 @@ export default function HomeDetails() {
               {/* description container */}
               <View style={styles.descContainer}>
                 <View>
-                  {/* <ImageBackground
-                    style={styles.poster}
-                    source={{uri: detail.movie.poster}}
-                    resizeMode="cover"
-                  /> */}
                   <FastImage
                     style={styles.poster}
                     source={{
@@ -119,14 +110,12 @@ export default function HomeDetails() {
                         color={COLORS.imperialRed}
                       />
                       <Poppins title={Math.floor(detail.rating) + '/10'} />
-                      {/* <Text>{Math.floor(detail.rating)}/10</Text> */}
                     </View>
                     <TouchableOpacity
                       style={styles.ratingIcon}
                       onPress={toggleOverlay}>
                       <Star name="star" size={moderateScale(20)} color="grey" />
                       <Poppins title="Rate this" />
-                      {/* <Text>Rate this</Text> */}
                     </TouchableOpacity>
                   </View>
                   {/* SYNOPSIS */}
@@ -134,7 +123,6 @@ export default function HomeDetails() {
                     title={detail.movie.synopsis}
                     style={styles.descText}
                   />
-                  {/* <Text style={styles.descText}>{detail.movie.synopsis}</Text> */}
                 </View>
               </View>
               <Card.Divider width={2} color={COLORS.imperialRed} />
@@ -153,7 +141,6 @@ export default function HomeDetails() {
                     style={styles.reviewIcon}
                   />
                   <Poppins title="123" color={COLORS.imperialRed} />
-                  {/* <Text style={{color: COLORS.imperialRed}}>123</Text> */}
                 </TouchableOpacity>
 
                 {/* tombol share */}
@@ -200,7 +187,6 @@ const styles = StyleSheet.create({
   },
   fullscreen: {
     flexGrow: 1,
-    // paddingVertical: moderateScale(5),
     backgroundColor: COLORS.imperialRed,
   },
   bottomStyle: {
@@ -218,20 +204,14 @@ const styles = StyleSheet.create({
   },
   imageVideo: {
     flex: 1,
-    // width: moderateScale(321),
     height: moderateScale(180),
     backgroundColor: 'darkslateblue',
   },
   titleContainer: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
     marginTop: moderateScale(10),
     marginBottom: moderateScale(5),
   },
   movieTitle: {
-    // fontSize: moderateScale(22),
-    // fontWeight: 'bold',
     textAlign: 'justify',
   },
   movieYear: {
@@ -243,9 +223,6 @@ const styles = StyleSheet.create({
   descContainer: {
     flex: 1,
     flexDirection: 'row',
-    // alignItems: 'center',
-    // backgroundColor: 'grey',
-    // width: moderateScale(321),
     marginBottom: moderateScale(5),
   },
   poster: {
@@ -253,12 +230,9 @@ const styles = StyleSheet.create({
     height: moderateScale(140),
     backgroundColor: 'darkslateblue',
     marginRight: moderateScale(10),
-    // transform: [{translateX: -10}],
   },
   ratingDescContainer: {
-    // width: moderateScale(212),
     flex: 1,
-    // backgroundColor: 'red',
   },
   ratingIconContainer: {
     flexDirection: 'row',
@@ -266,7 +240,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     width: moderateScale(100),
     paddingBottom: moderateScale(8),
-    // backgroundColor: 'green',
   },
   ratingIcon: {
     alignItems: 'center',
@@ -274,7 +247,6 @@ const styles = StyleSheet.create({
   descText: {
     textAlign: 'justify',
     flexWrap: 'wrap',
-    // backgroundColor: 'yellow',
   },
   iconContainer: {
     flexDirection: 'row',
