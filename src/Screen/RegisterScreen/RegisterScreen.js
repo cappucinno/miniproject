@@ -9,10 +9,8 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import {Input} from 'react-native-elements';
 import styles from '../styles/RegisterStyle';
 import {useNavigation} from '@react-navigation/native';
-import {moderateScale} from 'react-native-size-matters';
 import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostNewUser} from './Redux/RegisterAction';
@@ -58,7 +56,9 @@ function RegisterScreen(props) {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.window} behavior="padding">
+    <KeyboardAvoidingView
+      style={styles.window}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <View style={styles.container}>
         <View style={styles.contInput}>
           <View style={styles.contLogo}>
@@ -118,20 +118,6 @@ function RegisterScreen(props) {
         </View>
       </View>
     </KeyboardAvoidingView>
-
-    // <KeyboardAvoidingView>
-    //   <View
-    //     style={{
-    //       flex: 1,
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //       height: 100,
-    //       width: 100,
-    //     }}>
-    //     <Image source={require('../../Assets/Images/Logo.png')} />
-    //   </View>
-    //   <Text>MovReact</Text>
-    // </KeyboardAvoidingView>
   );
 }
 
