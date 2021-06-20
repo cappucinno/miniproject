@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   View,
   ActivityIndicator,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 
@@ -24,7 +25,7 @@ import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {postNewReview} from '../Review/Redux/Action/ActionReview';
 import Poppins from '../../Component/Poppins';
 import FastImage from 'react-native-fast-image';
-// import {getReviewData} from '../Review/Redux/ActionReview';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 export default function HomeDetails() {
   // state untuk toggle overlay
@@ -41,6 +42,19 @@ export default function HomeDetails() {
   const [StarRating, setStar] = useState(0);
   const [Headline, setHeadline] = useState('');
   const [Review, setReview] = useState('');
+  const [playing, setPlaying] = useState(false);
+
+  const onStateChange = useCallback(state => {
+    if (state === 'ended') {
+      setPlaying(false);
+      Alert.alert('Video has finished playing!');
+    }
+  }, []);
+
+  const videoId = detail.movie.trailer;
+  console.log(videoId);
+  const res = videoId.slice(32);
+  console.log(res);
 
   return (
     <SafeAreaView style={styles.safeView}>
@@ -52,14 +66,22 @@ export default function HomeDetails() {
             <Card containerStyle={styles.cardContainer}>
               {/* TRAILER */}
 
-              <FastImage
+              <YoutubePlayer
+                height={180}
+                // width={{flex: 1}}
+                videoId={res}
+                play={playing}
+                onChangeState={onStateChange}
+              />
+
+              {/* <FastImage
                 style={styles.imageVideo}
                 source={{
                   uri: detail.movie.poster,
                   priority: FastImage.priority.high,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-              />
+              /> */}
 
               {/* title container */}
               <View style={styles.titleContainer}>
