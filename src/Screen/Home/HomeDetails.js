@@ -25,6 +25,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {postNewReview} from '../Review/Redux/Action/ActionReview';
 import Poppins from '../../Component/Poppins';
+import FastImage from 'react-native-fast-image';
 // import {getReviewData} from '../Review/Redux/ActionReview';
 
 export default function HomeDetails() {
@@ -92,10 +93,18 @@ export default function HomeDetails() {
               {/* description container */}
               <View style={styles.descContainer}>
                 <View>
-                  <ImageBackground
+                  {/* <ImageBackground
                     style={styles.poster}
                     source={{uri: detail.movie.poster}}
                     resizeMode="cover"
+                  /> */}
+                  <FastImage
+                    style={styles.poster}
+                    source={{
+                      uri: detail.movie.poster,
+                      priority: FastImage.priority.high,
+                    }}
+                    resizeMode={FastImage.resizeMode.cover}
                   />
                 </View>
 

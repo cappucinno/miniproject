@@ -1,5 +1,6 @@
 import {
   SET_MOVIE_BY_CATEGORY,
+  SET_MOVIE_CATEGORY,
   SET_MOVIE_DATA,
   SET_MOVIE_DETAIL,
   SET_SEACRHED_MOVIE,
@@ -31,10 +32,16 @@ export default (state = initialState, action) => {
         data: action.payload,
       };
 
-    case SET_MOVIE_BY_CATEGORY:
+    case SET_MOVIE_CATEGORY:
       return {
         ...state,
         category: action.payload,
+      };
+
+    case SET_MOVIE_BY_CATEGORY:
+      return {
+        ...state,
+        data: action.payload,
       };
 
     default:

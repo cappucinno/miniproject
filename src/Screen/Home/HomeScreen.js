@@ -20,6 +20,7 @@ import {COLORS} from '../../Utils/Constant';
 import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {
   getMovieByCategory,
+  getMovieCategory,
   getMovieData,
   getMovieDetail,
   getSearchedMovie,
@@ -34,6 +35,7 @@ export default function HomeScreen(props) {
   });
 
   useEffect(() => {
+    dispatch(getMovieCategory());
     dispatch(getMovieData());
   }, [dispatch]);
 
@@ -54,12 +56,27 @@ export default function HomeScreen(props) {
     }
   };
 
-  //SHOW MOVIE BY CATEGORY
-  const dummy = ['Action', 'Thriller', 'Drama', 'Romance'];
-  const movieCategory = useSelector(state => state.Home.category);
-  console.log(movieCategory, 'category');
+  //SHOW MOVIE CATEGORY
+  const category = useSelector(state => state.Home.category);
+  console.log(category, 'category');
 
-  const showMovieByCategory = id => dispatch(getMovieByCategory(id));
+  // useEffect(() => {
+  //   dispatch(getMovieCategory());
+  // }, [dispatch]);
+
+  //SHOW MOVIE BY CATEGORY
+  const movieCategory = useSelector(state => state.Home.data);
+
+  const [pressed, setPressed] = useState(false);
+  // const [focussed, setFocussed] = useState(false);
+
+  // const showMovieByCategory = id => {
+  //   if (!pressed) {
+  //     dispatch(getMovieByCategory(id));
+  //   } else {
+  //     dispatch(getMovieData());
+  //   }
+  // };
 
   return (
     <SafeAreaView style={styles.fullscreen}>
@@ -99,20 +116,21 @@ export default function HomeScreen(props) {
             </View>
 
             <View style={styles.genreBtnContainer}>
-              {/* <ScrollView horizontal> */}
-              {dummy.map((e, i) => {
+              <ScrollView horizontal>
+                {/* {dummy.map((e, i) => {
                 return <GenreButton title={e} key={i.toString()} />;
-              })}
-              {/* {movieCategory.length > 0
-                  ? movieCategory.map((e, i) => (
+              })} */}
+                {category.length > 0
+                  ? category.map((e, i) => (
                       <GenreButton
-                        // showCategory={showMovieByCategory}
-                        title={e}
+                        // select={() => showMovieByCategory(e.id)}
+                        title={e.categoryName}
                         key={i.toString()}
+                        // select={setFocussed(!focussed)}
                       />
                     ))
-                  : null} */}
-              {/* </ScrollView> */}
+                  : null}
+              </ScrollView>
             </View>
           </View>
 
@@ -120,7 +138,7 @@ export default function HomeScreen(props) {
           <View style={styles.movieContainer}>
             <View style={styles.headView}>
               <Poppins
-                title="Hot 'Catergory' Movies"
+                title="Hot Movies"
                 color="white"
                 size={moderateScale(24)}
                 type="Bold"
