@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 import {moderateScale} from 'react-native-size-matters';
@@ -6,13 +6,16 @@ import {moderateScale} from 'react-native-size-matters';
 //icon
 import Feather from 'react-native-vector-icons/Feather';
 import {COLORS} from '../Utils/Constant';
-import Poppins from './Poppins';
 
-export default function GenreButton({title}) {
+export default function GenreButton(props) {
   return (
     <Button
       type="clear"
-      containerStyle={styles.container}
+      containerStyle={
+        props.select === true
+          ? {backgroundColor: COLORS.imperialRed}
+          : styles.container
+      }
       icon={
         <Feather
           name="tv"
@@ -21,8 +24,10 @@ export default function GenreButton({title}) {
           style={styles.icon}
         />
       }
-      title={title}
+      title={props.title}
       titleStyle={styles.title}
+      onPress={props.select}
+      onFocus={props.focussed}
     />
   );
 }
@@ -31,8 +36,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.champagne,
     width: moderateScale(80),
-    padding: moderateScale(3),
+    padding: moderateScale(2),
     borderRadius: moderateScale(10),
+    marginRight: moderateScale(8),
   },
   icon: {
     marginRight: moderateScale(5),

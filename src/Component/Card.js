@@ -6,15 +6,21 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Share from 'react-native-vector-icons/Foundation';
 import {COLORS} from '../Utils/Constant';
 import Poppins from './Poppins';
+import FastImage from 'react-native-fast-image';
 
 export default function CardView(props) {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={props.detail}>
       <Card containerStyle={styles.cardContainer}>
-        <Image
+        {/* <Image
           style={styles.image}
           resizeMode="contain"
           source={{uri: props.poster}}
+        /> */}
+        <FastImage
+          style={styles.image}
+          source={{uri: props.poster, priority: FastImage.priority.high}}
+          resizeMode={FastImage.resizeMode.contain}
         />
         <Poppins
           title={props.synopsis}

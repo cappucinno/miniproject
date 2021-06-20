@@ -4,12 +4,18 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from '../Screen/LoginScreen/LoginScreen';
 import RegisterScreen from '../Screen/RegisterScreen/RegisterScreen';
 import BottomTab from '../Component/BottomTab';
+import LoadingScreen from '../Screen/LoadingScreen/LoadingScreen';
 
 const Stack = createStackNavigator();
 
 const MainApp = () => {
   return (
-    <Stack.Navigator initialRouteName="LoginScreen">
+    <Stack.Navigator initialRouteName="LoadingScreen">
+      <Stack.Screen
+        name="LoadingScreen"
+        component={LoadingScreen}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
