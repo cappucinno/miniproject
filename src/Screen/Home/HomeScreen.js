@@ -24,6 +24,7 @@ import {
   getMovieData,
   getMovieDetail,
   getSearchedMovie,
+  currentCategory,
 } from './Redux/actionHome';
 
 export default function HomeScreen(props) {
@@ -60,23 +61,21 @@ export default function HomeScreen(props) {
   const category = useSelector(state => state.Home.category);
   console.log(category, 'category');
 
-  // useEffect(() => {
-  //   dispatch(getMovieCategory());
-  // }, [dispatch]);
-
   //SHOW MOVIE BY CATEGORY
   const movieCategory = useSelector(state => state.Home.data);
+  const current = useSelector(state => state.Home.currentCategory);
 
   const [pressed, setPressed] = useState(false);
   // const [focussed, setFocussed] = useState(false);
 
-  // const showMovieByCategory = id => {
-  //   if (!pressed) {
-  //     dispatch(getMovieByCategory(id));
-  //   } else {
-  //     dispatch(getMovieData());
-  //   }
-  // };
+  const showMovieByCategory = (id, name) => {
+    if (name === current) {
+      dispatch(getMovieData());
+      dispatch(currentCategory(''));
+    } else {
+      dispatch(getMovieByCategory(id));
+    }
+  };
 
   return (
     <SafeAreaView style={styles.fullscreen}>
@@ -101,32 +100,24 @@ export default function HomeScreen(props) {
                 color="white"
                 type="Bold"
                 size={moderateScale(24)}
-                // style={styles.headText}
               />
-              {/* <Text style={styles.headText}>Best Genre</Text> */}
               <TouchableOpacity>
                 <Poppins
                   title="more &gt;&gt;&gt;"
                   color="white"
                   fontSize={moderateScale(16)}
-                  // style={styles.moreBtn}
                 />
-                {/* <Text style={styles.moreBtn}>more &gt;&gt;&gt;</Text> */}
               </TouchableOpacity>
             </View>
 
             <View style={styles.genreBtnContainer}>
               <ScrollView horizontal>
-                {/* {dummy.map((e, i) => {
-                return <GenreButton title={e} key={i.toString()} />;
-              })} */}
                 {category.length > 0
                   ? category.map((e, i) => (
                       <GenreButton
-                        // select={() => showMovieByCategory(e.id)}
+                        select={() => showMovieByCategory(e.id, e.categoryName)}
                         title={e.categoryName}
                         key={i.toString()}
-                        // select={setFocussed(!focussed)}
                       />
                     ))
                   : null}
@@ -138,13 +129,11 @@ export default function HomeScreen(props) {
           <View style={styles.movieContainer}>
             <View style={styles.headView}>
               <Poppins
-                title="Hot Movies"
+                title={`Hot ${current === '' ? '' : current} Movies`}
                 color="white"
                 size={moderateScale(24)}
                 type="Bold"
-                // style={styles.headText}
               />
-              {/* <Text style={styles.headText}>Hot 'Category' Movies</Text> */}
             </View>
             {dataMovie.length > 0
               ? dataMovie.map((e, i) => {
@@ -178,21 +167,14 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     backgroundColor: 'transparent',
-    // paddingHorizontal: widthPercentageToDP(0),
+
     borderBottomColor: COLORS.primaryBlack,
   },
-  headText: {
-    color: 'white',
-    fontSize: moderateScale(26),
-    fontWeight: 'bold',
-  },
+
   headView: {
     paddingHorizontal: moderateScale(10),
   },
-  moreBtn: {
-    color: 'white',
-    fontSize: moderateScale(16),
-  },
+
   genreContainer: {
     justifyContent: 'space-between',
     height: heightPercentageToDP(13),
@@ -205,9 +187,8 @@ const styles = StyleSheet.create({
   },
   genreBtnContainer: {
     flexDirection: 'row',
-    // flexWrap: 'wrap',
+
     justifyContent: 'space-between',
-    // width: widthPercentageToDP(92),
   },
   movieContainer: {
     marginTop: heightPercentageToDP(2),

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 import {moderateScale} from 'react-native-size-matters';
@@ -27,7 +27,6 @@ export default function GenreButton(props) {
       title={props.title}
       titleStyle={styles.title}
       onPress={props.select}
-      onFocus={props.focussed}
     />
   );
 }

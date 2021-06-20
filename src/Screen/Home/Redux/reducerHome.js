@@ -1,4 +1,5 @@
 import {
+  CURRENT_CATEGORY,
   SET_MOVIE_BY_CATEGORY,
   SET_MOVIE_CATEGORY,
   SET_MOVIE_DATA,
@@ -10,6 +11,7 @@ const initialState = {
   data: [],
   detail: [],
   category: [],
+  currentCategory: '',
 };
 
 export default (state = initialState, action) => {
@@ -42,6 +44,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         data: action.payload,
+      };
+
+    case CURRENT_CATEGORY:
+      return {
+        ...state,
+        currentCategory: action.payload,
       };
 
     default:

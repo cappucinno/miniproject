@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {takeLatest, put} from 'redux-saga/effects';
 import {
+  currentCategory,
   GET_MOVIE_BY_CATEGORY,
   GET_MOVIE_CATEGORY,
   GET_MOVIE_DATA,
@@ -95,7 +96,8 @@ function* getMovieByCategory(action) {
     );
     console.log(res, 'show movie by catagory');
     if (res.status === 200) {
-      yield put(setMovieByCategory(res.data.data));
+      yield put(setMovieByCategory(res.data.data.movies));
+      yield put(currentCategory(res.data.data.category.categoryName));
     } else {
       console.log(res.data.statusCode);
     }

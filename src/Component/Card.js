@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Card} from 'react-native-elements';
 import {moderateScale} from 'react-native-size-matters';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,11 +12,6 @@ export default function CardView(props) {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={props.detail}>
       <Card containerStyle={styles.cardContainer}>
-        {/* <Image
-          style={styles.image}
-          resizeMode="contain"
-          source={{uri: props.poster}}
-        /> */}
         <FastImage
           style={styles.image}
           source={{uri: props.poster, priority: FastImage.priority.high}}
@@ -29,9 +24,6 @@ export default function CardView(props) {
           numberOfLines={3}
           ellipsizeMode="tail"
         />
-        {/* <Text style={styles.textDesc} numberOfLines={4} ellipsizeMode="tail">
-          {props.synopsis}
-        </Text> */}
 
         <Card.Divider width={2} color={COLORS.imperialRed} />
 
@@ -68,7 +60,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    // width: moderateScale(290),
+
     height: moderateScale(180),
     backgroundColor: 'black',
     marginBottom: moderateScale(15),
@@ -80,7 +72,7 @@ const styles = StyleSheet.create({
   },
   textDesc: {
     marginBottom: moderateScale(15),
-    // fontSize: moderateScale(16),
+
     textAlign: 'justify',
   },
   reviewBtn: {
