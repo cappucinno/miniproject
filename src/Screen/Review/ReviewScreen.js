@@ -21,12 +21,12 @@ import {
 import Poppins from '../../Component/Poppins';
 import moment from 'moment';
 
-const ReviewScreen = () => {
+const ReviewScreen = ({navigation}) => {
   const userData = useSelector(state => state.Login.data);
 
   useEffect(() => {
     dispatch(getReviewData(userData.data.id));
-  }, []);
+  }, [navigation]);
   // state untuk toggle overlay
   const [stateOverlay, setstateOverlay] = useState(false);
   // function overlay
@@ -40,6 +40,7 @@ const ReviewScreen = () => {
   const [Headline, setHeadline] = useState('');
   const [Review, setReview] = useState('');
   const [selectId, setselectId] = useState({});
+  console.log(selectId);
 
   return (
     <SafeAreaView style={styles.safeView}>
@@ -49,7 +50,16 @@ const ReviewScreen = () => {
         ) : (
           <View style={styles.bottomStyle}>
             {/* card */}
-            {review.length !== 0 ? (
+            {!review ? (
+              <View style={styles.empty}>
+                <Poppins
+                  title="Anda Belum Pernah Mereview Film Apapun"
+                  size={moderateScale(14)}
+                  type="Bold"
+                  color={COLORS.champagne}
+                />
+              </View>
+            ) : (
               review.map((e, i) => {
                 return (
                   <ReviewCard
@@ -68,15 +78,6 @@ const ReviewScreen = () => {
                   />
                 );
               })
-            ) : (
-              <View style={styles.empty}>
-                <Poppins
-                  title="Anda Belum Pernah Mereview Film Apapun"
-                  size={moderateScale(14)}
-                  type="Bold"
-                  color={COLORS.champagne}
-                />
-              </View>
             )}
             {/* overlay */}
           </View>
@@ -101,7 +102,7 @@ const ReviewScreen = () => {
                 rating: StarRating,
               }),
             );
-            toggleOverlay;
+            setstateOverlay(false);
           }}
         />
       </ScrollView>

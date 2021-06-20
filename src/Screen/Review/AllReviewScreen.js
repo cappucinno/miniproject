@@ -29,6 +29,25 @@ const AllReviewScreen = () => {
   return (
     <SafeAreaView style={styles.safeView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
+        {/* floating action button */}
+        <FAB
+          onPress={toggleOverlay}
+          placement="right"
+          size="large"
+          icon={
+            <Ionicons
+              name="add"
+              size={moderateScale(20)}
+              color={COLORS.cream}
+            />
+          }
+          color={COLORS.redOld}
+          style={{
+            borderRadius: moderateScale(10),
+            width: moderateScale(50),
+            height: moderateScale(50),
+          }}
+        />
         {/* card all review */}
         {allReview.data.Reviews.data.length !== 0 ? (
           allReview.data.Reviews.data.map((e, i) => (
@@ -55,25 +74,6 @@ const AllReviewScreen = () => {
           </View>
         )}
 
-        {/* floating action button */}
-        <FAB
-          onPress={toggleOverlay}
-          placement="right"
-          size="large"
-          icon={
-            <Ionicons
-              name="add"
-              size={moderateScale(20)}
-              color={COLORS.cream}
-            />
-          }
-          color={COLORS.redOld}
-          style={{
-            borderRadius: moderateScale(10),
-            width: moderateScale(50),
-            height: moderateScale(50),
-          }}
-        />
         <OverlayComp
           visible={stateOverlay}
           toggle={toggleOverlay}
