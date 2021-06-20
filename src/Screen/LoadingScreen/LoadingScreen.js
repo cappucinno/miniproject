@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Image} from 'react-native';
 
-class LoginScreen extends Component {
+class LoadingScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -30,4 +30,4 @@ class LoginScreen extends Component {
   }
 }
 
-export default LoginScreen;
+export default LoadingScreen;

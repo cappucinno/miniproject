@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from 'react-native';
 import {Header, Input, Button, Overlay, Avatar} from 'react-native-elements';
 import {
@@ -24,7 +25,7 @@ const ProfileOver = props => {
   const [userName, setuserName] = useState('');
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
-  const [profilPicture, setprofilPicture] = useState('');
+  const [profilePicture, setprofilePicture] = useState({});
 
   const logindata = useSelector(state => state.Login.data.data);
   const dispatch = useDispatch();
@@ -35,10 +36,10 @@ const ProfileOver = props => {
         return;
       } else {
         const img = {
-          uri: res.uri,
+          ...res.assets[0],
         };
 
-        setprofilPicture(img);
+        setprofilePicture(img);
       }
     });
   };
@@ -76,7 +77,7 @@ const ProfileOver = props => {
                       email,
                       password,
                       id: logindata.id,
-                      profilPicture,
+                      profilePicture,
                     }),
                   );
                   props.toggle;
@@ -90,9 +91,11 @@ const ProfileOver = props => {
                 rounded
                 source={{
                   uri:
-                    logindata.profilPicture === null
-                      ? ''
-                      : logindata.profilPicture,
+                    'uri' in profilePicture
+                      ? profilePicture.uri
+                      : logindata.profilePicture.uri
+                      ? logindata.profilePicture.uri
+                      : logindata.profilePicture,
                 }}
                 size={moderateScale(120)}>
                 <Avatar.Accessory

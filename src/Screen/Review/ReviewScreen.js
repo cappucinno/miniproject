@@ -52,7 +52,7 @@ const ReviewScreen = () => {
               review.map((e, i) => {
                 return (
                   <ReviewCard
-                    index={i.toString()}
+                    key={i}
                     image={e.Movie.poster}
                     title={e.Movie.title}
                     years={moment(e.Movie.MovieInfo.releaseDate).format('YYYY')}
@@ -79,7 +79,7 @@ const ReviewScreen = () => {
             {review !== undefined
               ? review.map((e, i) => (
                   <OverlayComp
-                    index={i.toString()}
+                    key={i}
                     visible={stateOverlay}
                     toggle={toggleOverlay}
                     startEdit={e.rating}
