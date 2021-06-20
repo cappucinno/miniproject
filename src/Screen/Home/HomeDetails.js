@@ -24,7 +24,6 @@ import {getReviewAllMovie} from '../Review/Redux/Action/ActionAllReview';
 import {postNewReview} from '../Review/Redux/Action/ActionReview';
 import Poppins from '../../Component/Poppins';
 import FastImage from 'react-native-fast-image';
-// import {getReviewData} from '../Review/Redux/ActionReview';
 
 export default function HomeDetails() {
   // state untuk toggle overlay
