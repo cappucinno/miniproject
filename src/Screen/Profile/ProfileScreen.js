@@ -15,8 +15,6 @@ const ProfileScreen = () => {
 
   const dataProfile = useSelector(state => state.Login.data.data) || '';
 
-  console.log(dataProfile);
-
   const dispatch = useDispatch();
 
   const toggleBottom = () => setVisible(!Visible);

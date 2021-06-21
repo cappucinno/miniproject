@@ -26,7 +26,7 @@ const ReviewScreen = ({navigation}) => {
 
   useEffect(() => {
     dispatch(getReviewData(userData.data.id));
-  }, [navigation]);
+  }, [toggleOverlay]);
   // state untuk toggle overlay
   const [stateOverlay, setstateOverlay] = useState(false);
   // function overlay
