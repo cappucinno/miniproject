@@ -65,9 +65,6 @@ export default function HomeScreen(props) {
   const movieCategory = useSelector(state => state.Home.data);
   const current = useSelector(state => state.Home.currentCategory);
 
-  const [pressed, setPressed] = useState(false);
-  // const [focussed, setFocussed] = useState(false);
-
   const showMovieByCategory = (id, name) => {
     if (name === current) {
       dispatch(getMovieData());
